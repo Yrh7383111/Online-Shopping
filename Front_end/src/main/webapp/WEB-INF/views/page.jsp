@@ -44,28 +44,28 @@
 <body>
     <div class="wrapper">
         <!-- Navigation -->
-        <%@include file="./shared/navbar.jsp" %>
+        <%@include file="./shared/navbar.jsp"%>
 
         <!-- Page Content -->
         <div class="content">
             <!-- Load only when user clicks Home -->
             <c:if test="${userClickHome == true}">
-                <%@include file="home.jsp" %>
+                <%@include file="home.jsp"%>
             </c:if>
 
             <!-- Load only when user clicks About -->
             <c:if test="${userClickAbout == true}">
-                <%@include file="about.jsp" %>
+                <%@include file="about.jsp"%>
             </c:if>
 
             <!-- Load only when user clicks Contact -->
             <c:if test="${userClickContact == true}">
-                <%@include file="contact.jsp" %>
+                <%@include file="contact.jsp"%>
             </c:if>
         </div>
 
         <!-- Footer comes here -->
-        <%@include file="./shared/footer.jsp" %>
+        <%@include file="./shared/footer.jsp"%>
 
 
         <%--  Javascript --%>

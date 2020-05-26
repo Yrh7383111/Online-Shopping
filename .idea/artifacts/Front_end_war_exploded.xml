@@ -14,6 +14,9 @@
           <element id="module-output" name="Front_end" />
         </element>
         <element id="directory" name="lib">
+          <element id="archive" name="Back_end-1.0-SNAPSHOT.jar">
+            <element id="module-output" name="Back_end" />
+          </element>
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.2.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.2.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:5.2.6.RELEASE" />

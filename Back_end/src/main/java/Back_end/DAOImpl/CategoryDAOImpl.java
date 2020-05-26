@@ -2,12 +2,14 @@ package Back_end.DAOImpl;
 
 import Back_end.DAO.CategoryDAO;
 import Back_end.DTO.Category;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 
+@Repository("categoryDAO")
 public class CategoryDAOImpl implements CategoryDAO
 {
 	// Private
