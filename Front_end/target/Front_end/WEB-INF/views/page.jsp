@@ -40,38 +40,44 @@
     <![endif]-->
 </head>
 
+
 <body>
-    <!-- Navigation -->
-    <%@include file="./shared/navbar.jsp" %>
-    
-    <!-- Page Content -->
-    <!-- Load only when user clicks Home -->
-    <c:if test="${userClickHome == true }">
-    	<%@include file="home.jsp" %>
-    </c:if>
-    
-    <!-- Load only when user clicks About -->
-    <c:if test="${userClickAbout == true }">
-    	<%@include file="about.jsp" %>
-    </c:if>
-    
-    <!-- Load only when user clicks Contact -->
-    <c:if test="${userClickContact == true }">
-    	<%@include file="contact.jsp" %>
-    </c:if>
+    <div class="wrapper">
+        <!-- Navigation -->
+        <%@include file="./shared/navbar.jsp" %>
 
-	<!-- Footer comes here -->
-	<%@include file="./shared/footer.jsp" %>
+        <!-- Page Content -->
+        <div class="content">
+            <!-- Load only when user clicks Home -->
+            <c:if test="${userClickHome == true}">
+                <%@include file="home.jsp" %>
+            </c:if>
+
+            <!-- Load only when user clicks About -->
+            <c:if test="${userClickAbout == true}">
+                <%@include file="about.jsp" %>
+            </c:if>
+
+            <!-- Load only when user clicks Contact -->
+            <c:if test="${userClickContact == true}">
+                <%@include file="contact.jsp" %>
+            </c:if>
+        </div>
+
+        <!-- Footer comes here -->
+        <%@include file="./shared/footer.jsp" %>
 
 
-    <!-- jQuery -->
-    <script src="${js}/jquery.js"></script>
+        <%--  Javascript --%>
+        <!-- jQuery -->
+        <script src="${js}/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="${js}/bootstrap.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="${js}/bootstrap.min.js"></script>
 
-    <!-- Extra javascript -->
-    <script src="${js}/myapp.js"></script>
+        <!-- Extra javascript -->
+        <script src="${js}/myapp.js"></script>
+    </div>
 </body>
 
 </html>
