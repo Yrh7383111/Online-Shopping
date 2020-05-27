@@ -1,16 +1,20 @@
 // Active menu
 $(function()
 {
-	switch(menu)
+	if (menu === 'About Us')
 	{
-		case 'About Us':
-			$('#about').addClass('active');
-			break;
-		case 'Contact Us':
-			$('#contact').addClass('active');
-			break;
-		default:
-			$('#home').addClass('active');
-			break;
+		$('#about').addClass('active');
+	}
+	else if (menu === 'Contact Us')
+	{
+		$('#contact').addClass('active');
+	}
+	else if (menu === 'All Products')
+	{
+		$('#listProducts').addClass('active');
+	}
+	else {
+		$('#listProducts').addClass('active');
+		$('#a_' + menu).addClass('active');
 	}
 });

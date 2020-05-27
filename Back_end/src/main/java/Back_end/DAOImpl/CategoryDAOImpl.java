@@ -13,47 +13,46 @@ import java.util.List;
 public class CategoryDAOImpl implements CategoryDAO
 {
 	// Private
-	private static List<Category> categories = new ArrayList<>();
-	
-	
-	static
+	private List<Category> categories;
+
+
+	// Public
+	public CategoryDAOImpl()
 	{
-		Category category = new Category();
-		
-		// First category
-		category.setId(1);
-		category.setName("Television");
-		category.setDescription("This is some description for television!");
-		category.setImageURL("CAT_1.png");
-		
-		categories.add(category);
+		categories = new ArrayList<Category>();
 
 
-		// Second category
-		category = new Category();
-		category.setId(2);
-		category.setName("Mobile");
-		category.setDescription("This is some description for mobile!");
-		category.setImageURL("CAT_2.png");
+		Category categoryOne = new Category(1, "Phone", "Phone", "phone.png", true);
+		Category categoryTwo = new Category(2, "Tablet", "Tablet", "Tablet.png", true);
+		Category categoryThree = new Category(3, "Computer", "Computer", "Computer.png", true);
+		Category categoryFour = new Category(4, "Television", "Television", "Television.png", true);
+		Category categoryFive = new Category(5, "Printer", "Printer", "Printer.png", true);
+		Category categorySix = new Category(6, "Camera", "Camera", "Camera.png", true);
 
-		categories.add(category);
-		
-		
-		// Third category
-		category = new Category();
-		category.setId(3);
-		category.setName("Laptop");
-		category.setDescription("This is some description for laptop!");
-		category.setImageURL("CAT_3.png");
-		
-		categories.add(category);
+		categories.add(categoryOne);
+		categories.add(categoryTwo);
+		categories.add(categoryThree);
+		categories.add(categoryFour);
+		categories.add(categoryFive);
+		categories.add(categorySix);
 	}
-	
-	
-	
+
+	// Retrieve a list of categories
 	@Override
 	public List<Category> list()
 	{
 		return categories;
+	}
+
+	// Retrieve a single category based on id
+	@Override
+	public Category get(int id)
+	{
+		for(Category category : categories)
+		{
+			if (category.getId() == id)
+				return category;
+		}
+		return null;
 	}
 }
