@@ -44,6 +44,12 @@ public class Product
 
 	@Column(name = "supplier_id")
 	private int supplierId;
+
+	@Column(name = "purchases")
+	private int purchases;
+
+	@Column(name = "views")
+	private int views;
 	
 
 	// Public
@@ -153,11 +159,31 @@ public class Product
 		this.supplierId = supplierId;
 	}
 
+	public int getPurchases()
+	{
+		return purchases;
+	}
+
+	public void setPurchases(int purchases)
+	{
+		this.purchases = purchases;
+	}
+
+	public int getViews()
+	{
+		return views;
+	}
+
+	public void setViews(int views)
+	{
+		this.views = views;
+	}
+
 	@Override
 	public String toString()
 	{
 		return "Product [id=" + id + ", code=" + code + ", name=" + name + ", brand=" + brand + ", description="
 				+ description + ", unitPrice=" + unitPrice + ", quantity=" + quantity + ", active=" + active
-				+ ", categoryId=" + categoryId + ", supplierId=" + supplierId + "]";
+				+ ", categoryId=" + categoryId + ", supplierId=" + supplierId + ", purchases=" + purchases + ", views=" + views + "]";
 	}
 }

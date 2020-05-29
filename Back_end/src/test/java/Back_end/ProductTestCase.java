@@ -29,35 +29,55 @@ public class ProductTestCase
 		productDAO = (ProductDAO) context.getBean("productDAO");
 	}
 	
+//	@Test
+//	public void testCRUDProduct()
+//	{
+//		Product product = new Product();
+//
+//		// Add
+//		product.setName("Huawei P30");
+//		product.setBrand("huawei");
+//		product.setDescription("Huawei");
+//		product.setUnitPrice(25000);
+//		product.setActive(true);
+//		product.setCategoryId(3);
+//		product.setSupplierId(1);
+//
+//		assertTrue(productDAO.addTest(product));
+//
+//
+//		// Update
+//		product = productDAO.get(5);
+//		product.setName("Dell Latitude");
+//		assertTrue(productDAO.updateTest(product));
+//		assertEquals("Dell Latitude", product.getName());
+//
+//
+//		// Delete
+//		assertTrue(productDAO.deleteTest(product));
+//
+//
+//		// List
+//		assertEquals(6, productDAO.list().size());
+//	}
+
 	@Test
-	public void testCRUDProduct()
+	public void testListActiveProducts()
 	{
-		Product product = new Product();
+		assertEquals(5, productDAO.listActiveProducts().size());
+	}
 
-		// Add
-		product.setName("Huawei P30");
-		product.setBrand("huawei");
-		product.setDescription("Huawei");
-		product.setUnitPrice(25000);
-		product.setActive(true);
-		product.setCategoryId(3);
-		product.setSupplierId(1);
-		
-		assertTrue(productDAO.addTest(product));
-		
+	@Test
+	public void testListActiveProductsByCategory()
+	{
+		assertEquals(1, productDAO.listActiveProductsByCategory(1).size());
 
-		// Update
-		product = productDAO.get(5);
-		product.setName("Dell Latitude");
-		assertTrue(productDAO.updateTest(product));
-		assertEquals("Dell Latitude", product.getName());
+		assertEquals(4, productDAO.listActiveProductsByCategory(3).size());
+	}
 
-
-		// Delete
-		assertTrue(productDAO.deleteTest(product));
-
-
-		// List
-		assertEquals(6, productDAO.list().size());
+	@Test
+	public void testListLatestActiveProduct()
+	{
+		assertEquals(5, productDAO.listLatestActiveProducts(5).size());
 	}
 }

@@ -3,6 +3,7 @@ package Back_end.DAOImpl;
 import java.util.List;
 
 import Back_end.DAO.ProductDAO;
+import Back_end.DTO.Category;
 import Back_end.DTO.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -47,7 +48,7 @@ public class ProductDAOImpl implements ProductDAO
 	{
 		Session session = sessionFactory.getCurrentSession();
 		String queryString = "FROM Product";
-		Query<Product> query = session.createQuery(queryString, Product.class);
+		Query<Product> query = session.createQuery(queryString);
 		List<Product> products = query.getResultList();
 
 		return products;
@@ -165,20 +166,47 @@ public class ProductDAOImpl implements ProductDAO
 	@Override
 	public List<Product> listActiveProducts()
 	{
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		String selectActiveProducts = "FROM Product WHERE active = :active";
+		Query<Product> query = session.createQuery(selectActiveProducts);
+
+		query.setParameter("active", true);
+
+		List<Product> products = query.getResultList();
+
+		return products;
 	}
 
 	// List products based on categoryId
 	@Override
 	public List<Product> listActiveProductsByCategory(int categoryId)
 	{
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		String selectActiveProductsByCategory = "FROM Product WHERE active = :active AND categoryId = :categoryId";
+		Query<Product> query = session.createQuery(selectActiveProductsByCategory);
+
+		query.setParameter("active", true);
+		query.setParameter("categoryId", categoryId);
+
+		List<Product> products = query.getResultList();
+
+		return products;
 	}
 
 	// Retrieve the latest products
 	@Override
 	public List<Product> listLatestActiveProducts(int count)
 	{
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		String selectLatestActiveProducts = "FROM Product WHERE active = :active ORDER BY id";
+		Query<Product> query = session.createQuery(selectLatestActiveProducts);
+
+		query.setParameter("active", true);
+		query.setFirstResult(0);
+		query.setMaxResults(count);
+
+		List<Product> products = query.getResultList();
+
+		return products;
 	}
 }
