@@ -1,58 +1,156 @@
 package Back_end.DAOImpl;
 
+import java.util.List;
+
 import Back_end.DAO.CategoryDAO;
 import Back_end.DTO.Category;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 
 
 @Repository("categoryDAO")
+@Transactional
 public class CategoryDAOImpl implements CategoryDAO
 {
 	// Private
-	private List<Category> categories;
+	@Autowired
+	private SessionFactory sessionFactory;
 
 
-	// Public
-	public CategoryDAOImpl()
+	// Retrieve a single category based on id
+	@Override
+	public Category get(int id)
 	{
-		categories = new ArrayList<Category>();
+		Session session = sessionFactory.getCurrentSession();
+		Category category = session.get(Category.class, id);
 
-
-		Category categoryOne = new Category(1, "Phone", "Phone", "phone.png", true);
-		Category categoryTwo = new Category(2, "Tablet", "Tablet", "Tablet.png", true);
-		Category categoryThree = new Category(3, "Computer", "Computer", "Computer.png", true);
-		Category categoryFour = new Category(4, "Television", "Television", "Television.png", true);
-		Category categoryFive = new Category(5, "Printer", "Printer", "Printer.png", true);
-		Category categorySix = new Category(6, "Camera", "Camera", "Camera.png", true);
-
-		categories.add(categoryOne);
-		categories.add(categoryTwo);
-		categories.add(categoryThree);
-		categories.add(categoryFour);
-		categories.add(categoryFive);
-		categories.add(categorySix);
+		return category;
 	}
 
 	// Retrieve a list of categories
 	@Override
 	public List<Category> list()
 	{
+		Session session = sessionFactory.getCurrentSession();
+		String selectActiveCategory = "FROM Category WHERE active = :active";
+		Query<Category> query = session.createQuery(selectActiveCategory);
+				
+		query.setParameter("active", true);
+
+		List<Category> categories = query.getResultList();
+
 		return categories;
 	}
 
-	// Retrieve a single category based on id
+	// Add a new category - Junit test
 	@Override
-	public Category get(int id)
+	public boolean addTest(Category category)
 	{
-		for(Category category : categories)
+		try
 		{
-			if (category.getId() == id)
-				return category;
+			Session session = sessionFactory.getCurrentSession();
+			session.persist(category);
+
+			return true;
 		}
-		return null;
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+			return false;
+		}
+	}
+
+	// Add a new category - Implementation
+	@Override
+	public void add(Category category)
+	{
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			session.persist(category);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	// Update an existing category - Junit test
+	@Override
+	public boolean updateTest(Category category)
+	{
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			session.update(category);
+
+			return true;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+			return false;
+		}
+	}
+
+	// Update an existing category - Implementation
+	@Override
+	public void update(Category category)
+	{
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			session.update(category);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+	}
+
+	//
+	@Override
+	public boolean deleteTest(Category category)
+	{
+		// Deactivate the category
+		category.setActive(false);
+
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			session.update(category);
+
+			return true;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+
+			return false;
+		}
+	}
+
+	@Override
+	public void delete(Category category)
+	{
+		// Deactivate the category
+		category.setActive(false);
+
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			session.update(category);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 }

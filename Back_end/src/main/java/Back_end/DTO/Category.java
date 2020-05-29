@@ -1,13 +1,28 @@
 package Back_end.DTO;
 
 
+import javax.persistence.*;
+
+
+
+@Entity
 public class Category
 {
     // Private
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "description")
     private String description;
+
+    @Column(name = "image_url")
     private String imageURL;
+
+    @Column(name = "is_active")
     private boolean active = true;
 
 
@@ -76,5 +91,11 @@ public class Category
     public void setActive(boolean active)
     {
         this.active = active;
+    }
+
+    @Override
+    public String toString()
+    {
+        return "Category [id=" + id + ", name=" + name + ", description=" + description + ", imageURL=" + imageURL + ", active=" + active + "]";
     }
 }
