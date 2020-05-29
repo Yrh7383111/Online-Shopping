@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface CategoryDAO
 {
-	// Retrieve a single category based on id
-	Category get(int id);
+	// Retrieve a single category based on categoryId
+	Category get(int categoryId);
 
 	// Retrieve a list of categories
 	List<Category> list();

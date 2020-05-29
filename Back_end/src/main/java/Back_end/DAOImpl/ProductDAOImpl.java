@@ -2,8 +2,8 @@ package Back_end.DAOImpl;
 
 import java.util.List;
 
-import Back_end.DAO.CategoryDAO;
-import Back_end.DTO.Category;
+import Back_end.DAO.ProductDAO;
+import Back_end.DTO.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -12,28 +12,28 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 
-
-@Repository("categoryDAO")
+@Repository("productDAO")
 @Transactional
-public class CategoryDAOImpl implements CategoryDAO
+public class ProductDAOImpl implements ProductDAO
 {
 	// Private
 	@Autowired
 	private SessionFactory sessionFactory;
 
 
-	// Retrieve a single category based on categoryId
+	// Public
+	// Retrieve a single product based on id
 	@Override
-	public Category get(int categoryId)
+	public Product get(int productId)
 	{
 		try
 		{
 			Session session = sessionFactory.getCurrentSession();
-			Category category = session.get(Category.class, categoryId);
+			Product product = session.get(Product.class, productId);
 
-			return category;
+			return product;
 		}
-		catch (Exception e)
+		catch(Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -41,29 +41,26 @@ public class CategoryDAOImpl implements CategoryDAO
 		return null;
 	}
 
-	// Retrieve a list of categories
+	// Retrieve a list of products
 	@Override
-	public List<Category> list()
+	public List<Product> list()
 	{
 		Session session = sessionFactory.getCurrentSession();
-		String selectActiveCategory = "FROM Category WHERE active = :active";
-		Query<Category> query = session.createQuery(selectActiveCategory);
-				
-		query.setParameter("active", true);
+		String queryString = "FROM Product";
+		Query<Product> query = session.createQuery(queryString, Product.class);
+		List<Product> products = query.getResultList();
 
-		List<Category> categories = query.getResultList();
-
-		return categories;
+		return products;
 	}
 
-	// Add a new category - Junit test
+	// Add a new  - Junit test
 	@Override
-	public boolean addTest(Category category)
+	public boolean addTest(Product product)
 	{
 		try
 		{
 			Session session = sessionFactory.getCurrentSession();
-			session.persist(category);
+			session.persist(product);
 
 			return true;
 		}
@@ -75,14 +72,14 @@ public class CategoryDAOImpl implements CategoryDAO
 		return false;
 	}
 
-	// Add a new category - Implementation
+	// Add a new product - Implementation
 	@Override
-	public void add(Category category)
+	public void add(Product product)
 	{
 		try
 		{
 			Session session = sessionFactory.getCurrentSession();
-			session.persist(category);
+			session.persist(product);
 		}
 		catch (Exception e)
 		{
@@ -90,14 +87,14 @@ public class CategoryDAOImpl implements CategoryDAO
 		}
 	}
 
-	// Update an existing category - Junit test
+	// Update an existing product - Junit test
 	@Override
-	public boolean updateTest(Category category)
+	public boolean updateTest(Product product)
 	{
 		try
 		{
 			Session session = sessionFactory.getCurrentSession();
-			session.update(category);
+			session.update(product);
 
 			return true;
 		}
@@ -109,14 +106,14 @@ public class CategoryDAOImpl implements CategoryDAO
 		return false;
 	}
 
-	// Update an existing category - Implementation
+	// Update an existing product - Implementation
 	@Override
-	public void update(Category category)
+	public void update(Product product)
 	{
 		try
 		{
 			Session session = sessionFactory.getCurrentSession();
-			session.update(category);
+			session.update(product);
 		}
 		catch (Exception e)
 		{
@@ -124,17 +121,17 @@ public class CategoryDAOImpl implements CategoryDAO
 		}
 	}
 
-	//
+	// Delete an existing product - Junit test
 	@Override
-	public boolean deleteTest(Category category)
+	public boolean deleteTest(Product product)
 	{
 		try
 		{
 			// Deactivate the category
-			category.setActive(false);
+			product.setActive(false);
 
 			Session session = sessionFactory.getCurrentSession();
-			session.update(category);
+			session.update(product);
 
 			return true;
 		}
@@ -146,20 +143,42 @@ public class CategoryDAOImpl implements CategoryDAO
 		return false;
 	}
 
+	// Delete an existing product - Implementation
 	@Override
-	public void delete(Category category)
+	public void delete(Product product)
 	{
 		try
 		{
 			// Deactivate the category
-			category.setActive(false);
+			product.setActive(false);
 
 			Session session = sessionFactory.getCurrentSession();
-			session.update(category);
+			session.update(product);
 		}
 		catch (Exception e)
 		{
 			e.printStackTrace();
 		}
+	}
+
+	// Retrieve only the active products
+	@Override
+	public List<Product> listActiveProducts()
+	{
+		return null;
+	}
+
+	// List products based on categoryId
+	@Override
+	public List<Product> listActiveProductsByCategory(int categoryId)
+	{
+		return null;
+	}
+
+	// Retrieve the latest products
+	@Override
+	public List<Product> listLatestActiveProducts(int count)
+	{
+		return null;
 	}
 }

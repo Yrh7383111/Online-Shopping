@@ -14,7 +14,10 @@ $(function()
 		$('#listProducts').addClass('active');
 	}
 	else {
-		$('#listProducts').addClass('active');
-		$('#a_' + menu).addClass('active');
+		if (menu !== "Home")
+		{
+			$('#listProducts').addClass('active');
+			$('#a_' + menu).addClass('active');
+		}
 	}
 });
