@@ -1,5 +1,7 @@
 package Back_end.DTO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -28,6 +30,7 @@ public class Product
 	private String brand;
 
 	@Column(name = "description")
+	@JsonIgnore
 	private String description;
 
 	@Column(name = "unit_price")
@@ -37,12 +40,15 @@ public class Product
 	private int quantity;
 
 	@Column(name = "is_active")
+	@JsonIgnore
 	private boolean active;
 
 	@Column(name = "category_id")
+	@JsonIgnore
 	private int categoryId;
 
 	@Column(name = "supplier_id")
+	@JsonIgnore
 	private int supplierId;
 
 	@Column(name = "purchases")
