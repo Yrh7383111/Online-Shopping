@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -24,62 +23,62 @@ public class PageController
     @GetMapping(value = {"/", "/home", "/index"})
     public ModelAndView index()
     {
-        ModelAndView mv = new ModelAndView("page");
-        mv.addObject("title","Home");
-        mv.addObject("userClickHome",true);
+        ModelAndView modelAndView = new ModelAndView("page");
+        modelAndView.addObject("title","Home");
+        modelAndView.addObject("userClickHome",true);
 
-        mv.addObject("categories", categoryDAO.list());
+        modelAndView.addObject("categories", categoryDAO.list());
 
-        return mv;
+        return modelAndView;
     }
 
     @GetMapping(value = "/about")
     public ModelAndView about()
     {
-        ModelAndView mv = new ModelAndView("page");
-        mv.addObject("title","About Us");
-        mv.addObject("userClickAbout",true);
+        ModelAndView modelAndView = new ModelAndView("page");
+        modelAndView.addObject("title","About Us");
+        modelAndView.addObject("userClickAbout",true);
 
-        return mv;
+        return modelAndView;
     }
 
     @GetMapping(value = "/contact")
     public ModelAndView contact()
     {
-        ModelAndView mv = new ModelAndView("page");
-        mv.addObject("title","Contact Us");
-        mv.addObject("userClickContact",true);
+        ModelAndView modelAndView = new ModelAndView("page");
+        modelAndView.addObject("title","Contact Us");
+        modelAndView.addObject("userClickContact",true);
 
-        return mv;
+        return modelAndView;
     }
 
     @GetMapping(value = "/show/all/products")
     public ModelAndView showAllProducts()
     {
-        ModelAndView mv = new ModelAndView("page");
+        ModelAndView modelAndView = new ModelAndView("page");
 
 
-        mv.addObject("title","All Products");
-        mv.addObject("userClickAllProducts",true);
-        mv.addObject("categories", categoryDAO.list());
+        modelAndView.addObject("title","All Products");
+        modelAndView.addObject("userClickAllProducts",true);
+        modelAndView.addObject("categories", categoryDAO.list());
 
-        return mv;
+        return modelAndView;
     }
 
     @GetMapping(value = "/show/category/{id}/products")
     public ModelAndView showCategoryProducts(@PathVariable("id") int id)
     {
-        ModelAndView mv = new ModelAndView("page");
+        ModelAndView modelAndView = new ModelAndView("page");
         Category category = new Category();
 
 
         category = categoryDAO.get(id);
 
-        mv.addObject("title",category.getName());
-        mv.addObject("userClickCategoryProducts",true);
-        mv.addObject("categories", categoryDAO.list());
-        mv.addObject("category", category);
+        modelAndView.addObject("title",category.getName());
+        modelAndView.addObject("userClickCategoryProducts",true);
+        modelAndView.addObject("categories", categoryDAO.list());
+        modelAndView.addObject("category", category);
 
-        return mv;
+        return modelAndView;
     }
 }

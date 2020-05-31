@@ -24,13 +24,17 @@
 
     <script>
         window.menu = '${title}';
+        window.contextRoot = '${contextRoot}'
     </script>
 
     <!-- Bootstrap Core CSS -->
     <link href="${css}/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <link href="${css}/myapp.css" rel="stylesheet">
+    <!-- Bootstrap DataTables -->
+    <link href="${css}/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- User Defined CSS -->
+    <link href="${css}/custom.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -80,8 +84,14 @@
         <!-- Bootstrap Core JavaScript -->
         <script src="${js}/bootstrap.min.js"></script>
 
+        <!-- DataTable Plugin -->
+        <script src="${js}/jquery.dataTables.js"></script>
+
+        <!-- DataTable Bootstrap Script -->
+        <script src="${js}/dataTables.bootstrap.js"></script>
+
         <!-- User defined javascript -->
-        <script src="${js}/myapp.js"></script>
+        <script src="${js}/custom.js"></script>
     </div>
 </body>
 
