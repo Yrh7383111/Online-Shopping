@@ -5,6 +5,8 @@ import Back_end.DAO.CategoryDAO;
 import Back_end.DAO.ProductDAO;
 import Back_end.DTO.Category;
 import Back_end.DTO.Product;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,8 @@ public class PageController
     @Autowired
     private ProductDAO productDAO;
 
+    private static final Logger logger = LoggerFactory.getLogger(PageController.class);
+
 
     // Public
 
@@ -35,6 +39,9 @@ public class PageController
         modelAndView.addObject("title","Home");
         modelAndView.addObject("userClickHome",true);
         modelAndView.addObject("categories", categoryDAO.list());
+
+        logger.info("Inside PageController index method - INFO");
+        logger.debug("Inside PageController index method - DEBUG");
 
         return modelAndView;
     }
