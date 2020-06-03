@@ -1,10 +1,11 @@
-package Front_end;
+package Front_end.Controller;
 
 
 import Back_end.DAO.CategoryDAO;
 import Back_end.DAO.ProductDAO;
 import Back_end.DTO.Category;
 import Back_end.DTO.Product;
+import Front_end.Exception.ProductNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
 
 
 @Controller
@@ -35,10 +37,11 @@ public class PageController
     public ModelAndView index()
     {
         ModelAndView modelAndView = new ModelAndView("page");
+        List<Category> categories = categoryDAO.list();
 
         modelAndView.addObject("title","Home");
         modelAndView.addObject("userClickHome",true);
-        modelAndView.addObject("categories", categoryDAO.list());
+        modelAndView.addObject("categories", categories);
 
         logger.info("Inside PageController index method - INFO");
         logger.debug("Inside PageController index method - DEBUG");
@@ -75,10 +78,11 @@ public class PageController
     public ModelAndView showAllProducts()
     {
         ModelAndView modelAndView = new ModelAndView("page");
+        List<Category> categories = categoryDAO.list();
 
         modelAndView.addObject("title","All Products");
         modelAndView.addObject("userClickAllProducts",true);
-        modelAndView.addObject("categories", categoryDAO.list());
+        modelAndView.addObject("categories", categories);
 
         return modelAndView;
     }
@@ -88,13 +92,13 @@ public class PageController
     public ModelAndView showCategoryProducts(@PathVariable("id") int id)
     {
         ModelAndView modelAndView = new ModelAndView("page");
-        Category category = new Category();
+        List<Category> categories = categoryDAO.list();
+        Category category = categoryDAO.get(id);
+        String name = category.getName();
 
-        category = categoryDAO.get(id);
-
-        modelAndView.addObject("title",category.getName());
+        modelAndView.addObject("title", name);
         modelAndView.addObject("userClickCategoryProducts",true);
-        modelAndView.addObject("categories", categoryDAO.list());
+        modelAndView.addObject("categories", categories);
         modelAndView.addObject("category", category);
 
         return modelAndView;
@@ -102,16 +106,20 @@ public class PageController
 
     // Show a single product
     @GetMapping(value = "/show/{id}/product")
-    public ModelAndView showSingleProduct(@PathVariable int id)
+    public ModelAndView showSingleProduct(@PathVariable int id) throws ProductNotFoundException
     {
         ModelAndView modelAndView = new ModelAndView("page");
         Product product = productDAO.get(id);
+        if (product == null)
+            throw new ProductNotFoundException();
+        // Else
+        String name = product.getName();
         int views = product.getViews();
 
         product.setViews(views + 1);
         productDAO.update(product);
 
-        modelAndView.addObject("title", product.getName());
+        modelAndView.addObject("title", name);
         modelAndView.addObject("userClickShowProduct", true);
         modelAndView.addObject("product", product);
         
