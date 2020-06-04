@@ -13,6 +13,10 @@ $(function()
 	{
 		$('#listProducts').addClass('active');
 	}
+	else if (menu === 'Manage Products')
+	{
+		$('#manageProducts').addClass('active');
+	}
 	else {
 		if (menu !== "Home")
 		{
