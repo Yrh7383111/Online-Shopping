@@ -20,7 +20,7 @@
 
                     <div class="panel-body">
                         <form:form class="form-horizontal" modelAttribute="product" action="${contextRoot}/manage/products" method="POST">
-                            <div class="form-group text-center">
+                            <div class="form-group">
                                 <label class="control-label col-md-4" for="name">Name</label>
                                 <div class="col-md-5">
                                     <form:input type="text" path="name" id="name" placeholder="Product Name" class="form-control" />

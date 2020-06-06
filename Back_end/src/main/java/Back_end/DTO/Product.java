@@ -9,7 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 
 
 @Entity
@@ -20,41 +21,45 @@ public class Product
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "code")
+	@Column(name="code")
 	private String code;
 
-	@Column(name = "name")
+	@Column(name="name")
+	@NotBlank(message="Please enter the product name!")
 	private String name;
 
-	@Column(name = "brand")
+	@Column(name="brand")
+	@NotBlank(message="Please enter the brand name!")
 	private String brand;
 
-	@Column(name = "description")
+	@Column(name="description")
 	@JsonIgnore
+	@NotBlank(message="Please enter the description!")
 	private String description;
 
-	@Column(name = "unit_price")
+	@Column(name="unit_price")
+	@Min(value = 1, message="Please enter a minimum value of 1")
 	private double unitPrice;
 
-	@Column(name = "quantity")
+	@Column(name="quantity")
 	private int quantity;
 
-	@Column(name = "is_active")
+	@Column(name="is_active")
 	@JsonIgnore
 	private boolean active;
 
-	@Column(name = "category_id")
+	@Column(name="category_id")
 	@JsonIgnore
 	private int categoryId;
 
-	@Column(name = "supplier_id")
+	@Column(name="supplier_id")
 	@JsonIgnore
 	private int supplierId;
 
-	@Column(name = "purchases")
+	@Column(name="purchases")
 	private int purchases;
 
-	@Column(name = "views")
+	@Column(name="views")
 	private int views;
 	
 
