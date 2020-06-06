@@ -1,6 +1,15 @@
     <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
     <div class="container">
+
+        <c:if test="${not empty message}">
+            <div class="row">
+                <div class="col-xs-12 col-md-offset-2 col-md-8">
+                    <div class="alert alert-info fade in">${message}</div>
+                </div>
+            </div>
+        </c:if>
+
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <div class="panel panel-primary">
@@ -10,7 +19,7 @@
 
 
                     <div class="panel-body">
-                        <form:form class="form-horizontal" modelAttribute="product">
+                        <form:form class="form-horizontal" modelAttribute="product" action="${contextRoot}/manage/products" method="POST">
                             <div class="form-group text-center">
                                 <label class="control-label col-md-4" for="name">Name</label>
                                 <div class="col-md-5">
