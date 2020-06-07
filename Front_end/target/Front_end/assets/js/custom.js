@@ -54,7 +54,7 @@ $(function()
 					data: 'code',
 					bSortable: false,
 					mRender: function(data, type, row) {
-						return '<img src="'+ window.contextRoot +'/resources/images/'+ data +'.jpg" alt="Alternate image" class="dataTableImg"/>';
+						return '<img src="'+ window.contextRoot +'/resources/images/'+ data +'.jpg" alt="Alternate image" class="dataTableImg" />';
 					}
 				},
 				{
@@ -70,6 +70,7 @@ $(function()
 					data: 'unitPrice',
 				},
 				{
+					// Quantity
 					data: 'quantity',
 					mRender: function(data, type, row) {
 						if (data < 1)
@@ -114,4 +115,31 @@ $(function()
 				$alert.fadeOut('slow');
 				}, 3000);
 	}
+
+
+	// Boot box support
+	$('.switch input[type="checkbox"]').on('change' , function() {
+		const checkbox = $(this);
+		const checked = checkbox.prop('checked');
+		const value = checkbox.prop('value');
+		const message = (checked)? 'You want to activate the Product?': 'You want to deactivate the Product?';
+
+		bootbox.confirm({
+			size: 'medium',
+			title: 'Product Activation/Deactivation',
+			message: message,
+			callback: function (confirmed) {
+				if (confirmed) {
+					bootbox.alert({
+						size: 'medium',
+						title: 'Information',
+						message: 'You are going to edit product ' + value
+					});
+				}
+				else {
+					checkbox.prop('checked', !checked);
+				}
+			}
+		});
+	});
 });

@@ -23,15 +23,28 @@ public class JsonDataController
 	
 
 	// Public
+
+	// Retrieve all the active products for users
 	@GetMapping("/all/products")
 	@ResponseBody
-	public List<Product> getAllProducts()
+	public List<Product> getAllActiveProducts()
 	{
 		List<Product> products = productDAO.listActiveProducts();
 
 		return products;
 	}
-	
+
+	// Retrieve all the products for admin
+	@GetMapping("/admin/all/products")
+	@ResponseBody
+	public List<Product> getAllProducts()
+	{
+		List<Product> products = productDAO.list();
+
+		return products;
+	}
+
+	// Retrieve products under a specific category
 	@GetMapping("/category/{id}/products")
 	@ResponseBody
 	public List<Product> getProductsByCategory(@PathVariable int id)

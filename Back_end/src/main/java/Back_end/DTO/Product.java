@@ -39,11 +39,10 @@ public class Product
 	private double unitPrice;
 
 	@Column(name="quantity")
-	@Min(value = 1, message="Please enter a minimum value of 1!")
+	@Min(value = 0, message="Please enter a minimum value of 0!")
 	private int quantity;
 
 	@Column(name="is_active")
-	@JsonIgnore
 	private boolean active;
 
 	@Column(name="category_id")
