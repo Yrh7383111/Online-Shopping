@@ -6,6 +6,7 @@ import Back_end.DAO.ProductDAO;
 import Back_end.DTO.Category;
 import Back_end.DTO.Product;
 import Front_end.Utility.FileUploadUtility;
+import Front_end.Validator.ProductValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +71,12 @@ public class ManagementController
     public String addProduct(@Valid @ModelAttribute("product") Product product,
                              BindingResult bindingResult, Model model)
     {
+        ProductValidator productValidator = new ProductValidator();
+
+
+        // Call the user defined validate method
+        productValidator.validate(product, bindingResult);
+
         // If there is an error occur when adding a product
         if (bindingResult.hasErrors())
         {
@@ -81,7 +88,7 @@ public class ManagementController
         }
         // Else
         // Add a new product (except the image filed)
-        if (product.getId() == 0 )
+        if (product.getId() == 0)
         {
             productDAO.add(product);                                    // If the product does not exist in the database
         }
@@ -89,8 +96,8 @@ public class ManagementController
             productDAO.update(product);                                 // If the product exists in the database
         }
 
-        // Upload the image file
-        if (product.getFile() != null)                                  // If the there is an image uploaded in the form
+        // Attach the image file the product afterwards
+        if (product.getFile() != null)                                  // If the product does not have a file, then upload it
         {
             try
             {

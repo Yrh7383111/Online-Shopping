@@ -26,19 +26,20 @@ public class Product
 	private String name;
 
 	@Column(name="brand")
-	@NotBlank(message="Please enter the brand name!")
+	@NotBlank(message="Please enter the product brand!")
 	private String brand;
 
 	@Column(name="description")
 	@JsonIgnore
-	@NotBlank(message="Please enter the description!")
+	@NotBlank(message="Please enter the product description!")
 	private String description;
 
 	@Column(name="unit_price")
-	@Min(value = 1, message="Please enter a minimum value of 1")
+	@Min(value = 1, message="Please enter a minimum value of 1!")
 	private double unitPrice;
 
 	@Column(name="quantity")
+	@Min(value = 1, message="Please enter a minimum value of 1!")
 	private int quantity;
 
 	@Column(name="is_active")
