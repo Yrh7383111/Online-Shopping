@@ -5,6 +5,7 @@ import Back_end.DAO.CategoryDAO;
 import Back_end.DAO.ProductDAO;
 import Back_end.DTO.Category;
 import Back_end.DTO.Product;
+import Front_end.Utility.FileUploadUtility;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
+
 
 
 @Controller
@@ -29,6 +32,9 @@ public class ManagementController
     @Autowired
     private ProductDAO productDAO;
 
+    @Autowired
+    private HttpServletRequest httpServletRequest;
+
     private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
 
 
@@ -40,8 +46,9 @@ public class ManagementController
         ModelAndView modelAndView = new ModelAndView("page");
         Product product = new Product();
 
-        product.setSupplierId(1);
-        product.setActive(true);
+
+        product.setSupplierId(1);                                       // Set the supplier to admin
+        product.setActive(true);                                        // Activate the product
 
         modelAndView.addObject("title", "Manage Products");
         modelAndView.addObject("userClickManageProducts", true);
@@ -50,7 +57,7 @@ public class ManagementController
         // Display the message if the product is submitted successfully
         if (operation != null)
         {
-            if (operation.equals("product"))
+            if (operation.equals("product"))                            // If the operation is to add a product
             {
                 modelAndView.addObject("message", "Product submitted successfully!");
             }
@@ -60,7 +67,8 @@ public class ManagementController
     }
 
     @PostMapping(value = "/products")
-    public String addProduct(@Valid @ModelAttribute("product") Product product, BindingResult bindingResult, Model model)
+    public String addProduct(@Valid @ModelAttribute("product") Product product,
+                             BindingResult bindingResult, Model model)
     {
         // If there is an error occur when adding a product
         if (bindingResult.hasErrors())
@@ -72,11 +80,31 @@ public class ManagementController
             return "page";
         }
         // Else
-        productDAO.add(product);
+        // Add a new product (except the image filed)
+        if (product.getId() == 0 )
+        {
+            productDAO.add(product);                                    // If the product does not exist in the database
+        }
+        else {
+            productDAO.update(product);                                 // If the product exists in the database
+        }
 
-        logger.info(product.toString());
+        // Upload the image file
+        if (product.getFile() != null)                                  // If the there is an image uploaded in the form
+        {
+            try
+            {
+                FileUploadUtility.uploadFile(httpServletRequest, product.getFile(), product.getCode());
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
 
-        return "redirect:/manage/products?operation=product";
+        logger.info(product.toString());                                // Log the info the the console
+
+        return "redirect:/manage/products?operation=product";           // Redirect to to the Product Management page with product operation
     }
 
     // Return a list categories
