@@ -119,30 +119,6 @@
                             </tr>
                         </thead>
 
-                        <tbody>
-                            <tr>
-                                <td>2</td>
-                                <td>
-                                    <img src="${contextRoot}/resources/images/PRDDEF123DEFX.jpg" alt="iPhone 11" class="adminDataTableImg" />
-                                </td>
-                                <td>iPhone 11</td>
-                                <td>Apple</td>
-                                <td>2</td>
-                                <td>1599</td>
-                                <td>
-                                    <label class="switch">
-                                        <input type="checkbox" checked="checked" value="2" />
-                                        <div class="slider"></div>
-                                    </label>
-                                </td>
-                                <td>
-                                    <a href="${contextRoot}/manage/products" class="btn btn-warning">
-                                        <span class="glyphicon glyphicon-pencil"></span>
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-
                         <tfoot>
                             <tr>
                                 <th>Id</th>

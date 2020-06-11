@@ -26,10 +26,11 @@ $(function()
 	}
 
 
-	// Jquery dataTable
-	const $table = $('#productListTable');
 
-	if ($table.length)
+	// Jquery dataTable for "View Products"
+	const productListTable = $('#productListTable');
+
+	if (productListTable.length)
 	{
 		let jsonUrl = '';
 
@@ -42,7 +43,7 @@ $(function()
 			jsonUrl = window.contextRoot + '/json/data/category/'+ window.categoryId + '/products';
 		}
 
-		$table.DataTable({
+		productListTable.DataTable({
 			lengthMenu: [[3, 5, 10, -1], ['3', '5', '10', 'ALL']],
 			ajax: {
 				url: jsonUrl,
@@ -106,6 +107,7 @@ $(function()
 	}
 
 
+
 	// Alert fade out animation
 	const $alert = $('.alert');
 
@@ -117,29 +119,116 @@ $(function()
 	}
 
 
-	// Boot box support
-	$('.switch input[type="checkbox"]').on('change' , function() {
-		const checkbox = $(this);
-		const checked = checkbox.prop('checked');
-		const value = checkbox.prop('value');
-		const message = (checked)? 'You want to activate the Product?': 'You want to deactivate the Product?';
 
-		bootbox.confirm({
-			size: 'medium',
-			title: 'Product Activation/Deactivation',
-			message: message,
-			callback: function (confirmed) {
-				if (confirmed) {
-					bootbox.alert({
+	// Jquery dataTable for "Manage Products" for admin
+	const adminProductsTable = $('#adminProductsTable');
+
+	if (adminProductsTable.length)
+	{
+		const jsonUrl = window.contextRoot + '/json/data/admin/all/products';
+
+		adminProductsTable.DataTable({
+			lengthMenu: [[10, 30, 50, -1], ['10', '30', '50', 'ALL']],
+			ajax: {
+				url: jsonUrl,
+				dataSrc: ''
+			},
+			columns: [
+				{
+					data: 'id'
+				},
+				{
+					// Image
+					data: 'code',
+					bSortable: false,
+					mRender: function(data, type, row) {
+						return '<img src="'+ window.contextRoot +'/resources/images/'+ data +'.jpg" alt="Alternate image" class="adminDataTableImg" />';
+					}
+				},
+				{
+					// Name
+					data: 'name'
+				},
+				{
+					// Brand
+					data: 'brand'
+				},
+				{
+					// Quantity
+					data: 'quantity',
+					mRender: function(data, type, row) {
+						if (data < 1)
+						{
+							return '<span style="color:red">Out of Stock...</span>';
+						}
+
+						return data;
+					}
+				},
+				{
+					// Price
+					data: 'unitPrice',
+				},
+				{
+					// Buttons
+					data: 'id',
+					bSortable: false,
+					mRender: function(data, type, row) {
+						let string = '';
+
+						if (data)
+						{
+							string += '<label class="switch"> <input type="checkbox" checked="checked" value="'+ row.id +'" /> <div class="slider round"></div> </label>'
+						}
+						else {
+							string += '<label class="switch"> <input type="checkbox" value="'+ row.id +'" /> <div class="slider round"></div> </label>'
+						}
+
+						return string;
+					}
+				},
+				{
+					data : 'id',
+					bSortable : false,
+					mRender : function(data, type, row) {
+						let string = '';
+
+						string += '<a href="'+ window.contextRoot +'/manage/'+ data +'/products" class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span> </a>'
+
+						return string;
+					}
+				}
+			],
+
+			initComplete: function () {
+				// Boot box support
+				const api = this.api();
+
+				api.$('.switch input[type="checkbox"]').on('change' , function() {
+					const checkbox = $(this);
+					const checked = checkbox.prop('checked');
+					const value = checkbox.prop('value');
+					const message = (checked)? 'You want to activate the Product?': 'You want to deactivate the Product?';
+
+					bootbox.confirm({
 						size: 'medium',
-						title: 'Information',
-						message: 'You are going to edit product ' + value
+						title: 'Product Activation/Deactivation',
+						message: message,
+						callback: function (confirmed) {
+							if (confirmed) {
+								bootbox.alert({
+									size: 'medium',
+									title: 'Information',
+									message: 'You are going to edit product ' + value
+								});
+							}
+							else {
+								checkbox.prop('checked', !checked);
+							}
+						}
 					});
-				}
-				else {
-					checkbox.prop('checked', !checked);
-				}
+				});
 			}
 		});
-	});
+	}
 });
