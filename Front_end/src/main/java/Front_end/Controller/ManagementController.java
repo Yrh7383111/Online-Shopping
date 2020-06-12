@@ -60,7 +60,7 @@ public class ManagementController
         {
             if (operation.equals("product"))                            // If the operation is to add a product
             {
-                modelAndView.addObject("message", "Product submitted successfully!");
+                modelAndView.addObject("message", "Product submitted successfully...");
             }
         }
 
@@ -82,7 +82,7 @@ public class ManagementController
         {
             model.addAttribute("title", "Manage Products");
             model.addAttribute("userClickManageProducts",true);
-            model.addAttribute("message", "Error occurred when adding the product");
+            model.addAttribute("message", "Error occurred when adding the product...");
 
             return "page";
         }
@@ -112,6 +112,21 @@ public class ManagementController
         logger.info(product.toString());                                // Log the info the the console
 
         return "redirect:/manage/products?operation=product";           // Redirect to to the Product Management page with product operation
+    }
+
+    @PostMapping(value = "/products/{id}/activation")
+    @ResponseBody
+    public String activateProduct(@PathVariable int id)
+    {
+        Product product = productDAO.get(id);
+        String name = product.getName();
+        boolean isActive = product.isActive();
+
+
+        product.setActive(!isActive);
+        productDAO.update(product);
+
+        return (isActive)? name + " has been deactivated successfully..." : name + " has been activated successfully...";
     }
 
     // Return a list categories

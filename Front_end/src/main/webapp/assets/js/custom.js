@@ -141,7 +141,7 @@ $(function()
 					// Image
 					data: 'code',
 					bSortable: false,
-					mRender: function(data, type, row) {
+					mRender: function(data) {
 						return '<img src="'+ window.contextRoot +'/resources/images/'+ data +'.jpg" alt="Alternate image" class="adminDataTableImg" />';
 					}
 				},
@@ -156,7 +156,7 @@ $(function()
 				{
 					// Quantity
 					data: 'quantity',
-					mRender: function(data, type, row) {
+					mRender: function(data) {
 						if (data < 1)
 						{
 							return '<span style="color:red">Out of Stock...</span>';
@@ -170,8 +170,8 @@ $(function()
 					data: 'unitPrice',
 				},
 				{
-					// Buttons
-					data: 'id',
+					// Activate button
+					data: 'active',
 					bSortable: false,
 					mRender: function(data, type, row) {
 						let string = '';
@@ -188,12 +188,13 @@ $(function()
 					}
 				},
 				{
+					// Edit button
 					data : 'id',
 					bSortable : false,
-					mRender : function(data, type, row) {
+					mRender : function(data) {
 						let string = '';
 
-						string += '<a href="'+ window.contextRoot +'/manage/'+ data +'/products" class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span> </a>'
+						string += '<a href="" class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span> </a>'
 
 						return string;
 					}
@@ -208,7 +209,7 @@ $(function()
 					const checkbox = $(this);
 					const checked = checkbox.prop('checked');
 					const value = checkbox.prop('value');
-					const message = (checked)? 'Do you want to activate the product?': 'Do you want to deactivate the product?';
+					const message = (checked)? 'Do you want to activate the product?' : 'Do you want to deactivate the product?';
 
 					bootbox.confirm({
 						size: 'medium',
@@ -216,10 +217,24 @@ $(function()
 						message: message,
 						callback: function (confirmed) {
 							if (confirmed) {
-								bootbox.alert({
-									size: 'medium',
-									title: 'Information',
-									message: 'You are going to edit product ' + value
+								$.ajax({
+									type: 'POST',
+									url: window.contextRoot + '/manage/products/'+ value +'/activation',
+									timeout: 5000,
+									success: function(data) {
+										bootbox.alert({
+											size: 'medium',
+											title: 'Confirmation',
+											message: data
+										});
+									},
+									error: function() {
+										bootbox.alert({
+											size: 'medium',
+											title: 'Error',
+											message: 'Something went wrong'
+										});
+									}
 								});
 							}
 							else {
