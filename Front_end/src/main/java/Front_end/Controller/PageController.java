@@ -87,7 +87,7 @@ public class PageController
         return modelAndView;
     }
 
-    // Show products based on id
+    // Show products based on category id
     @GetMapping(value = "/show/category/{id}/products")
     public ModelAndView showCategoryProducts(@PathVariable("id") int id)
     {
@@ -105,7 +105,7 @@ public class PageController
     }
 
     // Show a single product
-    @GetMapping(value = "/show/{id}/product")
+    @GetMapping(value = "/show/{id}/products")
     public ModelAndView showSingleProduct(@PathVariable int id) throws ProductNotFoundException
     {
         ModelAndView modelAndView = new ModelAndView("page");
@@ -120,7 +120,7 @@ public class PageController
         productDAO.update(product);
 
         modelAndView.addObject("title", name);
-        modelAndView.addObject("userClickShowProduct", true);
+        modelAndView.addObject("userClickSingleProduct", true);
         modelAndView.addObject("product", product);
         
         return modelAndView;

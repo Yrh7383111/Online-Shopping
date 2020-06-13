@@ -89,7 +89,7 @@ $(function()
 					mRender: function(data, type, row) {
 						let string = '';
 
-						string += '<a href="'+ window.contextRoot + '/show/' + data + '/product" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> &#160;';
+						string += '<a href="'+ window.contextRoot + '/show/' + data + '/products" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> &#160;';
 
 						if (row.quantity < 1)
 						{
@@ -194,7 +194,7 @@ $(function()
 					mRender : function(data) {
 						let string = '';
 
-						string += '<a href="" class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span> </a>'
+						string += '<a href="'+ window.contextRoot +' /manage/ '+ data +' /products" class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span> </a>'
 
 						return string;
 					}
@@ -219,7 +219,7 @@ $(function()
 							if (confirmed) {
 								$.ajax({
 									type: 'POST',
-									url: window.contextRoot + '/manage/products/'+ value +'/activation',
+									url: window.contextRoot + '/manage/activation/'+ value +'/products',
 									timeout: 5000,
 									success: function(data) {
 										bootbox.alert({

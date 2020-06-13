@@ -67,6 +67,22 @@ public class ManagementController
         return modelAndView;
     }
 
+    // Show the page to edit an existing product
+    @GetMapping("/{id}/products")
+    public ModelAndView editProduct(@PathVariable int id)
+    {
+        ModelAndView modelAndView = new ModelAndView("page");
+        Product product = productDAO.get(id);
+
+
+        modelAndView.addObject("title","Manage Products");
+        modelAndView.addObject("userClickManageProducts",true);
+        modelAndView.addObject("product", product);
+
+        return modelAndView;
+    }
+
+    // Add a new product
     @PostMapping(value = "/products")
     public String addProduct(@Valid @ModelAttribute("product") Product product,
                              BindingResult bindingResult, Model model)
@@ -114,7 +130,8 @@ public class ManagementController
         return "redirect:/manage/products?operation=product";           // Redirect to to the Product Management page with product operation
     }
 
-    @PostMapping(value = "/products/{id}/activation")
+    // Activate an existing product
+    @PostMapping(value = "/activation/{id}/products")
     @ResponseBody
     public String activateProduct(@PathVariable int id)
     {

@@ -95,6 +95,8 @@
             </div>
         </div>
 
+        <br>
+        <br>
 
         <%-- Table the display all the products for admin --%>
         <div class='col-xs-12'>

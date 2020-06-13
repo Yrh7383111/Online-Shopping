@@ -3,7 +3,6 @@ package Back_end.DAOImpl;
 import java.util.List;
 
 import Back_end.DAO.ProductDAO;
-import Back_end.DTO.Category;
 import Back_end.DTO.Product;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
