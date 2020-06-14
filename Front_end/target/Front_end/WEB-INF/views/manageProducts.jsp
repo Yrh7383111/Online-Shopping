@@ -11,82 +11,87 @@
         </c:if>
 
 
+
         <%-- Form to add a new product --%>
         <div class="row">
             <div class="col-md-offset-2 col-md-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4>Product Management</h4>
+                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#categoryModal">Add New Category</button>
                     </div>
 
 
                     <div class="panel-body">
                         <form:form class="form-horizontal" modelAttribute="product" action="${contextRoot}/manage/products" method="POST" enctype="multipart/form-data">
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="name">Name</label>
+                                <label class="control-label col-md-4">Name</label>
                                 <div class="col-md-5">
-                                    <form:input type="text" path="name" id="name" placeholder="Product Name" class="form-control" />
+                                    <form:input type="text" class="form-control" path="name" placeholder="Product Name" />
                                     <form:errors path="name" cssClass="help-block" element="em" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="brand">Brand</label>
+                                <label class="control-label col-md-4">Brand</label>
                                 <div class="col-md-5">
-                                    <form:input type="text" path="brand" id="brand" placeholder="Brand Name" class="form-control" />
+                                    <form:input type="text" class="form-control" path="brand" placeholder="Product Brand" />
                                     <form:errors path="brand" cssClass="help-block" element="em" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="description">Description</label>
+                                <label class="control-label col-md-4">Description</label>
                                 <div class="col-md-5">
-                                    <form:textarea path="description" id="description" rows="4" placeholder="Description" class="form-control" />
+                                    <form:textarea class="form-control" path="description" rows="4" placeholder="Product Description" />
                                     <form:errors path="description" cssClass="help-block" element="em" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="unitPrice">Price</label>
+                                <label class="control-label col-md-4">Price</label>
                                 <div class="col-md-5">
-                                    <form:input type="number" path="unitPrice" id="unitPrice" placeholder="Unit Price" class="form-control" />
+                                    <form:input type="number" class="form-control" path="unitPrice" placeholder="Product Unit Price" />
                                     <form:errors path="unitPrice" cssClass="help-block" element="em" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="quantity">Quantity</label>
+                                <label class="control-label col-md-4">Quantity</label>
                                 <div class="col-md-5">
-                                    <form:input type="number" path="quantity" id="quantity" placeholder="Quality" class="form-control" />
+                                    <form:input type="number" class="form-control" path="quantity" placeholder="Product Quality" />
                                     <form:errors path="quantity" cssClass="help-block" element="em" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="file">Image</label>
+                                <label class="control-label col-md-4">Image</label>
                                 <div class="col-md-5">
-                                    <form:input type="file" path="file" id="file" class="form-control" />
+                                    <form:input type="file" class="form-control" path="file" />
                                     <form:errors path="file" cssClass="help-block" element="em" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="categoryId">Category</label>
+                                <label class="control-label col-md-4">Category</label>
                                 <div class="col-md-5">
-                                    <form:select path="categoryId" id="categoryId" class="form-control" items="${categories}" itemLabel="name" itemValue="id" />
+                                    <form:select class="form-control" path="categoryId" items="${categories}" itemLabel="name" itemValue="id" />
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-offset-4 col-md-8">
-                                    <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-primary"/>
+                                <div class="col-md-offset-4 col-md-5">
+                                    <span><input type="submit" name="submit" value="Submit" class="btn btn-primary"/></span>
+                                    <c:if test="${product.id != 0}">
+                                        <span class="pull-right"><a href="${contextRoot}/manage/products" class="btn btn-primary">Back</a></span>
+                                    </c:if>
 
-                                    <form:hidden path="id"/>
-                                    <form:hidden path="code"/>
-                                    <form:hidden path="supplierId"/>
-                                    <form:hidden path="active"/>
-                                    <form:hidden path="purchases"/>
-                                    <form:hidden path="views"/>
+                                    <form:hidden path="id" />
+                                    <form:hidden path="code" />
+                                    <form:hidden path="active" />
+                                    <form:hidden path="supplierId" />
+                                    <form:hidden path="purchases" />
+                                    <form:hidden path="views" />
                                 </div>
                             </div>
                         </form:form>
@@ -95,8 +100,59 @@
             </div>
         </div>
 
+
+
+        <%-- Modal to add a new category --%>
+        <div id="categoryModal" class="modal fade" role="dialog" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <%-- Modal header --%>
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                        <h4 class="modal-title">Add New Category</h4>
+                    </div>
+
+                    <%-- Modal body --%>
+                    <div class="modal-body">
+                        <form:form id="categoryForm" class="form-horizontal" modelAttribute="category" action="${contextRoot}/manage/category" method="POST">
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Name</label>
+                                <div class="col-md-5">
+                                    <form:input type="text" class="form-control" path="name" placeholder="Category Name" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Description</label>
+                                <div class="col-md-5">
+                                    <form:textarea class="form-control" path="description" rows="4" placeholder="Category Description" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Image URL</label>
+                                <div class="col-md-5">
+                                    <form:input type="text" class="form-control" path="imageURL" placeholder="Category Image URL" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-8">
+                                    <input type="submit" name="submit" value="Submit" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </form:form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
         <br>
         <br>
+
+
 
         <%-- Table the display all the products for admin --%>
         <div class='col-xs-12'>

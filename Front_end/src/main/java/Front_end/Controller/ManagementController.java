@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
-
+import java.util.Objects;
 
 
 @Controller
@@ -58,9 +58,13 @@ public class ManagementController
         // Display the message if the product is submitted successfully
         if (operation != null)
         {
-            if (operation.equals("product"))                            // If the operation is to add a product
+            if (operation.equals("product"))                            // If the operation is to add a new product
             {
                 modelAndView.addObject("message", "Product submitted successfully...");
+            }
+            else if (operation.equals("category"))                      // If the operation is to add a new category
+            {
+                modelAndView.addObject("message", "Category submitted successfully...");
             }
         }
 
@@ -91,7 +95,16 @@ public class ManagementController
 
 
         // Call the user defined validate method
-        productValidator.validate(product, bindingResult);
+        if (product.getId() == 0)                                       // If we are adding a new product, then we need to validate
+        {
+            productValidator.validate(product, bindingResult);
+        }
+        else {
+            if (!Objects.equals(product.getFile().getOriginalFilename(), ""))
+            {
+                productValidator.validate(product, bindingResult);
+            }
+        }
 
         // If there is an error occur when adding a product
         if (bindingResult.hasErrors())
@@ -146,10 +159,28 @@ public class ManagementController
         return (isActive)? name + " has been deactivated successfully..." : name + " has been activated successfully...";
     }
 
+    // Add a new category
+    @PostMapping(value = "/category")
+    public String addCategory(@ModelAttribute("category") Category category)
+    {
+        categoryDAO.add(category);
+
+        return "redirect:/manage/products?operation=category";      // Redirect to to the Product Management page with category operation
+    }
+
     // Return a list categories
     @ModelAttribute("categories")
     public List<Category> getCategories()
     {
         return categoryDAO.list();
+    }
+
+    // Return an empty category to fill out
+    @ModelAttribute("category")
+    public Category addCategory()
+    {
+        Category category = new Category();
+
+        return category;
     }
 }
