@@ -246,4 +246,49 @@ $(function()
 			}
 		});
 	}
+
+
+
+	// Validate add new category form
+	const categoryForm = $('#categoryForm');
+
+	if(categoryForm.length)
+	{
+		categoryForm.validate({
+				rules: {
+					name: {
+						required: true,
+						minlength: 2,
+					},
+					description: {
+						required: true,
+						minlength: 2
+					},
+					imageURL: {
+						required: true,
+						minlength: 2
+					},
+				},
+				messages: {
+					name: {
+						required: 'Please enter Category name...',
+						minlength: 'Please enter at least two characters'
+					},
+					description: {
+						required: 'Please enter Category description...',
+						minlength: 'Please enter at least two characters'
+					},
+					imageURL: {
+						required: 'Please enter Category image URL...',
+						minlength: 'Please enter at two two characters'
+					}
+				},
+				errorElement: "em",
+				errorPlacement : function(error, element) {
+					error.addClass('help-block');
+					error.insertAfter(element);
+				}
+			}
+		);
+	}
 });
