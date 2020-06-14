@@ -29,7 +29,7 @@
 
 	if ( typeof define === 'function' && define.amd ) {
 		// AMD
-		define( ['jquery'], function ( $ ) {
+		define( ['src/main/webapp/assets/js/jquery.min'], function ($ ) {
 			return factory( $, window, document );
 		} );
 	}
@@ -44,8 +44,8 @@
 
 			if ( ! $ ) {
 				$ = typeof window !== 'undefined' ? // jQuery's factory checks for a global window
-					require('jquery') :
-					require('jquery')( root );
+					require('src/main/webapp/assets/js/jquery.min') :
+					require('src/main/webapp/assets/js/jquery.min')( root );
 			}
 
 			return factory( $, root, root.document );
