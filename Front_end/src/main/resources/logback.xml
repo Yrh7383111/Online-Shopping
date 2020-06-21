@@ -10,10 +10,6 @@
 		<appender-ref ref="consoleAppender"/>	
 	</logger>
 
-	<logger name="Back" level="DEBUG" additivity="false">
-		<appender-ref ref="consoleAppender"/>
-	</logger>
-
 	<root level="INFO">
 		<appender-ref ref="consoleAppender"/>
 	</root>

@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 
 
 @Entity
+@Table(name = "product")
 public class Product
 {
 	// Private

@@ -5,9 +5,9 @@
 			<Pattern>%-5level %msg %d{HH:mm:ss.SSS} %logger{36} %n</Pattern>
 		</encoder>
 	</appender>
-	
-	<logger name="Front_end" level="DEBUG" additivity="false">
-		<appender-ref ref="consoleAppender"/>	
+
+	<logger name="Back_end" level="DEBUG" additivity="false">
+		<appender-ref ref="consoleAppender"/>
 	</logger>
 
 	<root level="INFO">

@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name = "category")
 public class Category
 {
     // Private
@@ -27,21 +28,7 @@ public class Category
 
 
     // Public
-    public Category()
-    {
-        this.name = null;
-        this.description = null;
-        this.imageURL = null;
-    }
-
-    public Category(int id, String name, String description, String imageURL, boolean active)
-    {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.imageURL = imageURL;
-        this.active = active;
-    }
+    public Category() {}
 
     public int getId()
     {
