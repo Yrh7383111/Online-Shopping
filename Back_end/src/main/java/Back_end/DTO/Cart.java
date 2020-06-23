@@ -13,8 +13,9 @@ public class Cart
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "grand_total")
     private double grandTotal;
@@ -36,14 +37,14 @@ public class Cart
         this.id = id;
     }
 
-    public int getUserId()
+    public User getUser()
     {
-        return userId;
+        return user;
     }
 
-    public void setUserId(int userId)
+    public void setUser(User user)
     {
-        this.userId = userId;
+        this.user = user;
     }
 
     public double getGrandTotal()
@@ -71,7 +72,7 @@ public class Cart
     {
         return "Cart{" +
                 "id=" + id +
-                ", userId='" + userId + '\'' +
+                ", user=" + user +
                 ", grandTotal=" + grandTotal +
                 ", cartLines=" + cartLines +
                 '}';

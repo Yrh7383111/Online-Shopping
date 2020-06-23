@@ -40,11 +40,11 @@ public class UserTestCase
 
 
         // Add a user
-        user.setFirstName("Charlie");
-        user.setLastName("Liu");
+        user.setFirstName("Leo");
+        user.setLastName("Li");
         user.setPassword("123456");
         user.setRole("USER");
-        user.setEmail("Charlie.Liu@gmail.com");
+        user.setEmail("Leo.Li@gmail.com");
         user.setContactNumber("12345678");
         assertTrue(userDAO.addUserTest(user));
 
@@ -73,7 +73,7 @@ public class UserTestCase
             assertTrue(userDAO.addAddressTest(shippingAddress));
 
             // Add a cart
-            cart.setUserId(user.getId());
+            cart.setUser(user);
             cart.setGrandTotal(0);
             cart.setCartLines(0);
             assertTrue(userDAO.addCartTest(cart));
