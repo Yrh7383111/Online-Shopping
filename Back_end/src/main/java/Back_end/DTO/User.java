@@ -35,6 +35,12 @@ public class User
     @Column(name = "contact_number")
     private String contactNumber;
 
+    // mappedBy - Specify that User is the owner of Cart,
+    //            and therefore avoid adding a cart_id filed in User table
+    // cascade - Automatically add a Cart when a User is created
+    @OneToOne(mappedBy="user", cascade = CascadeType.ALL)
+    private Cart cart;
+
 
     // Public
     public User() {}
@@ -118,6 +124,16 @@ public class User
         this.contactNumber = contactNumber;
     }
 
+    public Cart getCart()
+    {
+        return cart;
+    }
+
+    public void setCart(Cart cart)
+    {
+        this.cart = cart;
+    }
+
     @Override
     public String toString()
     {
@@ -130,6 +146,7 @@ public class User
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
+                ", cart=" + cart +
                 '}';
     }
 }

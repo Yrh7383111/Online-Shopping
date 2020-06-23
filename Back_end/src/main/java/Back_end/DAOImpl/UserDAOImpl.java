@@ -22,6 +22,25 @@ public class UserDAOImpl implements UserDAO
     private SessionFactory sessionFactory;
 
 
+    // Retrieve a single user based on userId
+    @Override
+    public User get(int userId)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            User user = session.get(User.class, userId);
+
+            return user;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     // Public
     // Add a new user - Junit test
     @Override
@@ -93,12 +112,12 @@ public class UserDAOImpl implements UserDAO
 
     // Add a new cart - Junit test
     @Override
-    public boolean addCartTest(Cart cart)
+    public boolean updateCartTest(Cart cart)
     {
         try
         {
             Session session = sessionFactory.getCurrentSession();
-            session.persist(cart);
+            session.update(cart);
 
             return true;
         }
@@ -112,12 +131,12 @@ public class UserDAOImpl implements UserDAO
 
     // Add a new cart - Implementation
     @Override
-    public void addCart(Cart cart)
+    public void updateCart(Cart cart)
     {
         try
         {
             Session session = sessionFactory.getCurrentSession();
-            session.persist(cart);
+            session.update(cart);
         }
         catch (Exception e)
         {

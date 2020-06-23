@@ -30,53 +30,64 @@ public class UserTestCase
         userDAO = (UserDAO) context.getBean("userDAO");
     }
 
+//    @Test
+//    public void testAddUser()
+//	{
+//		User user = new User();
+//        Address billingAddress = new Address();
+//        Address shippingAddress = new Address();
+//        Cart cart = new Cart();
+//
+//
+//        // Add a user
+//        user.setFirstName("Leo");
+//        user.setLastName("Li");
+//        user.setPassword("123456");
+//        user.setRole("USER");
+//        user.setEmail("Leo.Li@gmail.com");
+//        user.setContactNumber("12345678");
+//        assertTrue(userDAO.addUserTest(user));
+//
+//        // Add a billing address
+//        billingAddress.setUserId(user.getId());
+//        billingAddress.setAddressLineOne("131 Columbia Street");
+//        billingAddress.setAddressLineTwo("808");
+//        billingAddress.setCity("Waterloo");
+//        billingAddress.setState("Ontario");
+//        billingAddress.setCountry("Canada");
+//        billingAddress.setPostalCode("N2J 2Y2");
+//        billingAddress.setBilling(true);
+//        assertTrue(userDAO.addAddressTest(billingAddress));
+//
+//        if (user.getRole().equals("USER"))
+//        {
+//            // Add a shipping address
+//            shippingAddress.setUserId(user.getId());
+//            shippingAddress.setAddressLineOne("131 Columbia Street");
+//            shippingAddress.setAddressLineTwo("808");
+//            shippingAddress.setCity("Waterloo");
+//            shippingAddress.setState("Ontario");
+//            shippingAddress.setCountry("Canada");
+//            shippingAddress.setPostalCode("N2J 2Y2");
+//            shippingAddress.setShipping(true);
+//            assertTrue(userDAO.addAddressTest(shippingAddress));
+//
+//            // Add a cart
+//            cart.setUser(user);
+//            cart.setGrandTotal(0);
+//            cart.setCartLines(0);
+//            assertTrue(userDAO.addCartTest(cart));
+//        }
+//	}
+
     @Test
-    public void testAddUser()
-	{
-		User user = new User();
-        Address billingAddress = new Address();
-        Address shippingAddress = new Address();
-        Cart cart = new Cart();
+    public void testUpdateCart()
+    {
+        User user = userDAO.get(5);
+        Cart cart = user.getCart();
 
-
-        // Add a user
-        user.setFirstName("Leo");
-        user.setLastName("Li");
-        user.setPassword("123456");
-        user.setRole("USER");
-        user.setEmail("Leo.Li@gmail.com");
-        user.setContactNumber("12345678");
-        assertTrue(userDAO.addUserTest(user));
-
-        // Add a billing address
-        billingAddress.setUserId(user.getId());
-        billingAddress.setAddressLineOne("131 Columbia Street");
-        billingAddress.setAddressLineTwo("808");
-        billingAddress.setCity("Waterloo");
-        billingAddress.setState("Ontario");
-        billingAddress.setCountry("Canada");
-        billingAddress.setPostalCode("N2J 2Y2");
-        billingAddress.setBilling(true);
-        assertTrue(userDAO.addAddressTest(billingAddress));
-
-        if (user.getRole().equals("USER"))
-        {
-            // Add a shipping address
-            shippingAddress.setUserId(user.getId());
-            shippingAddress.setAddressLineOne("131 Columbia Street");
-            shippingAddress.setAddressLineTwo("808");
-            shippingAddress.setCity("Waterloo");
-            shippingAddress.setState("Ontario");
-            shippingAddress.setCountry("Canada");
-            shippingAddress.setPostalCode("N2J 2Y2");
-            shippingAddress.setShipping(true);
-            assertTrue(userDAO.addAddressTest(shippingAddress));
-
-            // Add a cart
-            cart.setUser(user);
-            cart.setGrandTotal(0);
-            cart.setCartLines(0);
-            assertTrue(userDAO.addCartTest(cart));
-        }
-	}
+        cart.setGrandTotal(666);
+        cart.setCartLines(6);
+        assertTrue(userDAO.updateCartTest(cart));
+    }
 }
