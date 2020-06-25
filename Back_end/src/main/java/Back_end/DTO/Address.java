@@ -14,8 +14,9 @@ public class Address
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "user_id")
-    private int userId;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(name = "address_line_one")
     private String addressLineOne;
@@ -55,14 +56,14 @@ public class Address
         this.id = id;
     }
 
-    public int getUserId()
+    public User getUser()
     {
-        return userId;
+        return user;
     }
 
-    public void setUserId(int userId)
+    public void setUser(User user)
     {
-        this.userId = userId;
+        this.user = user;
     }
 
     public String getAddressLineOne()
@@ -150,7 +151,7 @@ public class Address
     {
         return "Address{" +
                 "id=" + id +
-                ", userId='" + userId + '\'' +
+                ", user=" + user +
                 ", addressLineOne='" + addressLineOne + '\'' +
                 ", addressLineTwo='" + addressLineTwo + '\'' +
                 ", city='" + city + '\'' +

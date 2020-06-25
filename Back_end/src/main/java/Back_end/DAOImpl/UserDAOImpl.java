@@ -7,9 +7,12 @@ import Back_end.DTO.Cart;
 import Back_end.DTO.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 
@@ -24,7 +27,7 @@ public class UserDAOImpl implements UserDAO
 
     // Retrieve a single user based on userId
     @Override
-    public User get(int userId)
+    public User getUser(int userId)
     {
         try
         {
@@ -76,6 +79,93 @@ public class UserDAOImpl implements UserDAO
         }
     }
 
+    // Update a new user - Junit test
+    @Override
+    public boolean updateUserTest(User user)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.update(user);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // Update a new user - Implementation
+    @Override
+    public void updateUser(User user)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.update(user);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    // Delete a new user - Junit test
+    @Override
+    public boolean deleteUserTest(User user)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.delete(user);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // Delete a new user - Implementation
+    @Override
+    public void deleteUser(User user)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.delete(user);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    // Retrieve a single address based on addressId
+    @Override
+    public Address getAddress(int addressId)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            Address address = session.get(Address.class, addressId);
+
+            return address;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     // Add a new address - Junit test
     @Override
     public boolean addAddressTest(Address address)
@@ -110,6 +200,138 @@ public class UserDAOImpl implements UserDAO
         }
     }
 
+    // Update a new address - Junit test
+    @Override
+    public boolean updateAddressTest(Address address)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.update(address);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // Update a new address - Implementation
+    @Override
+    public void updateAddress(Address address)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.update(address);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    // Delete a new address - Junit test
+    @Override
+    public boolean deleteAddressTest(Address address)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.delete(address);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // Delete a new address - Implementation
+    @Override
+    public void deleteAddress(Address address)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.delete(address);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    // Retrieve a list of addresses based on specific user
+    @Override
+    public List<Address> listAddresses(User user)
+    {
+        Session session = sessionFactory.getCurrentSession();
+        String selectAddresses = "FROM Address WHERE user = :user";
+        Query<Address> query = session.createQuery(selectAddresses);
+
+        query.setParameter("user", user);
+
+        List<Address> addresses = query.getResultList();
+
+        return addresses;
+    }
+
+    @Override
+    public List<Address> listBillingAddresses(User user)
+    {
+        Session session = sessionFactory.getCurrentSession();
+        String selectBillingAddresses = "FROM Address WHERE user = :user AND billing = :billing";
+        Query<Address> query = session.createQuery(selectBillingAddresses);
+
+        query.setParameter("user", user);
+        query.setParameter("billing", true);
+
+        List<Address> addresses = query.getResultList();
+
+        return addresses;
+    }
+
+    @Override
+    public List<Address> listShippingAddresses(User user)
+    {
+        Session session = sessionFactory.getCurrentSession();
+        String selectShippingAddresses = "FROM Address WHERE user = :user AND shipping = :shipping";
+        Query<Address> query = session.createQuery(selectShippingAddresses);
+
+        query.setParameter("user", user);
+        query.setParameter("shipping", true);
+
+        List<Address> addresses = query.getResultList();
+
+        return addresses;
+    }
+
+    // Retrieve a single cart based on cartId
+    @Override
+    public Cart getCart(int cartId)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            Cart cart = session.get(Cart.class, cartId);
+
+            return cart;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     // Add a new cart - Junit test
     @Override
     public boolean updateCartTest(Cart cart)
@@ -137,6 +359,40 @@ public class UserDAOImpl implements UserDAO
         {
             Session session = sessionFactory.getCurrentSession();
             session.update(cart);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    // Delete an existing cart - Junit test
+    @Override
+    public boolean deleteCartTest(Cart cart)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.delete(cart);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    // Delete an existing cart - Implementation
+    @Override
+    public void deleteCart(Cart cart)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.delete(cart);
         }
         catch (Exception e)
         {
