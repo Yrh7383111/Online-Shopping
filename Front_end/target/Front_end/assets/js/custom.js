@@ -271,15 +271,15 @@ $(function()
 				},
 				messages: {
 					name: {
-						required: 'Please enter Category name...',
+						required: 'Please enter the Category name...',
 						minlength: 'Please enter at least two characters'
 					},
 					description: {
-						required: 'Please enter Category description...',
+						required: 'Please enter the Category description...',
 						minlength: 'Please enter at least two characters'
 					},
 					imageURL: {
-						required: 'Please enter Category image URL...',
+						required: 'Please enter the Category image URL...',
 						minlength: 'Please enter at two two characters'
 					}
 				},

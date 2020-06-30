@@ -13,7 +13,7 @@
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+                <ul class="nav navbar-nav navbar-left">
                     <li id="about">
                         <a href="${contextRoot}/about">About</a>
                     </li>
@@ -25,6 +25,15 @@
                     </li>
                     <li id="manageProducts">
                         <a href="${contextRoot}/manage/products">Manage Products</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="signup">
+                        <a href="${contextRoot}/signup">Sign Up</a>
+                    </li>
+                    <li id="login">
+                        <a href="${contextRoot}/login">Login</a>
                     </li>
                 </ul>
             </div>
