@@ -14,7 +14,7 @@ public class SignupModel implements Serializable
     private static final long serialVersionUID = 1L;
 
     private User user;
-    private Address billing;
+    private Address billingAddress;
 
 
     // Public
@@ -30,13 +30,14 @@ public class SignupModel implements Serializable
         this.user = user;
     }
 
-    public Address getBilling()
+
+    public Address getBillingAddress()
     {
-        return billing;
+        return billingAddress;
     }
 
-    public void setBilling(Address billing)
+    public void setBillingAddress(Address billingAddress)
     {
-        this.billing = billing;
+        this.billingAddress = billingAddress;
     }
 }

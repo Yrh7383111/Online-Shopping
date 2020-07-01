@@ -5,7 +5,7 @@
             <div class="col-md-offset-2 col-md-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Sign Up - Personal Info</h4>
+                        <h4>Sign Up - User Info</h4>
                     </div>
 
                     <div class="panel-body">
@@ -72,7 +72,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-5">
-                                    <button type="submit" name="_eventId_billing" class="btn btn-primary">
+                                    <button type="submit" name="_eventId_billingAddress" class="btn btn-primary">
                                         Next - Billing
                                         <span class="glyphicon glyphicon-chevron-right"></span>
                                     </button>

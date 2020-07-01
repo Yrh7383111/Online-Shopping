@@ -9,7 +9,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <form:form method="POST" modelAttribute="billing" class="form-horizontal" id="billingForm">
+                        <form:form method="POST" modelAttribute="billingAddress" class="form-horizontal" id="billingAddressForm">
                             <div class="form-group">
                                 <label class="control-label col-md-4">Address Line One</label>
                                 <div class="col-md-5">
@@ -61,10 +61,15 @@
 
                             <div class="form-group">
                                 <div class="col-md-offset-4 col-md-8">
-                                    <button type="submit" name="_eventId_personal" class="btn btn-primary">
+                                    <button type="submit" name="_eventId_user" class="btn btn-primary">
                                         <span class="glyphicon glyphicon-chevron-left"></span>
-                                        Back - Personal
+                                        Back - User
                                     </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-offset-4 col-md-8">
                                     <button type="submit" name="_eventId_confirm" class="btn btn-primary">
                                         Next - Confirm
                                         <span class="glyphicon glyphicon-chevron-right"></span>

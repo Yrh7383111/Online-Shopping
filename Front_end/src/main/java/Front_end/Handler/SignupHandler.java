@@ -34,15 +34,15 @@ public class SignupHandler
         signupModel.setUser(user);
     }
 
-    public void addBilling(SignupModel signupModel, Address billing)
+    public void addBillingAddress(SignupModel signupModel, Address billingAddress)
     {
-        signupModel.setBilling(billing);
+        signupModel.setBillingAddress(billingAddress);
     }
 
     public String save(SignupModel signupModel)
     {
         User user = signupModel.getUser();
-        Address billing = signupModel.getBilling();
+        Address billingAddress = signupModel.getBillingAddress();
 
 
         // If the role of the is USER, then create a cart
@@ -54,11 +54,11 @@ public class SignupHandler
             user.setCart(cart);
         }
 
-        billing.setUser(user);
-        billing.setBilling(true);
+        billingAddress.setUser(user);
+        billingAddress.setBilling(true);
 
         userDAO.addUser(user);
-        userDAO.addAddress(billing);
+        userDAO.addAddress(billingAddress);
 
         return "success";
     }

@@ -5,20 +5,20 @@
             <div class="col-sm-6">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Personal Info</h4>
+                        <h4>User Info</h4>
                     </div>
 
                     <div class="panel-body">
                         <div class="text-center">
                             <h4><strong>Name: </strong>${signupModel.user.getFirstName()} ${signupModel.user.getLastName()}</h4>
-                            <h4><strong>Email: </strong> ${signupModel.user.getEmail()}</h4>
-                            <h4><strong>Contact: </strong> ${signupModel.user.getContactNumber()}</h4>
-                            <h4><strong>Role: </strong> ${signupModel.user.getRole()}</h4>
+                            <h4><strong>Email: </strong>${signupModel.user.getEmail()}</h4>
+                            <h4><strong>Contact: </strong>${signupModel.user.getContactNumber()}</h4>
+                            <h4><strong>Role: </strong>${signupModel.user.getRole()}</h4>
                         </div>
                     </div>
 
                     <div class="panel-footer">
-                        <a href="${flowExecutionUrl}&_eventId_personal" class="btn btn-primary">Edit</a>
+                        <a href="${flowExecutionUrl}&_eventId_user" class="btn btn-primary">Edit</a>
                     </div>
                 </div>
             </div>
@@ -30,17 +30,17 @@
                     </div>
                     <div class="panel-body">
                         <div class="text-center">
-                            <h4>Address Line One: ${signupModel.billing.getAddressLineOne()}</h4>
-                            <h4>Address Line Two: ${signupModel.billing.getAddressLineTwo()}</h4>
-                            <h4>City: ${signupModel.billing.getCity()}</h4>
-                            <h4>State: ${signupModel.billing.getState()}</h4>
-                            <h4>Country: ${signupModel.billing.getCountry()}</h4>
-                            <h4>Postal Code: ${signupModel.billing.getPostalCode()}</h4>
+                            <h4><strong>Address Line One: </strong>${signupModel.billingAddress.getAddressLineOne()}</h4>
+                            <h4><strong>Address Line One: </strong>${signupModel.billingAddress.getAddressLineTwo()}</h4>
+                            <h4><strong>City: </strong>${signupModel.billingAddress.getCity()}</h4>
+                            <h4><strong>State: </strong>${signupModel.billingAddress.getState()}</h4>
+                            <h4><strong>Country: </strong>${signupModel.billingAddress.getCountry()}</h4>
+                            <h4><strong>Postal Code: </strong>${signupModel.billingAddress.getPostalCode()}</h4>
                         </div>
                     </div>
 
                     <div class="panel-footer">
-                        <a href="${flowExecutionUrl}&_eventId_billing" class="btn btn-primary">Edit</a>
+                        <a href="${flowExecutionUrl}&_eventId_billingAddress" class="btn btn-primary">Edit</a>
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@
 
 
     <var name="user" class="Back_end.DTO.User" />
-    <var name="billing" class="Back_end.DTO.Address" />
+    <var name="billingAddress" class="Back_end.DTO.Address" />
 
 
     <on-start>
@@ -15,9 +15,9 @@
 
 
     <!-- Start state -->
-    <view-state id="personal" view="flows/signup/signup-personal" model="user">
+    <view-state id="user" view="flows/signup/signup-user" model="user">
         <!-- on - event id -->
-        <transition on="billing" to="billing" />
+        <transition on="billingAddress" to="billingAddress" />
 
         <!-- Persist user in signupModel -->
         <on-exit>
@@ -25,23 +25,23 @@
         </on-exit>
     </view-state>
 
-    <!-- Billing state -->
-    <view-state id="billing" view="flows/signup/signup-billing" model="billing">
+    <!-- Billing Address state -->
+    <view-state id="billingAddress" view="flows/signup/signup-billingAddress" model="billingAddress">
         <!-- on - event id --><!-- on - event id -->
-        <transition on="personal" to="personal" />
+        <transition on="user" to="user" />
         <transition on="confirm" to="confirm" />
 
-        <!-- Persist billing in signupModel -->
+        <!-- Persist billing address in signupModel -->
         <on-exit>
-            <evaluate expression="signupHandler.addBilling(flowScope.signupModel, billing)" />
+            <evaluate expression="signupHandler.addBillingAddress(flowScope.signupModel, billingAddress)" />
         </on-exit>
     </view-state>
 
     <!-- Confirm state -->
     <view-state id="confirm" view="flows/signup/signup-confirm" model="flowScope.signupModel">
         <!-- on - event id -->
-        <transition on="personal" to="personal" />
-        <transition on="billing" to="billing" />
+        <transition on="user" to="user" />
+        <transition on="billingAddress" to="billingAddress" />
         <transition on="submit" to="submit" />
     </view-state>
 
