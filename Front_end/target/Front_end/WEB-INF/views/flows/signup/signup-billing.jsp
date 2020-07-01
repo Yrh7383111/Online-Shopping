@@ -11,7 +11,7 @@
                     <div class="panel-body">
                         <form:form method="POST" modelAttribute="billing" class="form-horizontal" id="billingForm">
                             <div class="form-group">
-                                <label class="control-label col-md-4" for="addressLineOne">Address Line One</label>
+                                <label class="control-label col-md-4">Address Line One</label>
                                 <div class="col-md-5">
                                     <form:input type="text" path="addressLineOne" class="form-control" placeholder="Address Line One" />
                                     <form:errors path="addressLineOne" cssClass="help-block" element="em" />
@@ -35,14 +35,6 @@
                             </div>
 
                             <div class="form-group">
-                                <label class="control-label col-md-4">Postal Code</label>
-                                <div class="col-md-5">
-                                    <form:input type="text" path="postalCode" class="form-control" placeholder="Postal Code" />
-                                    <form:errors path="postalCode" cssClass="help-block" element="em" />
-                                </div>
-                            </div>
-
-                            <div class="form-group">
                                 <label class="control-label col-md-4">State</label>
                                 <div class="col-md-5">
                                     <form:input type="text" path="state" class="form-control" placeholder="State" />
@@ -55,6 +47,14 @@
                                 <div class="col-md-5">
                                     <form:input type="text" path="country" class="form-control" placeholder="Country" />
                                     <form:errors path="country" cssClass="help-block" element="em" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-4">Postal Code</label>
+                                <div class="col-md-5">
+                                    <form:input type="text" path="postalCode" class="form-control" placeholder="Postal Code" />
+                                    <form:errors path="postalCode" cssClass="help-block" element="em" />
                                 </div>
                             </div>
 

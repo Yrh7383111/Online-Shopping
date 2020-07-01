@@ -136,6 +136,7 @@ public class User implements Serializable
     {
         return contactNumber;
     }
+
     public void setContactNumber(String contactNumber)
     {
         this.contactNumber = contactNumber;
