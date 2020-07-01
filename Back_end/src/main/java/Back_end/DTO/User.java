@@ -2,14 +2,17 @@ package Back_end.DTO;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 
 @Entity
 @Table(name = "user_detail")
-public class User
+public class User implements Serializable
 {
     // Private
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,6 +31,9 @@ public class User
 
     @Column(name = "password")
     private String password;
+
+    @Transient
+    private String confirmPassword;
 
     @Column(name = "email")
     private String email;

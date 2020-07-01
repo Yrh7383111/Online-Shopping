@@ -4,11 +4,37 @@
       xsi:schemaLocation="http://www.springframework.org/schema/webflow
                           http://www.springframework.org/schema/webflow/spring-webflow.xsd">
 
+
+    <var name="user" class="Back_end.DTO.User" />
+    <var name="billing" class="Back_end.DTO.Address" />
+
+
     <!-- Start state -->
-    <view-state id="personal" view="flows/signup/signup-personal"></view-state>
+    <view-state id="personal" view="flows/signup/signup-personal" model="user">
+        <!-- on - event id -->
+        <transition on="billing" to="billing" />
+    </view-state>
+
+    <!-- Billing state -->
+    <view-state id="billing" view="flows/signup/signup-billing" model="billing">
+        <!-- on - event id --><!-- on - event id -->
+        <transition on="personal" to="personal" />
+        <transition on="confirm" to="confirm" />
+    </view-state>
+
+    <!-- Confirm state -->
+    <view-state id="confirm" view="flows/signup/signup-confirm">
+        <!-- on - event id -->
+        <transition on="personal" to="personal" />
+        <transition on="billing" to="billing" />
+        <transition on="success" to="success" />
+    </view-state>
+
 
     <!-- Eng state -->
     <end-state id="home" view="externalRedirect:contextRelative:/" />
+    <end-state id="success" view="flows/signup/signup-success" />
+
 
     <global-transitions>
         <transition on="home" to="home" />
