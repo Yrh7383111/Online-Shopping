@@ -14,10 +14,12 @@
     </on-start>
 
 
+    <!-- View state -->
+
     <!-- Start state -->
     <view-state id="user" view="flows/signup/signup-user" model="user">
         <!-- on - event id -->
-        <transition on="billingAddress" to="billingAddress" />
+        <transition on="billingAddress" to="validate" />
 
         <!-- Persist user in signupModel -->
         <on-exit>
@@ -46,6 +48,16 @@
     </view-state>
 
 
+    <!-- Action state -->
+
+    <!-- Validate state -->
+    <action-state id="validate">
+        <evaluate expression="signupHandler.validateUser(user, messageContext)" />
+        <transition on="success" to="billingAddress"/>
+        <transition on="failure" to="user"/>
+    </action-state>
+
+    <!-- Submit state   -->
     <action-state id="submit">
         <evaluate expression="signupHandler.save(flowScope.signupModel)" />
         <transition on="success" to="success"/>
@@ -57,7 +69,8 @@
     <end-state id="success" view="flows/signup/signup-success" />
 
 
+    <!-- Global transition -->
     <global-transitions>
-        <transition on="home" to="home" />
+        <transition on="home" to="home" validate="false" />
     </global-transitions>
 </flow>

@@ -14,6 +14,9 @@ public interface UserDAO
     // Retrieve a single user based on userId
     User getUser(int userId);
 
+    // Retrieve a single user based on email
+    User getUserByEmail(String email);
+
     // Add a new user - Junit test
     boolean addUserTest(User user);
 

@@ -2,6 +2,7 @@ package Back_end.DTO;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 
@@ -21,21 +22,27 @@ public class Address implements Serializable
     private User user;
 
     @Column(name = "address_line_one")
+    @NotBlank(message = "Please enter address line one...")
     private String addressLineOne;
 
     @Column(name = "address_line_two")
+    @NotBlank(message = "Please enter address line two...")
     private String addressLineTwo;
 
     @Column(name = "city")
+    @NotBlank(message = "Please enter city...")
     private String city;
 
     @Column(name = "state")
+    @NotBlank(message = "Please enter state...")
     private String state;
 
     @Column(name = "country")
+    @NotBlank(message = "Please enter country...")
     private String country;
 
     @Column(name ="postal_code")
+    @NotBlank(message = "Please enter postal code...")
     private String postalCode;
 
     @Column(name="is_billing")

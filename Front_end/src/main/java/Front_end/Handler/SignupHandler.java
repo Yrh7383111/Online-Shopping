@@ -7,6 +7,9 @@ import Back_end.DTO.Cart;
 import Back_end.DTO.User;
 import Front_end.Model.SignupModel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.binding.message.MessageBuilder;
+import org.springframework.binding.message.MessageContext;
+import org.springframework.binding.message.MessageResolver;
 import org.springframework.stereotype.Component;
 
 
@@ -32,6 +35,37 @@ public class SignupHandler
     public void addUser(SignupModel signupModel, User user)
     {
         signupModel.setUser(user);
+    }
+
+    public String validateUser(User user, MessageContext messageContext)
+    {
+        String transitionValue = new String("success");
+
+        // Password matches confirm password
+        if (!user.getPassword().equals(user.getConfirmPassword()))
+        {
+            MessageBuilder messageBuilder = new MessageBuilder();
+            MessageResolver messageResolver = messageBuilder.error().source("confirmPassword")
+                                                            .defaultText("Password doesn't match confirm password...").build();
+
+            messageContext.addMessage(messageResolver);
+
+            transitionValue = "failure";
+        }
+
+        // Unique email address
+        if (userDAO.getUserByEmail(user.getEmail()) != null)
+        {
+            MessageBuilder messageBuilder = new MessageBuilder();
+            MessageResolver messageResolver = messageBuilder.error().source("email")
+                                                            .defaultText("Email address is already taken...").build();
+
+            messageContext.addMessage(messageResolver);
+
+            transitionValue = "failure";
+        }
+
+        return transitionValue;
     }
 
     public void addBillingAddress(SignupModel signupModel, Address billingAddress)

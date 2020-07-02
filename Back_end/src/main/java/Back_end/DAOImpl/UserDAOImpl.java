@@ -44,6 +44,29 @@ public class UserDAOImpl implements UserDAO
         return null;
     }
 
+    @Override
+    public User getUserByEmail(String email)
+    {
+        String selectUserByEmail = "FROM User WHERE email =:email";
+
+       try
+       {
+           Session session = sessionFactory.getCurrentSession();
+           Query<User> query = session.createQuery(selectUserByEmail);
+
+           query.setParameter("email", email);
+           User user = query.getSingleResult();
+
+           return user;
+       }
+       catch (Exception e)
+       {
+           e.printStackTrace();
+       }
+
+       return null;
+    }
+
     // Public
     // Add a new user - Junit test
     @Override
