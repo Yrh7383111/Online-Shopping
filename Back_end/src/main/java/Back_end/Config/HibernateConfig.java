@@ -29,7 +29,7 @@ public class HibernateConfig
 
 	
 	// Data source connection
-	@Bean
+	@Bean(name = "dataSource")
 	public DataSource getDataSource()
 	{
 		BasicDataSource dataSource = new BasicDataSource();

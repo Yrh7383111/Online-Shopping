@@ -16,7 +16,6 @@
 
 	<!-- Component Scanning	-->
 	<context:component-scan base-package="Front_end"/>
-	<context:component-scan base-package="Back_end"/>
 
 	<!-- View Resolver	-->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
