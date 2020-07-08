@@ -35,6 +35,26 @@
                     <li id="login">
                         <a href="${contextRoot}/login">Login</a>
                     </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="btn btn-default dropdown-toggle" id="dropdownMenu"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            ${userModel.fullName}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                            <li id="cart">
+                                <a href="${contextRoot}/cart/${userModel.cart.id}">
+                                    <span class="glyphicon glyphicon-shopping-cart"></span>
+                                    <span class="badge">${userModel.cart.cartLines}</span>
+                                     - $${userModel.cart.grandTotal}
+                                </a>
+                            </li>
+                            <li class="divider" role="separator"></li>
+                            <li id="logout">
+                                <a href="${contextRoot}/logout">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

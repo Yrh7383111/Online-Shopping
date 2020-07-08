@@ -25,6 +25,8 @@ $(function()
 		}
 	}
 
+
+
 	// Alert fade out animation
 	const alert = $('.alert');
 
@@ -34,6 +36,7 @@ $(function()
 			alert.fadeOut('slow');
 		}, 3000);
 	}
+
 
 
 	// CSRF token
@@ -46,10 +49,6 @@ $(function()
 			xhr.setRequestHeader(CSRFHeader, CSRFToken);
 		});
 	}
-
-
-
-
 
 
 
