@@ -136,7 +136,7 @@ public class PageController
         modelAndView.addObject("title", "Login");
 
         if (error != null)
-            modelAndView.addObject("message", "Username and Password is invalid...");
+            modelAndView.addObject("message", "Invalid username or password...");
 
         return modelAndView;
     }

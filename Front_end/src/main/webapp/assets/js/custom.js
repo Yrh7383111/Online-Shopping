@@ -27,6 +27,19 @@ $(function()
 
 
 
+	// CSRF token
+	const CSRFToken = $('meta[name = "_csrf"]').attr('content');
+	const CSRFHeader = $('meta[name = "_csrf_header"]').attr('content');
+
+	if (CSRFToken.length > 0 && CSRFHeader.length > 0)
+	{
+		$(document).ajaxSend(function(e, xhr) {
+			xhr.setRequestHeader(CSRFHeader, CSRFToken);
+		});
+	}
+
+
+
 	// Jquery dataTable for "View Products"
 	const productListTable = $('#productListTable');
 
