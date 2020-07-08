@@ -27,6 +27,18 @@ $(function()
 
 
 
+	// Alert fade out animation
+	const alert = $('.alert');
+
+	if (alert.length)
+	{
+		setTimeout(function() {
+			alert.fadeOut('slow');
+		}, 3000);
+	}
+
+
+
 	// CSRF token
 	const CSRFToken = $('meta[name = "_csrf"]').attr('content');
 	const CSRFHeader = $('meta[name = "_csrf_header"]').attr('content');
@@ -117,18 +129,6 @@ $(function()
 				}
 			]
 		});
-	}
-
-
-
-	// Alert fade out animation
-	const $alert = $('.alert');
-
-	if ($alert.length)
-	{
-		setTimeout(function() {
-				$alert.fadeOut('slow');
-				}, 3000);
 	}
 
 

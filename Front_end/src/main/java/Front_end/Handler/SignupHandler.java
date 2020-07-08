@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
 import org.springframework.binding.message.MessageResolver;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
@@ -20,6 +21,9 @@ public class SignupHandler
     // Private
     @Autowired
     private UserDAO userDAO;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
 
     // Public
@@ -78,6 +82,8 @@ public class SignupHandler
         User user = signupModel.getUser();
         Address billingAddress = signupModel.getBillingAddress();
 
+        // Encrypt password using B encryption
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         // If the role of the is USER, then create a cart
         if (user.getRole().equals("USER"))

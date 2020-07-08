@@ -5,7 +5,7 @@
             <div class="col-sm-offset-4 col-sm-4">
                 <div class="text-center">
                     <h1>Welcome!</h1>
-                    <h3>Use your email address login</h3>
+                    <h3>Use your email address to login</h3>
                     <div>
                         <a href="${contextRoot}/login" class="btn btn-lg btn-success">Login</a>
                     </div>
