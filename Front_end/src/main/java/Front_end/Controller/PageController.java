@@ -140,4 +140,17 @@ public class PageController
 
         return modelAndView;
     }
+
+    // Show the access denied page
+    @GetMapping(value="/access-denied")
+    public ModelAndView accessDenied() 
+    {
+        ModelAndView modelAndView = new ModelAndView("error");
+
+        modelAndView.addObject("title", "403 Access Denied");
+        modelAndView.addObject("errorTitle", "Aha, caught you...");
+        modelAndView.addObject("errorDescription", "You are not authorized to view this page...");
+
+        return modelAndView;
+    }
 }
