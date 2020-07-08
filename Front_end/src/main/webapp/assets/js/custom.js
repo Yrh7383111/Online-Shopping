@@ -252,7 +252,7 @@ $(function()
 	// Validate add new category form
 	const categoryForm = $('#categoryForm');
 
-	if(categoryForm.length)
+	if (categoryForm.length)
 	{
 		categoryForm.validate({
 				rules: {
@@ -286,6 +286,41 @@ $(function()
 				errorElement: "em",
 				errorPlacement : function(error, element) {
 					error.addClass('help-block');
+					error.insertAfter(element);
+				}
+			}
+		);
+	}
+
+
+
+	// Validate add new category form
+	const loginForm = $('#loginForm');
+
+	if (loginForm.length)
+	{
+		loginForm.validate({
+				rules: {
+					username: {
+						required: true,
+						email: true
+					},
+					password: {
+						required: true
+					}
+				},
+				messages: {
+					username: {
+						required: 'Please enter the email...',
+						email: 'Please enter a valid email address...'
+					},
+					password: {
+						required: 'Please enter the password...'
+					}
+				},
+				errorElement : "em",
+				errorPlacement : function(error, element) {
+					error.addClass("help-block");
 					error.insertAfter(element);
 				}
 			}

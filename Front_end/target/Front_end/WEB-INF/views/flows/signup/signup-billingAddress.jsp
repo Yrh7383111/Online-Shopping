@@ -60,7 +60,7 @@
 
 
                             <div class="form-group">
-                                <div class="col-md-offset-4 col-md-8">
+                                <div class="col-md-offset-4 col-md-5">
                                     <button type="submit" name="_eventId_user" class="btn btn-primary">
                                         <span class="glyphicon glyphicon-chevron-left"></span>
                                         Back - User
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="form-group">
-                                <div class="col-md-offset-4 col-md-8">
+                                <div class="col-md-offset-4 col-md-5">
                                     <button type="submit" name="_eventId_confirm" class="btn btn-primary">
                                         Next - Confirm
                                         <span class="glyphicon glyphicon-chevron-right"></span>

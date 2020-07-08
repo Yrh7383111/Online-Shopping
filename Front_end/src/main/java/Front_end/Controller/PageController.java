@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -123,6 +124,20 @@ public class PageController
         modelAndView.addObject("userClickSingleProduct", true);
         modelAndView.addObject("product", product);
         
+        return modelAndView;
+    }
+
+    // Show the login page
+    @GetMapping(value="/login")
+    public ModelAndView login(@RequestParam(name="error", required = false)	String error)
+    {
+        ModelAndView modelAndView= new ModelAndView("login");
+
+        modelAndView.addObject("title", "Login");
+
+        if (error != null)
+            modelAndView.addObject("message", "Username and Password is invalid...");
+
         return modelAndView;
     }
 }

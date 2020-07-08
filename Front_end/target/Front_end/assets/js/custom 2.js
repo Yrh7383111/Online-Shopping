@@ -109,12 +109,12 @@ $(function()
 
 
 	// Alert fade out animation
-	const $alert = $('.alert');
+	const alert = $('.alert');
 
-	if ($alert.length)
+	if (alert.length)
 	{
 		setTimeout(function() {
-				$alert.fadeOut('slow');
+				alert.fadeOut('slow');
 				}, 3000);
 	}
 
@@ -286,41 +286,6 @@ $(function()
 				errorElement: "em",
 				errorPlacement : function(error, element) {
 					error.addClass('help-block');
-					error.insertAfter(element);
-				}
-			}
-		);
-	}
-
-
-
-	// Validate add new category form
-	const loginForm = $('#loginForm');
-
-	if (loginForm.length)
-	{
-		loginForm.validate({
-				rules: {
-					username: {
-						required: true,
-						email: true
-					},
-					password: {
-						required: true
-					}
-				},
-				messages: {
-					username: {
-						required: 'Please enter the email...',
-						email: 'Please enter a valid email address...'
-					},
-					password: {
-						required: 'Please enter the password...'
-					}
-				},
-				errorElement : "em",
-				errorPlacement : function(error, element) {
-					error.addClass("help-block");
 					error.insertAfter(element);
 				}
 			}

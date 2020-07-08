@@ -11,11 +11,15 @@
 
     <context:component-scan base-package="Back_end"/>
 
-    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+    <beans:bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+
+    <http pattern="/resources/**" security="none" />
 
     <http>
-        <intercept-url pattern="/**" access="hasAuthority('USER')" />
-        <form-login />
+        <intercept-url pattern="/manage/**" access="hasAuthority('ADMIN')" />
+        <intercept-url pattern="/cart/**" access="hasAuthority('USER')" />
+        <intercept-url pattern="/**" access="permitAll()" />
+        <form-login login-page="/login" />
         <logout />
     </http>
 

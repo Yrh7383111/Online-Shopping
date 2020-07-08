@@ -9,7 +9,7 @@
                     </div>
 
                     <div class="panel-body">
-                        <form:form method="POST" modelAttribute="user" class="form-horizontal" id="personalForm">
+                        <form:form method="POST" modelAttribute="user" class="form-horizontal" id="userForm">
                             <div class="form-group">
                                 <label class="control-label col-md-4">First Name</label>
                                 <div class="col-md-5">
