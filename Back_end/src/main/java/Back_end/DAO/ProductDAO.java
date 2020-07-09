@@ -13,7 +13,7 @@ public interface ProductDAO
 	// Retrieve a list of products
 	List<Product> list();
 
-	// Add a new  - Junit test
+	// Add a new product - Junit test
 	boolean addTest(Product product);
 
 	// Add a new product - Implementation

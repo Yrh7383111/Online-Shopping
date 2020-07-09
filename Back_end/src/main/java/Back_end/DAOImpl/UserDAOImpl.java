@@ -355,7 +355,7 @@ public class UserDAOImpl implements UserDAO
         return null;
     }
 
-    // Add a new cart - Junit test
+    // Update an existing cart - Junit test
     @Override
     public boolean updateCartTest(Cart cart)
     {
@@ -374,7 +374,7 @@ public class UserDAOImpl implements UserDAO
         return false;
     }
 
-    // Add a new cart - Implementation
+    // Update an existing cart - Implementation
     @Override
     public void updateCart(Cart cart)
     {

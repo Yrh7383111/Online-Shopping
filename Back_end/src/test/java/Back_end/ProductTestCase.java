@@ -24,8 +24,8 @@ public class ProductTestCase
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
 
 		context.scan("Back_end");
-
 		context.refresh();
+
 		productDAO = (ProductDAO) context.getBean("productDAO");
 	}
 	
