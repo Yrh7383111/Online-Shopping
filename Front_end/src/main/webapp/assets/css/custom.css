@@ -83,6 +83,7 @@ footer {
     color: #ff0000;
 }
 
+
 /* Switch */
 .switch {
     position: relative;
@@ -94,6 +95,7 @@ footer {
 .switch input {
     display:none;
 }
+
 
 /* Slider */
 .slider {
@@ -140,4 +142,10 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+
+/* Responsive data table */
+.table-responsive {
+    overflow-x: inherit;
 }

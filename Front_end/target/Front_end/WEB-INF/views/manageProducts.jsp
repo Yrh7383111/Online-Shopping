@@ -2,13 +2,13 @@
 
     <div class="container">
         <%-- Pop up message --%>
-<%--        <c:if test="${not empty message}">--%>
-<%--            <div class="row">--%>
-<%--                <div class="col-xs-12 col-md-offset-2 col-md-8">--%>
-<%--                    <div class="alert alert-danger fade in">${message}</div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </c:if>--%>
+        <c:if test="${not empty message}">
+            <div class="row">
+                <div class="col-xs-12 col-md-offset-2 col-md-8">
+                    <div class="alert alert-danger fade in">${message}</div>
+                </div>
+            </div>
+        </c:if>
 
 
 
@@ -162,9 +162,10 @@
 
         <div class="row">
             <div class='col-xs-12'>
-                <div style="overflow: auto">
-                    <table id="adminProductsTable" class="table table-condensed table-bordered">
-                        <thead>
+                <div class="container-fluid">
+                    <div class="table-responsive">
+                        <table id="adminProductsTable" class="table table-condensed table-bordered">
+                            <thead>
                             <tr>
                                 <th>Id</th>
                                 <th>Image</th>
@@ -175,9 +176,9 @@
                                 <th>Activate</th>
                                 <th>Edit</th>
                             </tr>
-                        </thead>
+                            </thead>
 
-                        <tfoot>
+                            <tfoot>
                             <tr>
                                 <th>Id</th>
                                 <th>Image</th>
@@ -188,8 +189,9 @@
                                 <th>Activate</th>
                                 <th>Edit</th>
                             </tr>
-                        </tfoot>
-                    </table>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

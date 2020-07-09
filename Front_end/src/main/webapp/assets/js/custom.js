@@ -116,15 +116,14 @@ $(function()
 
 						string += '<a href="'+ window.contextRoot + '/show/' + data + '/products" class="btn btn-primary"><span class="glyphicon glyphicon-eye-open"></span></a> &#160;';
 
-						if (row.quantity < 1)
+						if (userRole === 'ADMIN')
 						{
-							string += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+							string += '<a href="'+ window.contextRoot + '/manage/' + data + '/products" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>';
 						}
 						else {
-							if (userRole === 'ADMIN')
+							if (row.quantity < 1)
 							{
-								string += '<a href="'+ window.contextRoot + '/manage/' + data + '/products" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>';
-
+								string += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
 							}
 							else {
 								string += '<a href="'+ window.contextRoot + '/cart/add/' + data + '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';

@@ -36,29 +36,33 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <table id="productListTable" class="table table-striped table-borderd">
-                            <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Brand</th>
-                                    <th>Price ($)</th>
-                                    <th>Quantity</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
+                        <div class="container-fluid">
+                            <div class="table-responsive">
+                                <table id="productListTable" class="table table-striped table-borderd">
+                                    <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Brand</th>
+                                        <th>Price ($)</th>
+                                        <th>Quantity</th>
+                                        <th></th>
+                                    </tr>
+                                    </thead>
 
-                            <tfoot>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Brand</th>
-                                    <th>Price ($)</th>
-                                    <th>Quantity</th>
-                                    <th></th>
-                                </tr>
-                            </tfoot>
-                        </table>
+                                    <tfoot>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Brand</th>
+                                        <th>Price ($)</th>
+                                        <th>Quantity</th>
+                                        <th></th>
+                                    </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
