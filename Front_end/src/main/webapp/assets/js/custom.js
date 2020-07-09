@@ -1,19 +1,19 @@
 // Active menu
 $(function()
 {
-	if (menu === 'About Us')
+	if (menu === 'About')
 	{
 		$('#about').addClass('active');
 	}
-	else if (menu === 'Contact Us')
+	else if (menu === 'Contact')
 	{
 		$('#contact').addClass('active');
 	}
-	else if (menu === 'All Products')
+	else if (menu === 'Products')
 	{
 		$('#listProducts').addClass('active');
 	}
-	else if (menu === 'Manage Products')
+	else if (menu === 'Management')
 	{
 		$('#manageProducts').addClass('active');
 	}
@@ -121,7 +121,14 @@ $(function()
 							string += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
 						}
 						else {
-							string += '<a href="'+ window.contextRoot + '/cart/add/' + data + '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+							if (userRole === 'ADMIN')
+							{
+								string += '<a href="'+ window.contextRoot + '/manage/' + data + '/products" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>';
+
+							}
+							else {
+								string += '<a href="'+ window.contextRoot + '/cart/add/' + data + '/product" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+							}
 						}
 
 						return string;

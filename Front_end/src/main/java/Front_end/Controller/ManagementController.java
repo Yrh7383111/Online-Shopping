@@ -51,7 +51,7 @@ public class ManagementController
         product.setSupplierId(1);                                       // Set the supplier to admin
         product.setActive(true);                                        // Activate the product
 
-        modelAndView.addObject("title", "Manage Products");
+        modelAndView.addObject("title", "Management");
         modelAndView.addObject("userClickManageProducts", true);
         modelAndView.addObject("product", product);
 
@@ -79,7 +79,7 @@ public class ManagementController
         Product product = productDAO.get(id);
 
 
-        modelAndView.addObject("title","Manage Products");
+        modelAndView.addObject("title","Management");
         modelAndView.addObject("userClickManageProducts",true);
         modelAndView.addObject("product", product);
 
@@ -109,7 +109,7 @@ public class ManagementController
         // If there is an error occur when adding a product
         if (bindingResult.hasErrors())
         {
-            model.addAttribute("title", "Manage Products");
+            model.addAttribute("title", "Management");
             model.addAttribute("userClickManageProducts",true);
             model.addAttribute("message", "Error occurred when adding the product...");
 

@@ -1,3 +1,9 @@
+    <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
+    <script>
+        window.userRole = '${userModel.role}';
+    </script>
+
+
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -23,38 +29,47 @@
                     <li id="listProducts">
                         <a href="${contextRoot}/show/all/products">View Products</a>
                     </li>
-                    <li id="manageProducts">
-                        <a href="${contextRoot}/manage/products">Manage Products</a>
-                    </li>
+                    <security:authorize access="hasAuthority('ADMIN')">
+                        <li id="manageProducts">
+                            <a href="${contextRoot}/manage/products">Manage Products</a>
+                        </li>
+                    </security:authorize>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li id="signup">
-                        <a href="${contextRoot}/signup">Sign Up</a>
-                    </li>
-                    <li id="login">
-                        <a href="${contextRoot}/login">Login</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="javascript:void(0)" class="btn btn-default dropdown-toggle" id="dropdownMenu"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                            ${userModel.fullName}
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-                            <li id="cart">
-                                <a href="${contextRoot}/cart/${userModel.cart.id}">
-                                    <span class="glyphicon glyphicon-shopping-cart"></span>
-                                    <span class="badge">${userModel.cart.cartLines}</span>
-                                     - $${userModel.cart.grandTotal}
-                                </a>
-                            </li>
-                            <li class="divider" role="separator"></li>
-                            <li id="logout">
-                                <a href="${contextRoot}/logout">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
+                    <security:authorize access="isAnonymous()">
+                        <li id="signup">
+                            <a href="${contextRoot}/signup">Sign Up</a>
+                        </li>
+                        <li id="login">
+                            <a href="${contextRoot}/login">Login</a>
+                        </li>
+                    </security:authorize>
+
+                    <security:authorize access="isAuthenticated()">
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="btn btn-link dropdown-toggle" id="dropdownMenu"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                ${userModel.fullName}
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+                                <security:authorize access="hasAuthority('USER')">
+                                    <li id="cart">
+                                        <a href="${contextRoot}/cart/${userModel.cart.id}">
+                                            <span class="glyphicon glyphicon-shopping-cart"></span>
+                                            <span class="badge">${userModel.cart.cartLines}</span>
+                                             - $${userModel.cart.grandTotal}
+                                        </a>
+                                    </li>
+                                    <li class="divider" role="separator"></li>
+                                </security:authorize>
+                                <li id="logout">
+                                    <a href="${contextRoot}/logout">Logout</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </security:authorize>
                 </ul>
             </div>
         </div>

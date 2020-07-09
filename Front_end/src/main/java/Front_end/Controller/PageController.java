@@ -56,7 +56,7 @@ public class PageController
     {
         ModelAndView modelAndView = new ModelAndView("page");
 
-        modelAndView.addObject("title","About Us");
+        modelAndView.addObject("title","About");
         modelAndView.addObject("userClickAbout",true);
 
         return modelAndView;
@@ -68,7 +68,7 @@ public class PageController
     {
         ModelAndView modelAndView = new ModelAndView("page");
 
-        modelAndView.addObject("title","Contact Us");
+        modelAndView.addObject("title","Contact");
         modelAndView.addObject("userClickContact",true);
 
         return modelAndView;
@@ -81,7 +81,7 @@ public class PageController
         ModelAndView modelAndView = new ModelAndView("page");
         List<Category> categories = categoryDAO.list();
 
-        modelAndView.addObject("title","All Products");
+        modelAndView.addObject("title","Products");
         modelAndView.addObject("userClickAllProducts",true);
         modelAndView.addObject("categories", categories);
 
