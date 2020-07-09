@@ -9,12 +9,17 @@ import Front_end.Exception.ProductNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 
@@ -129,7 +134,8 @@ public class PageController
 
     // Show the login page
     @GetMapping(value="/login")
-    public ModelAndView login(@RequestParam(name="error", required = false)	String error)
+    public ModelAndView login(@RequestParam(name="error", required = false)	String error,
+                              @RequestParam(name="logout", required = false) String logout)
     {
         ModelAndView modelAndView= new ModelAndView("login");
 
@@ -138,7 +144,25 @@ public class PageController
         if (error != null)
             modelAndView.addObject("message", "Invalid username or password...");
 
+        if (logout != null)
+            modelAndView.addObject("logout", "Successfully logged out...");
+
         return modelAndView;
+    }
+
+    // Log out the user
+    @GetMapping(value="/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response)
+    {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null)
+        {
+            SecurityContextLogoutHandler securityContextLogoutHandler = new SecurityContextLogoutHandler();
+            securityContextLogoutHandler.logout(request, response, authentication);
+        }
+
+        return "redirect:/login?logout";
     }
 
     // Show the access denied page
