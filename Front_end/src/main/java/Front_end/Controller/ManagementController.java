@@ -86,7 +86,7 @@ public class ManagementController
         return modelAndView;
     }
 
-    // Add a new product
+    // Add/Update a new product
     @PostMapping(value = "/products")
     public String addProduct(@Valid @ModelAttribute("product") Product product,
                              BindingResult bindingResult, Model model)

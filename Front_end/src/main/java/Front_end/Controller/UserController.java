@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 
 
 @ControllerAdvice
-public class GlobalController
+public class UserController
 {
     // Private
     @Autowired

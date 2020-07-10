@@ -56,7 +56,7 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
                                 <security:authorize access="hasAuthority('USER')">
                                     <li id="cart">
-                                        <a href="${contextRoot}/cart/${userModel.cart.id}">
+                                        <a href="${contextRoot}/cart/show">
                                             <span class="glyphicon glyphicon-shopping-cart"></span>
                                             <span class="badge">${userModel.cart.cartLines}</span>
                                              - $${userModel.cart.grandTotal}
