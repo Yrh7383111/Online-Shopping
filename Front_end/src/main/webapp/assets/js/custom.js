@@ -17,6 +17,10 @@ $(function()
 	{
 		$('#manageProducts').addClass('active');
 	}
+	else if (menu === 'Shopping Cart')
+	{
+		$('#userModel').addClass('active');
+	}
 	else {
 		if (menu !== "Home")
 		{

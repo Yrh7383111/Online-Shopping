@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <label class="control-label col-md-4">Contact Number</label>
                                 <div class="col-md-5">
-                                    <form:input type="text" path="contactNumber" class="form-control" placeholder="Contact Number" maxlength="10" />
+                                    <form:input type="text" path="contactNumber" class="form-control" placeholder="Contact Number" />
                                     <form:errors path="contactNumber" cssClass="help-block" element="em" />
                                 </div>
                             </div>

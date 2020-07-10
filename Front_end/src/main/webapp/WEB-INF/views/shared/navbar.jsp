@@ -47,7 +47,7 @@
                     </security:authorize>
 
                     <security:authorize access="isAuthenticated()">
-                        <li class="dropdown">
+                        <li class="dropdown" id="userModel">
                             <a href="javascript:void(0)" class="btn btn-link dropdown-toggle" id="dropdownMenu"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 ${userModel.fullName}
