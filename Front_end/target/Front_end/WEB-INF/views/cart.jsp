@@ -34,11 +34,13 @@
                                 </td>
                                 <td data-th="Price">$ ${cartLine.buyingPrice}</td>
                                 <td data-th="Quantity">
-                                    <input type="number" class="form-control text-center" value="${cartLine.productCount}">
+                                    <input type="number" class="form-control text-center" id="quantity${cartLine.id}" value="${cartLine.productCount}" min="1">
                                 </td>
                                 <td data-th="Subtotal" class="text-center">$ ${cartLine.total}</td>
                                 <td class="actions" data-th="">
-                                    <button class="btn btn-info btn-sm"><span class="glyphicon glyphicon-refresh"></span></button>
+                                    <button type="button" name="refreshCart" class="btn btn-info btn-sm" value="${cartLine.id}">
+                                        <span class="glyphicon glyphicon-refresh"></span>
+                                    </button>
                                     <button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></button>
                                 </td>
                             </tr>

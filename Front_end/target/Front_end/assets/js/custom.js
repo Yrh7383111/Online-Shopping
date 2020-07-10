@@ -1,6 +1,5 @@
 // Active menu
-$(function()
-{
+$(function() {
 	if (menu === 'About')
 	{
 		$('#about').addClass('active');
@@ -349,4 +348,39 @@ $(function()
 			}
 		);
 	}
+
+
+
+	// Handle refresh cart button
+	const refreshCartButton = $('button[name="refreshCart"]');
+
+	refreshCartButton.click(function() {
+		const cartLineId = refreshCartButton.attr('value');
+		const quantityElement = $('#quantity' + cartLineId);
+		const oldCount = quantityElement.attr('value');
+		const newCount = quantityElement.val();
+
+
+		// Do the refresh only if the quantity has changed
+		if (oldCount !== newCount)
+		{
+			// Minimum quantity is 1
+			if (newCount < 1)
+			{
+				// Revert back to the original quantity
+				quantityElement.val(oldCount);
+
+				bootbox.alert({
+					size: 'medium',
+					title: 'Error',
+					message: 'Product minimum quantity is 1...'
+				});
+			}
+			else {
+				const updateURL = window.contextRoot + '/cart/' + cartLineId + '/update?count=' + newCount;
+
+				window.location.href = updateURL;
+			}
+		}
+	});
 });
