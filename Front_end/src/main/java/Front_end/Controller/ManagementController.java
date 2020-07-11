@@ -27,19 +27,21 @@ import java.util.Objects;
 public class ManagementController
 {
     // Private
-    @Autowired
-    private CategoryDAO categoryDAO;
-
-    @Autowired
-    private ProductDAO productDAO;
-
-    @Autowired
-    private HttpServletRequest httpServletRequest;
-
+    private final HttpServletRequest httpServletRequest;
+    private final CategoryDAO categoryDAO;
+    private final ProductDAO productDAO;
     private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
 
 
     // Public
+    @Autowired
+    public ManagementController(HttpServletRequest httpServletRequest, CategoryDAO categoryDAO, ProductDAO productDAO)
+    {
+        this.httpServletRequest = httpServletRequest;
+        this.categoryDAO = categoryDAO;
+        this.productDAO = productDAO;
+    }
+
     // Show the Product Management page
     @GetMapping(value = "/products")
     public ModelAndView showProducts(@RequestParam(name="operation", required=false) String operation)

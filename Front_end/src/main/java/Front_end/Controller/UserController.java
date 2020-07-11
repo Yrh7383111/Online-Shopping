@@ -18,14 +18,18 @@ import javax.servlet.http.HttpSession;
 public class UserController
 {
     // Private
-    @Autowired
-    private HttpSession session;
-
-    @Autowired
-    private UserDAO userDAO;
+    private final HttpSession session;
+    private final UserDAO userDAO;
 
 
     // Public
+    @Autowired
+    public UserController(HttpSession session, UserDAO userDAO)
+    {
+        this.session = session;
+        this.userDAO = userDAO;
+    }
+
     @ModelAttribute("userModel")
     public UserModel getUserModel()
     {

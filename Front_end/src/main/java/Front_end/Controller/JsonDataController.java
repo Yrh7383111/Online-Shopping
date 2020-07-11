@@ -18,11 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class JsonDataController
 {
 	// Private
-	@Autowired
-	private ProductDAO productDAO;
-	
+	private final ProductDAO productDAO;
+
 
 	// Public
+	@Autowired
+	public JsonDataController(ProductDAO productDAO)
+	{
+		this.productDAO = productDAO;
+	}
 
 	// Retrieve all the active products for users
 	@GetMapping("/all/products")

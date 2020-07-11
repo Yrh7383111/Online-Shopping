@@ -17,14 +17,18 @@ import java.util.List;
 public class CartService
 {
     // Private
-    @Autowired
-    private HttpSession session;
-
-    @Autowired
-    private CartLineDAO cartLineDAO;
+    private final HttpSession session;
+    private final CartLineDAO cartLineDAO;
 
 
     // Public
+    @Autowired
+    public CartService(HttpSession session, CartLineDAO cartLineDAO)
+    {
+        this.session = session;
+        this.cartLineDAO = cartLineDAO;
+    }
+
     // Retrieve the cart
     public Cart getCart()
     {

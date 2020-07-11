@@ -27,16 +27,18 @@ import java.util.List;
 public class PageController
 {
     // Private
-    @Autowired
-    private CategoryDAO categoryDAO;
-
-    @Autowired
-    private ProductDAO productDAO;
-
+    private final CategoryDAO categoryDAO;
+    private final ProductDAO productDAO;
     private static final Logger logger = LoggerFactory.getLogger(PageController.class);
 
 
     // Public
+    @Autowired
+    public PageController(CategoryDAO categoryDAO, ProductDAO productDAO)
+    {
+        this.categoryDAO = categoryDAO;
+        this.productDAO = productDAO;
+    }
 
     // Home page
     @GetMapping(value = {"/", "/home", "/index"})

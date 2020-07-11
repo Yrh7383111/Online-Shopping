@@ -16,11 +16,16 @@ import java.util.List;
 public class CartController
 {
     // Private
-    @Autowired
-    private CartService cartService;
+    private final CartService cartService;
 
 
     // Public
+    @Autowired
+    public CartController(CartService cartService)
+    {
+        this.cartService = cartService;
+    }
+
     @GetMapping("/show")
     public ModelAndView showCart(@RequestParam(name = "result", required = false) String result)
     {
