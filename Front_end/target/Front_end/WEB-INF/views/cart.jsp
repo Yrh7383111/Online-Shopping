@@ -1,4 +1,11 @@
     <div class="container">
+        <c:if test="${not empty message}">
+            <div class="alert alert-info fade in">
+                <h3 class="text-center">${message}</h3>
+            </div>
+        </c:if>
+
+
         <c:choose>
             <c:when test="${not empty cartLines}">
                 <table id="cart" class="table table-hover table-condensed">
