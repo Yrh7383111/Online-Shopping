@@ -389,7 +389,7 @@ $(function() {
 				});
 			}
 			else {
-				const updateURL = window.contextRoot + '/cart/' + cartLineId + '/update?count=' + newCount;
+				const updateURL = window.contextRoot + '/cart/update/' + cartLineId + '/cartlines?count=' + newCount;
 
 				window.location.href = updateURL;
 			}

@@ -17,22 +17,22 @@ import java.util.List;
 public class CartService
 {
     // Private
-    private final HttpSession session;
+    private final HttpSession httpSession;
     private final CartLineDAO cartLineDAO;
 
 
     // Public
     @Autowired
-    public CartService(HttpSession session, CartLineDAO cartLineDAO)
+    public CartService(HttpSession httpSession, CartLineDAO cartLineDAO)
     {
-        this.session = session;
+        this.httpSession = httpSession;
         this.cartLineDAO = cartLineDAO;
     }
 
     // Retrieve the cart
     public Cart getCart()
     {
-        UserModel userModel = (UserModel)session.getAttribute("userModel");
+        UserModel userModel = (UserModel)httpSession.getAttribute("userModel");
         Cart cart = userModel.getCart();
 
         return cart;
@@ -41,7 +41,7 @@ public class CartService
     // Retrieve a list of cart lines
     public List<CartLine> listCartLines()
     {
-        UserModel userModel = (UserModel)session.getAttribute("userModel");
+        UserModel userModel = (UserModel)httpSession.getAttribute("userModel");
         Cart cart = userModel.getCart();
         List<CartLine> cartLines = cartLineDAO.list(cart.getId());
 
@@ -68,7 +68,7 @@ public class CartService
         cartLineDAO.update(cartLine);
 
 
-        UserModel userModel = (UserModel)session.getAttribute("userModel");
+        UserModel userModel = (UserModel)httpSession.getAttribute("userModel");
         Cart cart = userModel.getCart();
         double oldGrandTotal = cart.getGrandTotal();
         double newGrandTotal = oldGrandTotal + (newTotal - oldTotal);
@@ -77,5 +77,23 @@ public class CartService
         cartLineDAO.updateCart(cart);
 
         return "result=updated";
+    }
+
+    public String deleteCartLine(int id)
+    {
+        CartLine cartLine = cartLineDAO.get(id);
+        
+        cartLineDAO.delete(cartLine);
+
+        UserModel userModel = (UserModel)httpSession.getAttribute("userModel");
+        Cart cart = userModel.getCart();
+        double newGrandTotal = cart.getGrandTotal() - cartLine.getTotal();
+        int newCartLines = cart.getCartLines() - 1;
+
+        cart.setGrandTotal(newGrandTotal);
+        cart.setCartLines(newCartLines);
+        cartLineDAO.updateCart(cart);
+
+        return "result=deleted";
     }
 }

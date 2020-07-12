@@ -42,6 +42,10 @@ public class CartController
             {
                 modelAndView.addObject("message", "Cart line updated successfully...");
             }
+            else if (result.equals("deleted"))
+            {
+                modelAndView.addObject("message", "Cart line deleted successfully...");
+            }
             else {
                 modelAndView.addObject("message", "Something went wrong...");
             }
@@ -50,10 +54,18 @@ public class CartController
         return modelAndView;
     }
 
-    @GetMapping("/{id}/update")
+    @GetMapping("/update/{id}/cartlines")
     public String updateCart(@PathVariable int id, @RequestParam int count)
     {
         String result = cartService.updateCartLine(id, count);
+
+        return "redirect:/cart/show?" + result;
+    }
+
+    @GetMapping("/delete/{id}/cartlines")
+    public String deleteCart(@PathVariable int id)
+    {
+        String result = cartService.deleteCartLine(id);
 
         return "redirect:/cart/show?" + result;
     }
