@@ -53,32 +53,28 @@ public class CartService
     {
         CartLine cartLine = cartLineDAO.get(id);
 
-        if (cartLine == null)
-            return "result=error";
-        else {
-            Product product = cartLine.getProduct();
-            double oldTotal = cartLine.getTotal();
+        Product product = cartLine.getProduct();
+        double oldTotal = cartLine.getTotal();
 
-            if (count > product.getQuantity())
-                count = product.getQuantity();
-            // Else
-            cartLine.setProductCount(count);
-            cartLine.setBuyingPrice(product.getUnitPrice());
+        if (count > product.getQuantity())
+            count = product.getQuantity();
+        // Else
+        cartLine.setProductCount(count);
+        cartLine.setBuyingPrice(product.getUnitPrice());
 
-            double newTotal = product.getUnitPrice() * count;
-            cartLine.setTotal(newTotal);
+        double newTotal = product.getUnitPrice() * count;
+        cartLine.setTotal(newTotal);
 
-            cartLineDAO.update(cartLine);
+        cartLineDAO.update(cartLine);
 
 
-            UserModel userModel = (UserModel)session.getAttribute("userModel");
-            Cart cart = userModel.getCart();
-            double oldGrandTotal = cart.getGrandTotal();
-            double newGrandTotal = oldGrandTotal + (newTotal - oldTotal);
+        UserModel userModel = (UserModel)session.getAttribute("userModel");
+        Cart cart = userModel.getCart();
+        double oldGrandTotal = cart.getGrandTotal();
+        double newGrandTotal = oldGrandTotal + (newTotal - oldTotal);
 
-            cart.setGrandTotal(newGrandTotal);
-            cartLineDAO.updateCart(cart);
-        }
+        cart.setGrandTotal(newGrandTotal);
+        cartLineDAO.updateCart(cart);
 
         return "result=updated";
     }

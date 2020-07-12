@@ -220,6 +220,18 @@ $(function() {
 
 						return string;
 					}
+				},
+				{
+					// Delete button
+					data : 'id',
+					bSortable : false,
+					mRender : function(data) {
+						let string = '';
+
+						string += '<a href="'+ window.contextRoot + '/manage/' + data + '/products" class="btn btn-danger"><span class="glyphicon glyphicon-remove-sign"></span></a>';
+
+						return string;
+					}
 				}
 			],
 

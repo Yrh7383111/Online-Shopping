@@ -246,6 +246,7 @@
                                 <th>Price ($)</th>
                                 <th>Activate</th>
                                 <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                             </thead>
 
@@ -259,6 +260,7 @@
                                 <th>Price ($)</th>
                                 <th>Activate</th>
                                 <th>Edit</th>
+                                <th>Delete</th>
                             </tr>
                             </tfoot>
                         </table>

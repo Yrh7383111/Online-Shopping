@@ -80,7 +80,7 @@ public class ManagementController
             }
             else if (operation.equals("productDeleted"))                // If the operation is to delete a new product
             {
-                modelAndView.addObject("message", "Product updated successfully...");
+                modelAndView.addObject("message", "Product deleted successfully...");
             }
             else if (operation.equals("category"))                      // If the operation is to add a new category
             {
@@ -207,10 +207,12 @@ public class ManagementController
     }
 
     // Delete a product
-    @DeleteMapping(value = "/{id}/products")
-    public String deleteProduct(@PathVariable String id)
+    @GetMapping(value = "/{id}/products")
+    public String deleteProduct(@PathVariable int id)
     {
+        Product product = productDAO.get(id);
 
+        productDAO.delete(product);
 
         return "redirect:/manage/products?operation=productDeleted";    // Redirect to to the Product Management page with product operation
     }
