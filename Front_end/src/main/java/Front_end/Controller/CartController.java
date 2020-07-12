@@ -40,7 +40,7 @@ public class CartController
         {
             if (result.equals("updated"))
             {
-                modelAndView.addObject("message", "Successfully updated the cart line...");
+                modelAndView.addObject("message", "Cart line updated successfully...");
             }
             else {
                 modelAndView.addObject("message", "Something went wrong...");
@@ -50,10 +50,10 @@ public class CartController
         return modelAndView;
     }
 
-    @GetMapping("/{cartLineId}/update")
-    public String updateCart(@PathVariable int cartLineId, @RequestParam int count)
+    @GetMapping("/{id}/update")
+    public String updateCart(@PathVariable int id, @RequestParam int count)
     {
-        String result = cartService.updateCartLine(cartLineId, count);
+        String result = cartService.updateCartLine(id, count);
 
         return "redirect:/cart/show?" + result;
     }

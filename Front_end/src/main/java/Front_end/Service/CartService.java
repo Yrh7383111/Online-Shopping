@@ -49,9 +49,9 @@ public class CartService
     }
 
     // Update one cart line
-    public String updateCartLine(int cartLineId, int count)
+    public String updateCartLine(int id, int count)
     {
-        CartLine cartLine = cartLineDAO.get(cartLineId);
+        CartLine cartLine = cartLineDAO.get(id);
 
         if (cartLine == null)
             return "result=error";

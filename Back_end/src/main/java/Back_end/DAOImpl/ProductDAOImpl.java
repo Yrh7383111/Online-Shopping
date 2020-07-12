@@ -127,11 +127,8 @@ public class ProductDAOImpl implements ProductDAO
 	{
 		try
 		{
-			// Deactivate the category
-			product.setActive(false);
-
 			Session session = sessionFactory.getCurrentSession();
-			session.update(product);
+			session.delete(product);
 
 			return true;
 		}
@@ -149,11 +146,8 @@ public class ProductDAOImpl implements ProductDAO
 	{
 		try
 		{
-			// Deactivate the category
-			product.setActive(false);
-
 			Session session = sessionFactory.getCurrentSession();
-			session.update(product);
+			session.delete(product);
 		}
 		catch (Exception e)
 		{

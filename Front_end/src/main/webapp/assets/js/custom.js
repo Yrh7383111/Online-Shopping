@@ -101,7 +101,7 @@ $(function() {
 				{
 					// Quantity
 					data: 'quantity',
-					mRender: function(data, type, row) {
+					mRender: function(data) {
 						if (data < 1)
 						{
 							return '<span style="color:red">Out of Stock...</span>';
@@ -121,7 +121,7 @@ $(function() {
 
 						if (userRole === 'ADMIN')
 						{
-							string += '<a href="'+ window.contextRoot + '/manage/' + data + '/products" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>';
+							string += '<a href="'+ window.contextRoot + '/manage/edit/' + data + '/products" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>';
 						}
 						else {
 							if (row.quantity < 1)
@@ -216,7 +216,7 @@ $(function() {
 					mRender : function(data) {
 						let string = '';
 
-						string += '<a href="'+ window.contextRoot +' /manage/ '+ data +' /products" class="btn btn-warning"> <span class="glyphicon glyphicon-pencil"></span> </a>'
+						string += '<a href="'+ window.contextRoot + '/manage/edit/' + data + '/products" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span></a>';
 
 						return string;
 					}

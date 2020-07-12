@@ -22,14 +22,15 @@ import java.util.List;
 import java.util.Objects;
 
 
+
 @Controller
 @RequestMapping("/manage")
 public class ManagementController
 {
     // Private
     private final HttpServletRequest httpServletRequest;
-    private final CategoryDAO categoryDAO;
     private final ProductDAO productDAO;
+    private final CategoryDAO categoryDAO;
     private static final Logger logger = LoggerFactory.getLogger(ManagementController.class);
 
 
@@ -38,8 +39,15 @@ public class ManagementController
     public ManagementController(HttpServletRequest httpServletRequest, CategoryDAO categoryDAO, ProductDAO productDAO)
     {
         this.httpServletRequest = httpServletRequest;
-        this.categoryDAO = categoryDAO;
         this.productDAO = productDAO;
+        this.categoryDAO = categoryDAO;
+    }
+
+    // Return a list categories
+    @ModelAttribute("categories")
+    public List<Category> getCategories()
+    {
+        return categoryDAO.list();
     }
 
     // Show the Product Management page
@@ -48,6 +56,7 @@ public class ManagementController
     {
         ModelAndView modelAndView = new ModelAndView("page");
         Product product = new Product();
+        Category category = new Category();
 
 
         product.setSupplierId(1);                                       // Set the supplier to admin
@@ -56,13 +65,22 @@ public class ManagementController
         modelAndView.addObject("title", "Management");
         modelAndView.addObject("userClickManageProducts", true);
         modelAndView.addObject("product", product);
+        modelAndView.addObject("category", category);
 
         // Display the message if the product is submitted successfully
         if (operation != null)
         {
-            if (operation.equals("product"))                            // If the operation is to add a new product
+            if (operation.equals("productAdded"))                       // If the operation is to add a new product
             {
-                modelAndView.addObject("message", "Product submitted successfully...");
+                modelAndView.addObject("message", "Product added successfully...");
+            }
+            else if (operation.equals("productUpdated"))                // If the operation is to update a new product
+            {
+                modelAndView.addObject("message", "Product updated successfully...");
+            }
+            else if (operation.equals("productDeleted"))                // If the operation is to delete a new product
+            {
+                modelAndView.addObject("message", "Product updated successfully...");
             }
             else if (operation.equals("category"))                      // If the operation is to add a new category
             {
@@ -74,21 +92,23 @@ public class ManagementController
     }
 
     // Show the page to edit an existing product
-    @GetMapping("/{id}/products")
+    @GetMapping("/edit/{id}/products")
     public ModelAndView editProduct(@PathVariable int id)
     {
         ModelAndView modelAndView = new ModelAndView("page");
         Product product = productDAO.get(id);
+        Category category = new Category();
 
 
         modelAndView.addObject("title","Management");
         modelAndView.addObject("userClickManageProducts",true);
         modelAndView.addObject("product", product);
+        modelAndView.addObject("category", category);
 
         return modelAndView;
     }
 
-    // Add/Update a new product
+    // Add a new product
     @PostMapping(value = "/products")
     public String addProduct(@Valid @ModelAttribute("product") Product product,
                              BindingResult bindingResult, Model model)
@@ -97,16 +117,7 @@ public class ManagementController
 
 
         // Call the user defined validate method
-        if (product.getId() == 0)                                       // If we are adding a new product, then we need to validate
-        {
-            productValidator.validate(product, bindingResult);
-        }
-        else {
-            if (!Objects.equals(product.getFile().getOriginalFilename(), ""))
-            {
-                productValidator.validate(product, bindingResult);
-            }
-        }
+        productValidator.validate(product, bindingResult);
 
         // If there is an error occur when adding a product
         if (bindingResult.hasErrors())
@@ -119,13 +130,38 @@ public class ManagementController
         }
         // Else
         // Add a new product (except the image filed)
-        if (product.getId() == 0)
+        productDAO.add(product);                                        // If the product does not exist in the database
+
+        logger.info(product.toString());                                // Log the info the the console
+
+        return "redirect:/manage/products?operation=productAdded";      // Redirect to to the Product Management page with product operation
+    }
+
+    // Update a product
+    @PostMapping(value = "/{id}/products")
+    public String updateProduct(@Valid @ModelAttribute("product") Product product,
+                                BindingResult bindingResult, Model model)
+    {
+        ProductValidator productValidator = new ProductValidator();
+
+
+        // Call the user defined validate method
+        if (!Objects.equals(product.getFile().getOriginalFilename(), ""))
         {
-            productDAO.add(product);                                    // If the product does not exist in the database
+            productValidator.validate(product, bindingResult);
         }
-        else {
-            productDAO.update(product);                                 // If the product exists in the database
+
+        // If there is an error occur when adding a product
+        if (bindingResult.hasErrors())
+        {
+            model.addAttribute("title", "Management");
+            model.addAttribute("userClickManageProducts",true);
+            model.addAttribute("message", "Error occurred when adding the product...");
+
+            return "page";
         }
+        // Else
+        productDAO.update(product);
 
         // Attach the image file the product afterwards
         if (product.getFile() != null)                                  // If the product does not have a file, then upload it
@@ -142,7 +178,7 @@ public class ManagementController
 
         logger.info(product.toString());                                // Log the info the the console
 
-        return "redirect:/manage/products?operation=product";           // Redirect to to the Product Management page with product operation
+        return "redirect:/manage/products?operation=productUpdated";    // Redirect to to the Product Management page with product operation
     }
 
     // Activate an existing product
@@ -162,7 +198,7 @@ public class ManagementController
     }
 
     // Add a new category
-    @PostMapping(value = "/category")
+    @PostMapping(value = "/categories")
     public String addCategory(@ModelAttribute("category") Category category)
     {
         categoryDAO.add(category);
@@ -170,19 +206,12 @@ public class ManagementController
         return "redirect:/manage/products?operation=category";      // Redirect to to the Product Management page with category operation
     }
 
-    // Return a list categories
-    @ModelAttribute("categories")
-    public List<Category> getCategories()
+    // Delete a product
+    @DeleteMapping(value = "/{id}/products")
+    public String deleteProduct(@PathVariable String id)
     {
-        return categoryDAO.list();
-    }
 
-    // Return an empty category to fill out
-    @ModelAttribute("category")
-    public Category addCategory()
-    {
-        Category category = new Category();
 
-        return category;
+        return "redirect:/manage/products?operation=productDeleted";    // Redirect to to the Product Management page with product operation
     }
 }
