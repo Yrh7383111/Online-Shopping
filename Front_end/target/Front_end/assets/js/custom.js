@@ -129,7 +129,7 @@ $(function() {
 								string += '<a href="javascript:void(0)" class="btn btn-success disabled"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
 							}
 							else {
-								string += '<a href="' + window.contextRoot + '/cart/' + data + '/products" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
+								string += '<a href="' + window.contextRoot + '/cart/add/' + data + '/cartlines" class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span></a>';
 							}
 						}
 
@@ -364,13 +364,13 @@ $(function() {
 
 
 	// Handle refresh cart button
-	const refreshCartButton = $('button[name="refreshCart"]');
+	// const refreshCartButton = $('button[name="refreshCart"]');
 
-	refreshCartButton.click(function() {
-		const cartLineId = refreshCartButton.attr('value');
+	$('button[name="refreshCart"]').click(function() {
+		const cartLineId = $(this).attr('value');
 		const quantityElement = $('#quantity' + cartLineId);
 		const oldCount = quantityElement.attr('value');
-		const newCount = quantityElement.val();
+		let newCount = quantityElement.val();
 
 
 		// Do the refresh only if the quantity has changed
@@ -381,6 +381,7 @@ $(function() {
 			{
 				// Revert back to the original quantity
 				quantityElement.val(oldCount);
+				newCount = quantityElement.val();
 
 				bootbox.alert({
 					size: 'medium',

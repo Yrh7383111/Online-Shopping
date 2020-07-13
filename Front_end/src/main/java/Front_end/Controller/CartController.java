@@ -38,7 +38,11 @@ public class CartController
 
         if (result != null)
         {
-            if (result.equals("updated"))
+            if (result.equals("added"))
+            {
+                modelAndView.addObject("message", "Cart line added successfully...");
+            }
+            else if (result.equals("updated"))
             {
                 modelAndView.addObject("message", "Cart line updated successfully...");
             }
@@ -54,18 +58,26 @@ public class CartController
         return modelAndView;
     }
 
-    @GetMapping("/update/{id}/cartlines")
-    public String updateCart(@PathVariable int id, @RequestParam int count)
+    @GetMapping("/add/{productId}/cartlines")
+    public String addCart(@PathVariable int productId)
     {
-        String result = cartService.updateCartLine(id, count);
+        String result = cartService.addCartLine(productId);
 
         return "redirect:/cart/show?" + result;
     }
 
-    @GetMapping("/delete/{id}/cartlines")
-    public String deleteCart(@PathVariable int id)
+    @GetMapping("/update/{cartLineId}/cartlines")
+    public String updateCart(@PathVariable int cartLineId, @RequestParam int count)
     {
-        String result = cartService.deleteCartLine(id);
+        String result = cartService.updateCartLine(cartLineId, count);
+
+        return "redirect:/cart/show?" + result;
+    }
+
+    @GetMapping("/delete/{cartLineId}/cartlines")
+    public String deleteCart(@PathVariable int cartLineId)
+    {
+        String result = cartService.deleteCartLine(cartLineId);
 
         return "redirect:/cart/show?" + result;
     }

@@ -2,6 +2,7 @@ package Front_end.Service;
 
 
 import Back_end.DAO.CartLineDAO;
+import Back_end.DAO.ProductDAO;
 import Back_end.DTO.Cart;
 import Back_end.DTO.CartLine;
 import Back_end.DTO.Product;
@@ -18,14 +19,16 @@ public class CartService
 {
     // Private
     private final HttpSession httpSession;
+    private final ProductDAO productDAO;
     private final CartLineDAO cartLineDAO;
 
 
     // Public
     @Autowired
-    public CartService(HttpSession httpSession, CartLineDAO cartLineDAO)
+    public CartService(HttpSession httpSession, ProductDAO productDAO, CartLineDAO cartLineDAO)
     {
         this.httpSession = httpSession;
+        this.productDAO = productDAO;
         this.cartLineDAO = cartLineDAO;
     }
 
@@ -48,10 +51,40 @@ public class CartService
         return cartLines;
     }
 
-    // Update one cart line
-    public String updateCartLine(int id, int count)
+    public String addCartLine(int productId)
     {
-        CartLine cartLine = cartLineDAO.get(id);
+        String result = "";
+        UserModel userModel = (UserModel)httpSession.getAttribute("userModel");
+        Cart cart = userModel.getCart();
+        int cartId = cart.getId();
+        CartLine cartLine = cartLineDAO.getCartLineByCartAndProduct(cartId, productId);
+
+        if (cartLine == null)
+        {
+            cartLine = new CartLine();
+            Product product = productDAO.get(productId);
+
+            cartLine.setCartId(cartId);
+            cartLine.setTotal(product.getUnitPrice());
+            cartLine.setProduct(product);
+            cartLine.setProductCount(1);
+            cartLine.setBuyingPrice(product.getUnitPrice());
+            cartLineDAO.add(cartLine);
+
+            cart.setGrandTotal(cart.getGrandTotal() + cartLine.getTotal());
+            cart.setCartLines(cart.getCartLines() + 1);
+            cartLineDAO.updateCart(cart);
+
+            result = "result=added";
+        }
+
+        return result;
+    }
+
+    // Update one cart line
+    public String updateCartLine(int cartLineId, int count)
+    {
+        CartLine cartLine = cartLineDAO.get(cartLineId);
 
         Product product = cartLine.getProduct();
         double oldTotal = cartLine.getTotal();
@@ -79,9 +112,9 @@ public class CartService
         return "result=updated";
     }
 
-    public String deleteCartLine(int id)
+    public String deleteCartLine(int cartLineId)
     {
-        CartLine cartLine = cartLineDAO.get(id);
+        CartLine cartLine = cartLineDAO.get(cartLineId);
         
         cartLineDAO.delete(cartLine);
 

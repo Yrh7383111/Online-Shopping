@@ -25,8 +25,8 @@
                             <tr>
                                 <td data-th="Product">
                                     <div class="row">
-                                        <div class="col-sm-2 hidden-xs"><img src="${images}/${cartLine.product.code}.jpg" alt="${cartLine.product.name}" class="img-responsive cartImg"/></div>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-4 hidden-xs"><img src="${images}/${cartLine.product.code}.jpg" alt="${cartLine.product.name}" class="img-responsive cartImg"/></div>
+                                        <div class="col-sm-8">
                                             <h4 class="nomargin">
                                                 <c:if test="${cartLine.available == false}">
                                                     <strong class="unavailable">(Not Available)</strong>
@@ -63,7 +63,7 @@
                         </tr>
 
                         <tr>
-                            <td><a href="#" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> Continue Shopping</a></td>
+                            <td><a href="${contextRoot}/show/all/products" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> Continue Shopping</a></td>
                             <td colspan="2" class="hidden-xs"></td>
                             <td class="hidden-xs text-center"><strong>Total $ ${userModel.cart.grandTotal}</strong></td>
                             <td><a href="#" class="btn btn-success btn-block">Checkout <span class="glyphicon glyphicon-chevron-right"></span></a></td>

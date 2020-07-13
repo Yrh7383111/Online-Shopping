@@ -165,32 +165,50 @@ public class CartLineDAOImpl implements CartLineDAO
     @Override
     public CartLine getCartLineByCartAndProduct(int cartId, int productId)
     {
-        Session session = sessionFactory.getCurrentSession();
-        String selectCartLineByCartAndProduct = "FROM CartLine WHERE cartId = :cartId AND product.id = :productId";
-        Query<CartLine> query = session.createQuery(selectCartLineByCartAndProduct);
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            String selectCartLineByCartAndProduct = "FROM CartLine WHERE cartId = :cartId AND product.id = :productId";
+            Query<CartLine> query = session.createQuery(selectCartLineByCartAndProduct);
 
-        query.setParameter("cartId", cartId);
-        query.setParameter("productId", productId);
+            query.setParameter("cartId", cartId);
+            query.setParameter("productId", productId);
 
-        CartLine cartLine = query.getSingleResult();
+            CartLine cartLine = query.getSingleResult();
 
-        return cartLine;
+            return cartLine;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     // Retrieve only the available cart line
     @Override
     public List<CartLine> listAvailableCartLines(int cartId)
     {
-        Session session = sessionFactory.getCurrentSession();
-        String selectAvailableCartLines = "FROM CartLine WHERE cartId = :cartId AND available = :available";
-        Query<CartLine> query = session.createQuery(selectAvailableCartLines);
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            String selectAvailableCartLines = "FROM CartLine WHERE cartId = :cartId AND available = :available";
+            Query<CartLine> query = session.createQuery(selectAvailableCartLines);
 
-        query.setParameter("cartId", cartId);
-        query.setParameter("available", true);
+            query.setParameter("cartId", cartId);
+            query.setParameter("available", true);
 
-        List<CartLine> cartLines = query.getResultList();
+            List<CartLine> cartLines = query.getResultList();
 
-        return cartLines;
+            return cartLines;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     // Update a new cart - Junit test
