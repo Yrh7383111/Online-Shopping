@@ -364,13 +364,11 @@ $(function() {
 
 
 	// Handle refresh cart button
-	// const refreshCartButton = $('button[name="refreshCart"]');
-
 	$('button[name="refreshCart"]').click(function() {
 		const cartLineId = $(this).attr('value');
 		const quantityElement = $('#quantity' + cartLineId);
 		const oldCount = quantityElement.attr('value');
-		let newCount = quantityElement.val();
+		const newCount = quantityElement.val();
 
 
 		// Do the refresh only if the quantity has changed
@@ -381,7 +379,6 @@ $(function() {
 			{
 				// Revert back to the original quantity
 				quantityElement.val(oldCount);
-				newCount = quantityElement.val();
 
 				bootbox.alert({
 					size: 'medium',

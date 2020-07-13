@@ -50,6 +50,10 @@ public class CartController
             {
                 modelAndView.addObject("message", "Cart line deleted successfully...");
             }
+            else if (result.equals("unavailable"))
+            {
+                modelAndView.addObject("message", "Product quantity is  unavailable...");
+            }
             else {
                 modelAndView.addObject("message", "Something went wrong...");
             }
