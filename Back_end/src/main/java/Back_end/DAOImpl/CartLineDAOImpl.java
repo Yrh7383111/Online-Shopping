@@ -20,11 +20,16 @@ import java.util.List;
 public class CartLineDAOImpl implements CartLineDAO
 {
     // Private
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
 
     // Public
+    @Autowired
+    public CartLineDAOImpl(SessionFactory sessionFactory)
+    {
+        this.sessionFactory = sessionFactory;
+    }
+
     // Retrieve a single cart line based on id
     @Override
     public CartLine get(int cartLineId)

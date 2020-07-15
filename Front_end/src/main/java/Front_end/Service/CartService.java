@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
+
 @Service("cartService")
 public class CartService
 {
@@ -42,11 +43,11 @@ public class CartService
     }
 
     // Retrieve a list of cart lines
-    public List<CartLine> listCartLines()
+    public List<CartLine> listAvailableCartLines()
     {
         UserModel userModel = (UserModel)httpSession.getAttribute("userModel");
         Cart cart = userModel.getCart();
-        List<CartLine> cartLines = cartLineDAO.list(cart.getId());
+        List<CartLine> cartLines = cartLineDAO.listAvailableCartLines(cart.getId());
 
         return cartLines;
     }
@@ -135,5 +136,76 @@ public class CartService
         cartLineDAO.updateCart(cart);
 
         return "result=deleted";
+    }
+
+    public String validateCartLine()
+    {
+        String result = "result=empty";
+        UserModel userModel = (UserModel)httpSession.getAttribute("userModel");
+        Cart cart = userModel.getCart();
+        List<CartLine> cartLines = cartLineDAO.list(cart.getId());
+
+        int cartLinesCount = 0;
+        double grandTotal = 0.0;
+        boolean isChanged = false;
+
+
+        for (CartLine cartLine : cartLines)
+        {
+            Product product = cartLine.getProduct();
+
+            // If the product's unit price is changed
+            if (cartLine.getBuyingPrice() != product.getUnitPrice())
+            {
+                cartLine.setBuyingPrice(product.getUnitPrice());
+                cartLine.setTotal(cartLine.getBuyingPrice() * cartLine.getProductCount());
+                isChanged = true;
+            }
+
+            // If the product's quantity is changed
+            if (cartLine.getProductCount() > product.getQuantity())
+            {
+                cartLine.setProductCount(product.getQuantity());
+                cartLine.setTotal(cartLine.getBuyingPrice() * cartLine.getProductCount());
+                isChanged = true;
+            }
+
+            // If the product is deactivated, but the cart line is available
+            if (!product.isActive() && cartLine.isAvailable())
+            {
+                cartLine.setAvailable(false);
+                isChanged = true;
+            }
+
+            // If the product line is available, but the cart line is deactivated
+            if (product.isActive() && !cartLine.isAvailable())
+            {
+                if (product.getQuantity() > 0)
+                {
+                    cartLine.setAvailable(true);
+                    isChanged = true;
+                }
+            }
+
+            if (isChanged)
+                cartLineDAO.update(cartLine);
+
+            if (product.isActive() && cartLine.isAvailable())
+                cartLinesCount++;
+
+            if (product.isActive() && cartLine.isAvailable())
+                grandTotal += cartLine.getTotal();
+        }
+
+        // If at least one cart line was modified
+        if (isChanged)
+            result = "result=modified";
+
+        // Update cart
+        cart.setCartLines(cartLinesCount);
+        cart.setGrandTotal(grandTotal);
+        cartLineDAO.updateCart(cart);
+
+        return result;
     }
 }

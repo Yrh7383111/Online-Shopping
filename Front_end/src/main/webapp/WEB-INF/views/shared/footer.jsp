@@ -1,11 +1,9 @@
     <div class="container footer">
-        <hr>
-
         <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2020</p>
+                    <p>Copyright &copy; Jackson Yin Website 2020</p>
                 </div>
             </div>
         </footer>

@@ -17,11 +17,16 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductDAOImpl implements ProductDAO
 {
 	// Private
-	@Autowired
-	private SessionFactory sessionFactory;
+	private final SessionFactory sessionFactory;
 
 
 	// Public
+	@Autowired
+	public ProductDAOImpl(SessionFactory sessionFactory)
+	{
+		this.sessionFactory = sessionFactory;
+	}
+
 	// Retrieve a single product based on id
 	@Override
 	public Product get(int productId)

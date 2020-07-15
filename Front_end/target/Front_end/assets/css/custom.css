@@ -64,9 +64,10 @@ footer {
 }
 
 .footer {
+    width: 100%;
     position: absolute;
-    bottom: 15px;
-    height: 60px;
+    bottom: 10px;
+    /*height: 60px;*/
 }
 
 .dataTableImg {
@@ -208,4 +209,9 @@ input:checked + .slider:before {
 
 .unavailable {
     color: red;
+}
+
+.imageSize {
+    width: 800px;
+    height: 300px;
 }

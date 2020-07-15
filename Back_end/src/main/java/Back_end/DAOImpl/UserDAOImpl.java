@@ -21,9 +21,15 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO
 {
     // Private
-    @Autowired
-    private SessionFactory sessionFactory;
+    private final SessionFactory sessionFactory;
 
+
+    // Public
+    @Autowired
+    public UserDAOImpl(SessionFactory sessionFactory)
+    {
+        this.sessionFactory = sessionFactory;
+    }
 
     // Retrieve a single user based on userId
     @Override
@@ -61,7 +67,7 @@ public class UserDAOImpl implements UserDAO
        }
        catch (Exception e)
        {
-           e.printStackTrace();
+//           e.printStackTrace();
        }
 
        return null;
@@ -293,13 +299,13 @@ public class UserDAOImpl implements UserDAO
 
     // Retrieve a list of addresses based on specific user
     @Override
-    public List<Address> listAddresses(User user)
+    public List<Address> listAddresses(int userId)
     {
         Session session = sessionFactory.getCurrentSession();
-        String selectAddresses = "FROM Address WHERE user = :user";
+        String selectAddresses = "FROM Address WHERE user.id = :userId";
         Query<Address> query = session.createQuery(selectAddresses);
 
-        query.setParameter("user", user);
+        query.setParameter("userId", userId);
 
         List<Address> addresses = query.getResultList();
 
@@ -307,13 +313,13 @@ public class UserDAOImpl implements UserDAO
     }
 
     @Override
-    public List<Address> listBillingAddresses(User user)
+    public List<Address> listBillingAddresses(int userId)
     {
         Session session = sessionFactory.getCurrentSession();
-        String selectBillingAddresses = "FROM Address WHERE user = :user AND billing = :billing";
+        String selectBillingAddresses = "FROM Address WHERE user.id = :userId AND billing = :billing";
         Query<Address> query = session.createQuery(selectBillingAddresses);
 
-        query.setParameter("user", user);
+        query.setParameter("userId", userId);
         query.setParameter("billing", true);
 
         List<Address> addresses = query.getResultList();
@@ -322,13 +328,13 @@ public class UserDAOImpl implements UserDAO
     }
 
     @Override
-    public List<Address> listShippingAddresses(User user)
+    public List<Address> listShippingAddresses(int userId)
     {
         Session session = sessionFactory.getCurrentSession();
-        String selectShippingAddresses = "FROM Address WHERE user = :user AND shipping = :shipping";
+        String selectShippingAddresses = "FROM Address WHERE user.id = :userId AND shipping = :shipping ORDER BY id DESC";
         Query<Address> query = session.createQuery(selectShippingAddresses);
 
-        query.setParameter("user", user);
+        query.setParameter("userId", userId);
         query.setParameter("shipping", true);
 
         List<Address> addresses = query.getResultList();

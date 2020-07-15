@@ -57,13 +57,13 @@ public interface UserDAO
     void deleteAddress(Address address);
 
     // Retrieve a list of addresses based on specific user
-    List<Address> listAddresses(User user);
+    List<Address> listAddresses(int userId);
 
     // Retrieve a list of billing addresses based on specific user
-    List<Address> listBillingAddresses(User user);
+    List<Address> listBillingAddresses(int userId);
 
     // Retrieve a list of shipping addresses based on specific user
-    List<Address> listShippingAddresses(User user);
+    List<Address> listShippingAddresses(int userId);
 
     // Retrieve a single cart based on cartId
     Cart getCart(int cartId);

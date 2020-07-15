@@ -3,6 +3,7 @@ package Back_end.DTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.*;
@@ -10,11 +11,14 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 
+
 @Entity
 @Table(name = "product")
-public class Product
+public class Product implements Serializable
 {
 	// Private
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -31,7 +35,6 @@ public class Product
 	private String brand;
 
 	@Column(name="description")
-	@JsonIgnore
 	@NotBlank(message="Please enter the product description!")
 	private String description;
 

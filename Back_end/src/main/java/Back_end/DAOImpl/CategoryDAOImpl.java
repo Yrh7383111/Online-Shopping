@@ -18,9 +18,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class CategoryDAOImpl implements CategoryDAO
 {
 	// Private
-	@Autowired
-	private SessionFactory sessionFactory;
+	private final SessionFactory sessionFactory;
 
+
+	// Public
+	@Autowired
+	public CategoryDAOImpl(SessionFactory sessionFactory)
+	{
+		this.sessionFactory = sessionFactory;
+	}
 
 	// Retrieve a single category based on categoryId
 	@Override

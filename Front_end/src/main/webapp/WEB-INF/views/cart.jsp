@@ -22,18 +22,16 @@
 
                     <tbody>
                         <c:forEach var="cartLine" items="${cartLines}">
+<%--                        <c:if test="${cartLine.available == false}">--%>
+<%--                            <c:set var="${userModel.cart.cartLines}" value="${userModel.cart.cartLines - 1}"/>--%>
+<%--                        </c:if>--%>
+
                             <tr>
                                 <td data-th="Product">
                                     <div class="row">
                                         <div class="col-sm-4 hidden-xs"><img src="${images}/${cartLine.product.code}.jpg" alt="${cartLine.product.name}" class="img-responsive cartImg"/></div>
                                         <div class="col-sm-8">
-                                            <h4 class="nomargin">
-                                                <c:if test="${cartLine.available == false}">
-                                                    <strong class="unavailable">(Not Available)</strong>
-                                                </c:if>
-                                                <%-- Else --%>
-                                                ${cartLine.product.name}
-                                            </h4>
+                                            <h4 class="nomargin">${cartLine.product.name}</h4>
                                             <p>Brand: ${cartLine.product.brand}</p>
                                             <p>Description: ${cartLine.product.description}
                                         </div>
@@ -66,7 +64,14 @@
                             <td><a href="${contextRoot}/show/all/products" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> Continue Shopping</a></td>
                             <td colspan="2" class="hidden-xs"></td>
                             <td class="hidden-xs text-center"><strong>Total $ ${userModel.cart.grandTotal}</strong></td>
-                            <td><a href="#" class="btn btn-success btn-block">Checkout <span class="glyphicon glyphicon-chevron-right"></span></a></td>
+                            <c:choose>
+                                <c:when test="${userModel.cart.cartLines != 0}">
+                                    <td><a href="${contextRoot}/cart/validate/cartlines" class="btn btn-success btn-block">Checkout <span class="glyphicon glyphicon-chevron-right"></span></a></td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><a href="javascript:void(0)" class="btn btn-success btn-block disabled"><strike>Checkout <span class="glyphicon glyphicon-chevron-right"></span></strike></a></td>
+                                </c:otherwise>
+                            </c:choose>
                         </tr>
                     </tfoot>
                 </table>

@@ -2,14 +2,17 @@ package Back_end.DTO;
 
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 
 @Entity
 @Table(name = "category")
-public class Category
+public class Category implements Serializable
 {
     // Private
+    private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

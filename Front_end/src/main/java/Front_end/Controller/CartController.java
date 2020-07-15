@@ -30,40 +30,52 @@ public class CartController
     public ModelAndView showCart(@RequestParam(name = "result", required = false) String result)
     {
         ModelAndView modelAndView = new ModelAndView("page");
-        List<CartLine> cartLines = cartService.listCartLines();
 
         modelAndView.addObject("title", "Shopping Cart");
         modelAndView.addObject("userClickCart", true);
-        modelAndView.addObject("cartLines", cartLines);
 
         if (result != null)
         {
             if (result.equals("added"))
             {
                 modelAndView.addObject("message", "Cart line added successfully...");
+                validateCartLine();
             }
             else if (result.equals("updated"))
             {
                 modelAndView.addObject("message", "Cart line updated successfully...");
+                validateCartLine();
             }
             else if (result.equals("deleted"))
             {
                 modelAndView.addObject("message", "Cart line deleted successfully...");
+                validateCartLine();
             }
             else if (result.equals("unavailable"))
             {
-                modelAndView.addObject("message", "Product quantity is  unavailable...");
+                modelAndView.addObject("message", "Product quantity is unavailable...");
+            }
+            else if (result.equals("modified"))
+            {
+                modelAndView.addObject("message", "One or more cart lines modified successfully...");
             }
             else {
                 modelAndView.addObject("message", "Something went wrong...");
             }
         }
+        else {
+            if (cartService.validateCartLine().equals("result=modified"))
+                modelAndView.addObject("message", "One or more cart lines modified successfully...");
+        }
+
+        List<CartLine> cartLines = cartService.listAvailableCartLines();
+        modelAndView.addObject("cartLines", cartLines);
 
         return modelAndView;
     }
 
     @GetMapping("/add/{productId}/cartlines")
-    public String addCart(@PathVariable int productId)
+    public String addCartLine(@PathVariable int productId)
     {
         String result = cartService.addCartLine(productId);
 
@@ -71,7 +83,7 @@ public class CartController
     }
 
     @GetMapping("/update/{cartLineId}/cartlines")
-    public String updateCart(@PathVariable int cartLineId, @RequestParam int count)
+    public String updateCartLine(@PathVariable int cartLineId, @RequestParam int count)
     {
         String result = cartService.updateCartLine(cartLineId, count);
 
@@ -79,10 +91,25 @@ public class CartController
     }
 
     @GetMapping("/delete/{cartLineId}/cartlines")
-    public String deleteCart(@PathVariable int cartLineId)
+    public String deleteCartLine(@PathVariable int cartLineId)
     {
         String result = cartService.deleteCartLine(cartLineId);
 
         return "redirect:/cart/show?" + result;
+    }
+
+    @GetMapping("/validate/cartlines")
+    public String validateCartLine()
+    {
+        String result = cartService.validateCartLine();
+        
+        
+        if (result.equals("result=modified"))
+        {
+            return "redirect:/cart/show?" + result;
+        }
+        else {
+            return "redirect:/cart/checkout";
+        }
     }
 }
