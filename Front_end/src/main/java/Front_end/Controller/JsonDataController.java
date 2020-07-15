@@ -49,7 +49,7 @@ public class JsonDataController
 	}
 
 	// Retrieve products under a specific category
-	@GetMapping("/category/{id}/products")
+	@GetMapping("/products/categories/{id}")
 	@ResponseBody
 	public List<Product> getProductsByCategory(@PathVariable int id)
 	{

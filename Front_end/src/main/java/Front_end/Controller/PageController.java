@@ -82,7 +82,7 @@ public class PageController
     }
 
     // Show all products
-    @GetMapping(value = "/show/all/products")
+    @GetMapping(value = "/show/products")
     public ModelAndView showAllProducts()
     {
         ModelAndView modelAndView = new ModelAndView("page");
@@ -96,7 +96,7 @@ public class PageController
     }
 
     // Show products based on category id
-    @GetMapping(value = "/show/category/{id}/products")
+    @GetMapping(value = "/show/products/categories/{id}")
     public ModelAndView showCategoryProducts(@PathVariable("id") int id)
     {
         ModelAndView modelAndView = new ModelAndView("page");
@@ -113,7 +113,7 @@ public class PageController
     }
 
     // Show a single product
-    @GetMapping(value = "/show/{id}/products")
+    @GetMapping(value = "/show/products/{id}")
     public ModelAndView showSingleProduct(@PathVariable int id) throws ProductNotFoundException
     {
         ModelAndView modelAndView = new ModelAndView("page");

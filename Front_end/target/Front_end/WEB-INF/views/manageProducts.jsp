@@ -96,7 +96,7 @@
                         </c:if>
 
                         <c:if test="${product.id != 0}">
-                            <form:form class="form-horizontal" modelAttribute="product" action="${contextRoot}/manage/${product.id}/products?_method=PUT" method="POST" enctype="multipart/form-data">
+                            <form:form class="form-horizontal" modelAttribute="product" action="${contextRoot}/manage/products/${product.id}?_method=PUT" method="POST" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label class="control-label col-md-4">Name</label>
                                     <div class="col-md-5">

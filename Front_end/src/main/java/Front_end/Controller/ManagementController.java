@@ -92,7 +92,7 @@ public class ManagementController
     }
 
     // Show the page to edit an existing product
-    @GetMapping("/edit/{id}/products")
+    @GetMapping("products/{id}/edit")
     public ModelAndView editProduct(@PathVariable int id)
     {
         ModelAndView modelAndView = new ModelAndView("page");
@@ -138,7 +138,7 @@ public class ManagementController
     }
 
     // Update a product
-    @PostMapping(value = "/{id}/products")
+    @PostMapping(value = "/products/{id}")
     public String updateProduct(@Valid @ModelAttribute("product") Product product,
                                 BindingResult bindingResult, Model model)
     {
@@ -182,7 +182,7 @@ public class ManagementController
     }
 
     // Activate an existing product
-    @PostMapping(value = "/activation/{id}/products")
+    @PostMapping(value = "/activate/products/{id}")
     @ResponseBody
     public String activateProduct(@PathVariable int id)
     {
@@ -207,7 +207,7 @@ public class ManagementController
     }
 
     // Delete a product
-    @GetMapping(value = "/{id}/products")
+    @GetMapping(value = "/products/{id}")
     public String deleteProduct(@PathVariable int id)
     {
         Product product = productDAO.get(id);

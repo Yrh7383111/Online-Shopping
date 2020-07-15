@@ -26,7 +26,7 @@ public class CartController
         this.cartService = cartService;
     }
 
-    @GetMapping("/show")
+    @GetMapping("/show/cartlines")
     public ModelAndView showCart(@RequestParam(name = "result", required = false) String result)
     {
         ModelAndView modelAndView = new ModelAndView("page");
@@ -68,34 +68,34 @@ public class CartController
                 modelAndView.addObject("message", "One or more cart lines modified successfully...");
         }
 
-        List<CartLine> cartLines = cartService.listAvailableCartLines();
+        List<CartLine> cartLines = cartService.getAvailableCartLines();
         modelAndView.addObject("cartLines", cartLines);
 
         return modelAndView;
     }
 
-    @GetMapping("/add/{productId}/cartlines")
+    @GetMapping("/add/cartlines/{productId}")
     public String addCartLine(@PathVariable int productId)
     {
         String result = cartService.addCartLine(productId);
 
-        return "redirect:/cart/show?" + result;
+        return "redirect:/cart/show/cartlines?" + result;
     }
 
-    @GetMapping("/update/{cartLineId}/cartlines")
+    @GetMapping("/update/cartlines/{cartLineId}")
     public String updateCartLine(@PathVariable int cartLineId, @RequestParam int count)
     {
         String result = cartService.updateCartLine(cartLineId, count);
 
-        return "redirect:/cart/show?" + result;
+        return "redirect:/cart/show/cartlines?" + result;
     }
 
-    @GetMapping("/delete/{cartLineId}/cartlines")
+    @GetMapping("/delete/cartlines/{cartLineId}")
     public String deleteCartLine(@PathVariable int cartLineId)
     {
         String result = cartService.deleteCartLine(cartLineId);
 
-        return "redirect:/cart/show?" + result;
+        return "redirect:/cart/show/cartlines?" + result;
     }
 
     @GetMapping("/validate/cartlines")
@@ -106,7 +106,7 @@ public class CartController
         
         if (result.equals("result=modified"))
         {
-            return "redirect:/cart/show?" + result;
+            return "redirect:/cart/show/cartlines?" + result;
         }
         else {
             return "redirect:/cart/checkout";

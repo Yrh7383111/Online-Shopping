@@ -46,7 +46,7 @@
                                     <button type="button" name="refreshCart" class="btn btn-info btn-sm" value="${cartLine.id}">
                                         <span class="glyphicon glyphicon-refresh"></span>
                                     </button>
-                                    <a href="${contextRoot}/cart/delete/${cartLine.id}/cartlines" class="btn btn-danger btn-sm">
+                                    <a href="${contextRoot}/cart/delete/cartlines/${cartLine.id}" class="btn btn-danger btn-sm">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </a>
                                 </td>

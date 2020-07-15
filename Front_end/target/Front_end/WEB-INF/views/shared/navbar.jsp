@@ -27,7 +27,7 @@
                         <a href="${contextRoot}/contact">Contact</a>
                     </li>
                     <li id="listProducts">
-                        <a href="${contextRoot}/show/all/products">View Products</a>
+                        <a href="${contextRoot}/show/products">View Products</a>
                     </li>
                     <security:authorize access="hasAuthority('ADMIN')">
                         <li id="manageProducts">
@@ -56,7 +56,7 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
                                 <security:authorize access="hasAuthority('USER')">
                                     <li id="cart">
-                                        <a href="${contextRoot}/cart/show">
+                                        <a href="${contextRoot}/cart/show/cartlines">
                                             <span class="glyphicon glyphicon-shopping-cart"></span>
                                             <span class="badge">${userModel.cart.cartLines}</span>
                                              - $${userModel.cart.grandTotal}

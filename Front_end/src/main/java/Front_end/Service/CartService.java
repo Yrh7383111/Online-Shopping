@@ -43,7 +43,7 @@ public class CartService
     }
 
     // Retrieve a list of cart lines
-    public List<CartLine> listAvailableCartLines()
+    public List<CartLine> getAvailableCartLines()
     {
         UserModel userModel = (UserModel)httpSession.getAttribute("userModel");
         Cart cart = userModel.getCart();
