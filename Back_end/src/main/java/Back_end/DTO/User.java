@@ -64,6 +64,15 @@ public class User implements Serializable
                          CascadeType.REFRESH, CascadeType.REMOVE})
     private List<Address> addresses;
 
+    // mappedBy - Specify that User is the owner of Order Detail,
+    //            and therefore avoid adding a order_id filed in User table
+    // cascade - Automatically remove all the Order Details when a User is deleted
+    @OneToMany(mappedBy="user",
+               fetch = FetchType.LAZY,
+               cascade= {CascadeType.MERGE, CascadeType.DETACH,
+                    CascadeType.REFRESH, CascadeType.REMOVE})
+    private List<OrderDetail> orderDetails;
+
 
     // Public
     public User() {}
@@ -178,6 +187,16 @@ public class User implements Serializable
         this.addresses = addresses;
     }
 
+    public List<OrderDetail> getOrderDetails()
+    {
+        return orderDetails;
+    }
+
+    public void setOrderDetails(List<OrderDetail> orderDetails)
+    {
+        this.orderDetails = orderDetails;
+    }
+
     @Override
     public String toString()
     {
@@ -188,10 +207,12 @@ public class User implements Serializable
                 ", role='" + role + '\'' +
                 ", enabled=" + enabled +
                 ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
                 ", email='" + email + '\'' +
                 ", contactNumber='" + contactNumber + '\'' +
                 ", cart=" + cart +
                 ", addresses=" + addresses +
+                ", orderDetails=" + orderDetails +
                 '}';
     }
 }

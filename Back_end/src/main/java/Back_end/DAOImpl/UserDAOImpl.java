@@ -108,7 +108,7 @@ public class UserDAOImpl implements UserDAO
         }
     }
 
-    // Update a new user - Junit test
+    // Update an existing user - Junit test
     @Override
     public boolean updateUserTest(User user)
     {
@@ -127,7 +127,7 @@ public class UserDAOImpl implements UserDAO
         return false;
     }
 
-    // Update a new user - Implementation
+    // Update an existing user - Implementation
     @Override
     public void updateUser(User user)
     {
@@ -142,7 +142,7 @@ public class UserDAOImpl implements UserDAO
         }
     }
 
-    // Delete a new user - Junit test
+    // Delete an existing user - Junit test
     @Override
     public boolean deleteUserTest(User user)
     {
@@ -161,7 +161,7 @@ public class UserDAOImpl implements UserDAO
         return false;
     }
 
-    // Delete a new user - Implementation
+    // Delete an existing user - Implementation
     @Override
     public void deleteUser(User user)
     {
@@ -229,7 +229,7 @@ public class UserDAOImpl implements UserDAO
         }
     }
 
-    // Update a new address - Junit test
+    // Update an existing address - Junit test
     @Override
     public boolean updateAddressTest(Address address)
     {
@@ -248,7 +248,7 @@ public class UserDAOImpl implements UserDAO
         return false;
     }
 
-    // Update a new address - Implementation
+    // Update an existing address - Implementation
     @Override
     public void updateAddress(Address address)
     {
@@ -263,7 +263,7 @@ public class UserDAOImpl implements UserDAO
         }
     }
 
-    // Delete a new address - Junit test
+    // Delete an existing address - Junit test
     @Override
     public boolean deleteAddressTest(Address address)
     {
@@ -282,7 +282,7 @@ public class UserDAOImpl implements UserDAO
         return false;
     }
 
-    // Delete a new address - Implementation
+    // Delete an existing address - Implementation
     @Override
     public void deleteAddress(Address address)
     {

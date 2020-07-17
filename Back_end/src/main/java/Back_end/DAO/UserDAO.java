@@ -23,16 +23,16 @@ public interface UserDAO
     // Add a new user - Implementation
     void addUser(User user);
 
-    // Update a new user - Junit test
+    // Update an existing user - Junit test
     boolean updateUserTest(User user);
 
-    // Update a new user - Implementation
+    // Update an existing user - Implementation
     void updateUser(User user);
 
-    // Delete a new user - Junit test
+    // Delete an existing user - Junit test
     boolean deleteUserTest(User user);
 
-    // Delete a new user - Implementation
+    // Delete an existing user - Implementation
     void deleteUser(User user);
 
     // Retrieve a single address based on addressId
@@ -44,16 +44,16 @@ public interface UserDAO
     // Add a new address - Implementation
     void addAddress(Address address);
 
-    // Update a new address - Junit test
+    // Update an existing address - Junit test
     boolean updateAddressTest(Address address);
 
-    // Update a new address - Implementation
+    // Update an existing address - Implementation
     void updateAddress(Address address);
 
-    // Delete a new address - Junit test
+    // Delete an existing address - Junit test
     boolean deleteAddressTest(Address address);
 
-    // Delete a new address - Implementation
+    // Delete an existing address - Implementation
     void deleteAddress(Address address);
 
     // Retrieve a list of addresses based on specific user
