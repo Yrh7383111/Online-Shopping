@@ -53,7 +53,7 @@ public class UserDAOImpl implements UserDAO
     @Override
     public User getUserByEmail(String email)
     {
-        String selectUserByEmail = "FROM User WHERE email =:email";
+        String selectUserByEmail = "FROM User WHERE email = :email";
 
        try
        {
@@ -301,45 +301,72 @@ public class UserDAOImpl implements UserDAO
     @Override
     public List<Address> listAddresses(int userId)
     {
-        Session session = sessionFactory.getCurrentSession();
-        String selectAddresses = "FROM Address WHERE user.id = :userId";
-        Query<Address> query = session.createQuery(selectAddresses);
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            String selectAddresses = "FROM Address WHERE user.id = :userId";
+            Query<Address> query = session.createQuery(selectAddresses);
 
-        query.setParameter("userId", userId);
+            query.setParameter("userId", userId);
 
-        List<Address> addresses = query.getResultList();
+            List<Address> addresses = query.getResultList();
 
-        return addresses;
+            return addresses;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     @Override
     public List<Address> listBillingAddresses(int userId)
     {
-        Session session = sessionFactory.getCurrentSession();
-        String selectBillingAddresses = "FROM Address WHERE user.id = :userId AND billing = :billing";
-        Query<Address> query = session.createQuery(selectBillingAddresses);
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            String selectBillingAddresses = "FROM Address WHERE user.id = :userId AND billing = :billing";
+            Query<Address> query = session.createQuery(selectBillingAddresses);
 
-        query.setParameter("userId", userId);
-        query.setParameter("billing", true);
+            query.setParameter("userId", userId);
+            query.setParameter("billing", true);
 
-        List<Address> addresses = query.getResultList();
+            List<Address> addresses = query.getResultList();
 
-        return addresses;
+            return addresses;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     @Override
     public List<Address> listShippingAddresses(int userId)
     {
-        Session session = sessionFactory.getCurrentSession();
-        String selectShippingAddresses = "FROM Address WHERE user.id = :userId AND shipping = :shipping ORDER BY id DESC";
-        Query<Address> query = session.createQuery(selectShippingAddresses);
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            String selectShippingAddresses = "FROM Address WHERE user.id = :userId AND shipping = :shipping ORDER BY id DESC";
+            Query<Address> query = session.createQuery(selectShippingAddresses);
 
-        query.setParameter("userId", userId);
-        query.setParameter("shipping", true);
+            query.setParameter("userId", userId);
+            query.setParameter("shipping", true);
 
-        List<Address> addresses = query.getResultList();
+            List<Address> addresses = query.getResultList();
 
-        return addresses;
+            return addresses;
+        }
+        catch (Exception e)
+        {
+//            e.printStackTrace();
+        }
+
+        return null;
     }
 
     // Retrieve a single cart based on cartId

@@ -50,12 +50,21 @@ public class ProductDAOImpl implements ProductDAO
 	@Override
 	public List<Product> list()
 	{
-		Session session = sessionFactory.getCurrentSession();
-		String selectProducts = "FROM Product";
-		Query<Product> query = session.createQuery(selectProducts);
-		List<Product> products = query.getResultList();
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			String selectProducts = "FROM Product";
+			Query<Product> query = session.createQuery(selectProducts);
+			List<Product> products = query.getResultList();
 
-		return products;
+			return products;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	// Add a new  - Junit test
@@ -164,47 +173,74 @@ public class ProductDAOImpl implements ProductDAO
 	@Override
 	public List<Product> listActiveProducts()
 	{
-		Session session = sessionFactory.getCurrentSession();
-		String selectActiveProducts = "FROM Product WHERE active = :active";
-		Query<Product> query = session.createQuery(selectActiveProducts);
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			String selectActiveProducts = "FROM Product WHERE active = :active";
+			Query<Product> query = session.createQuery(selectActiveProducts);
 
-		query.setParameter("active", true);
+			query.setParameter("active", true);
 
-		List<Product> products = query.getResultList();
+			List<Product> products = query.getResultList();
 
-		return products;
+			return products;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	// List products based on categoryId
 	@Override
 	public List<Product> listActiveProductsByCategory(int categoryId)
 	{
-		Session session = sessionFactory.getCurrentSession();
-		String selectActiveProductsByCategory = "FROM Product WHERE active = :active AND categoryId = :categoryId";
-		Query<Product> query = session.createQuery(selectActiveProductsByCategory);
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			String selectActiveProductsByCategory = "FROM Product WHERE active = :active AND categoryId = :categoryId";
+			Query<Product> query = session.createQuery(selectActiveProductsByCategory);
 
-		query.setParameter("active", true);
-		query.setParameter("categoryId", categoryId);
+			query.setParameter("active", true);
+			query.setParameter("categoryId", categoryId);
 
-		List<Product> products = query.getResultList();
+			List<Product> products = query.getResultList();
 
-		return products;
+			return products;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	// Retrieve the latest products
 	@Override
 	public List<Product> listLatestActiveProducts(int count)
 	{
-		Session session = sessionFactory.getCurrentSession();
-		String selectLatestActiveProducts = "FROM Product WHERE active = :active ORDER BY id";
-		Query<Product> query = session.createQuery(selectLatestActiveProducts);
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			String selectLatestActiveProducts = "FROM Product WHERE active = :active ORDER BY id";
+			Query<Product> query = session.createQuery(selectLatestActiveProducts);
 
-		query.setParameter("active", true);
-		query.setFirstResult(0);
-		query.setMaxResults(count);
+			query.setParameter("active", true);
+			query.setFirstResult(0);
+			query.setMaxResults(count);
 
-		List<Product> products = query.getResultList();
+			List<Product> products = query.getResultList();
 
-		return products;
+			return products;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 }

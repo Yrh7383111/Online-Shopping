@@ -51,15 +51,24 @@ public class CategoryDAOImpl implements CategoryDAO
 	@Override
 	public List<Category> list()
 	{
-		Session session = sessionFactory.getCurrentSession();
-		String selectActiveCategory = "FROM Category WHERE active = :active";
-		Query<Category> query = session.createQuery(selectActiveCategory);
-				
-		query.setParameter("active", true);
+		try
+		{
+			Session session = sessionFactory.getCurrentSession();
+			String selectActiveCategory = "FROM Category WHERE active = :active";
+			Query<Category> query = session.createQuery(selectActiveCategory);
 
-		List<Category> categories = query.getResultList();
+			query.setParameter("active", true);
 
-		return categories;
+			List<Category> categories = query.getResultList();
+
+			return categories;
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		return null;
 	}
 
 	// Add a new category - Junit test

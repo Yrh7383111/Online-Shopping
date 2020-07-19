@@ -4,6 +4,7 @@ package Back_end.DAOImpl;
 import Back_end.DAO.CartLineDAO;
 import Back_end.DTO.Cart;
 import Back_end.DTO.CartLine;
+import Back_end.DTO.OrderDetail;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -53,15 +54,24 @@ public class CartLineDAOImpl implements CartLineDAO
     @Override
     public List<CartLine> list(int cartId)
     {
-        Session session = sessionFactory.getCurrentSession();
-        String select = "FROM CartLine WHERE cartId = :cartId";
-        Query<CartLine> query = session.createQuery(select);
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            String select = "FROM CartLine WHERE cartId = :cartId";
+            Query<CartLine> query = session.createQuery(select);
 
-        query.setParameter("cartId", cartId);
+            query.setParameter("cartId", cartId);
 
-        List<CartLine> cartLines = query.getResultList();
+            List<CartLine> cartLines = query.getResultList();
 
-        return cartLines;
+            return cartLines;
+        }
+        catch (Exception e)
+        {
+//            e.printStackTrace();
+        }
+
+        return null;
     }
 
     // Add a new cart line - Junit test
@@ -210,7 +220,7 @@ public class CartLineDAOImpl implements CartLineDAO
         }
         catch (Exception e)
         {
-            e.printStackTrace();
+//            e.printStackTrace();
         }
 
         return null;
@@ -243,6 +253,38 @@ public class CartLineDAOImpl implements CartLineDAO
         {
             Session session = sessionFactory.getCurrentSession();
             session.update(cart);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public boolean addOrderDetailTest(OrderDetail orderDetail)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.persist(orderDetail);
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
+    @Override
+    public void addOrderDetail(OrderDetail orderDetail)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            session.persist(orderDetail);
         }
         catch (Exception e)
         {

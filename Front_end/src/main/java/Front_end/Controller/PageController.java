@@ -6,8 +6,6 @@ import Back_end.DAO.ProductDAO;
 import Back_end.DTO.Category;
 import Back_end.DTO.Product;
 import Front_end.Exception.ProductNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,7 +27,6 @@ public class PageController
     // Private
     private final CategoryDAO categoryDAO;
     private final ProductDAO productDAO;
-    private static final Logger logger = LoggerFactory.getLogger(PageController.class);
 
 
     // Public
@@ -50,9 +47,6 @@ public class PageController
         modelAndView.addObject("title","Home");
         modelAndView.addObject("userClickHome",true);
         modelAndView.addObject("categories", categories);
-
-        logger.info("Inside PageController index method - INFO");
-        logger.debug("Inside PageController index method - DEBUG");
 
         return modelAndView;
     }

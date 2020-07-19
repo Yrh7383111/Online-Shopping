@@ -3,6 +3,7 @@ package Back_end.DAO;
 
 import Back_end.DTO.Cart;
 import Back_end.DTO.CartLine;
+import Back_end.DTO.OrderDetail;
 
 import java.util.List;
 
@@ -45,4 +46,10 @@ public interface CartLineDAO
 
     // Update an existing cart - Implementation
     void updateCart(Cart cart);
+
+    // Add a new order detail - Junit test
+    boolean addOrderDetailTest(OrderDetail orderDetail);
+
+    // Add a new order detail - Implementation
+    void addOrderDetail(OrderDetail orderDetail);
 }

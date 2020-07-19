@@ -19,15 +19,17 @@ import org.springframework.stereotype.Component;
 public class SignupHandler
 {
     // Private
-    @Autowired
-    private UserDAO userDAO;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UserDAO userDAO;
+    private final PasswordEncoder passwordEncoder;
 
 
     // Public
-    public SignupHandler() {}
+    @Autowired
+    public SignupHandler(UserDAO userDAO, PasswordEncoder passwordEncoder)
+    {
+        this.userDAO = userDAO;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public SignupModel init()
     {
