@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 
 
-@Component
+@Component("signupHandler")
 public class SignupHandler
 {
     // Private

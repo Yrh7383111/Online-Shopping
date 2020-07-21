@@ -64,13 +64,15 @@
     </action-state>
 
 
-    <!-- Eng state -->
+    <!-- End state -->
     <end-state id="home" view="externalRedirect:contextRelative:/" />
     <end-state id="success" view="flows/signup/signup-success" />
+    <end-state id="error" view="flows/shared/flow-error" />
 
 
     <!-- Global transition -->
     <global-transitions>
         <transition on="home" to="home" validate="false" />
+        <transition on-exception="java.lang.Exception" to="error" />
     </global-transitions>
 </flow>

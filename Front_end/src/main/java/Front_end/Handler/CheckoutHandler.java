@@ -17,7 +17,7 @@ import java.util.List;
 
 
 
-@Component
+@Component("checkoutHandler")
 public class CheckoutHandler
 {
     // Private
@@ -62,14 +62,15 @@ public class CheckoutHandler
     public List<Address> getShippingAddresses(CheckoutModel checkoutModel)
     {
         int userId = checkoutModel.getUser().getId();
-        List<Address> addresses = userDAO.listShippingAddresses(userId);
+        List<Address> shippingAddresses = userDAO.listShippingAddresses(userId);
+        List<Address> billingAddresses = userDAO.listBillingAddresses(userId);
 
-        if (addresses == null)
-            addresses = new ArrayList<Address>();
+        if (shippingAddresses == null)
+            shippingAddresses = new ArrayList<Address>();
 
-        addresses.add((Address) userDAO.listShippingAddresses(userId));
+        shippingAddresses.addAll(billingAddresses);
 
-        return addresses;
+        return shippingAddresses;
     }
 
     public OrderDetail getOrderDetail(CheckoutModel checkoutModel)

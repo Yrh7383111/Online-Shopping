@@ -61,12 +61,12 @@
                         </tr>
 
                         <tr>
-                            <td><a href="${contextRoot}/show/all/products" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> Continue Shopping</a></td>
+                            <td><a href="${contextRoot}/show/products" class="btn btn-warning"><span class="glyphicon glyphicon-chevron-left"></span> Continue Shopping</a></td>
                             <td colspan="2" class="hidden-xs"></td>
                             <td class="hidden-xs text-center"><strong>Total $ ${userModel.cart.grandTotal}</strong></td>
                             <c:choose>
                                 <c:when test="${userModel.cart.cartLines != 0}">
-                                    <td><a href="${contextRoot}/cart/validate/cartlines" class="btn btn-success btn-block">Checkout <span class="glyphicon glyphicon-chevron-right"></span></a></td>
+                                    <td><a href="${contextRoot}/cart/checkout" class="btn btn-success btn-block">Checkout <span class="glyphicon glyphicon-chevron-right"></span></a></td>
                                 </c:when>
                                 <c:otherwise>
                                     <td><a href="javascript:void(0)" class="btn btn-success btn-block disabled"><strike>Checkout <span class="glyphicon glyphicon-chevron-right"></span></strike></a></td>

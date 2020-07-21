@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.springframework.org/schema/webflow
+                          http://www.springframework.org/schema/webflow/spring-webflow.xsd">
+
+
+    <var name="shippingAddress" class="Back_end.DTO.Address" />
+
+
+    <on-start>
+        <evaluate expression="checkoutHandler.init(currentUser.name)" result="flowScope.checkoutModel" />
+    </on-start>
+
+
+    <!-- View state -->
+
+    <!-- Shipping Address state -->
+    <view-state id="shippingAddress" view="flows/cart/checkout/checkout-shippingAddress" model="shippingAddress">
+        <on-entry>
+            <evaluate expression="checkoutHandler.getShippingAddresses(flowScope.checkoutModel)" result="viewScope.shippingAddresses" />
+        </on-entry>
+        <transition on="selectListAddress" to="selectListAddress" validate="false" />
+        <transition on="addNewAddress" to="addNewAddress" />
+    </view-state>
+
+    <!-- Payment state -->
+    <view-state id="payment" view="flows/cart/checkout/checkout-payment" model="flowScope.checkoutModel">
+        <transition on="addOrder" to="addOrder" />
+    </view-state>
+
+
+    <!-- Action state -->
+    <!-- Select a shipping address from the existing list -->
+    <action-state id="selectListAddress">
+        <evaluate expression="checkoutHandler.selectListAddress(flowScope.checkoutModel, requestParameters.shippingId)" />
+        <transition on="success" to="payment" />
+    </action-state>
+
+    <!-- Add a new shipping address -->
+    <action-state id="addNewAddress">
+        <evaluate expression="checkoutHandler.addNewAddress(flowScope.checkoutModel, shippingAddress)" />
+        <transition on="success" to="payment" />
+    </action-state>
+
+    <!-- Add the order -->
+    <action-state id="addOrder">
+        <evaluate expression="checkoutHandler.addOrder(flowScope.checkoutModel)" />
+        <transition on="success" to="receipt" />
+    </action-state>
+
+
+    <!-- End state -->
+    <end-state id="receipt" view="flows/cart/checkout/checkout-receipt">
+        <on-entry>
+            <evaluate expression="checkoutHandler.getOrderDetail(flowScope.checkoutModel)" result="requestScope.orderDetail" />
+        </on-entry>
+    </end-state>
+    <end-state id="home" view="externalRedirect:contextRelative:/home" />
+    <end-state id="error" view="flows/shared/flow-error" />
+
+
+    <!-- Global transition -->
+    <global-transitions>
+        <transition on="home" to="home" validate="false" />
+        <transition on-exception="java.lang.Exception" to="error" />
+    </global-transitions>
+</flow>
