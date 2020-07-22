@@ -41,13 +41,12 @@
                         <address>
                             <strong>Payment Method:</strong><br>
                             Card Payment <br>
-                            ${orderDetail.user.email}
                         </address>
                     </div>
                     <div class="col-xs-6 text-right">
                         <address>
                             <strong>Order Date:</strong><br>
-                            ${orderDetail.orderDate}<br><br>
+                            ${orderDetail.orderDate}<br>
                         </address>
                     </div>
                 </div>

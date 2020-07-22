@@ -68,12 +68,12 @@ public class CheckoutHandler
     {
         int userId = checkoutModel.getUser().getId();
         List<Address> shippingAddresses = userDAO.listShippingAddresses(userId);
-        List<Address> billingAddresses = userDAO.listBillingAddresses(userId);
+        Address billingAddress = userDAO.getBillingAddress(userId);
 
         if (shippingAddresses == null)
             shippingAddresses = new ArrayList<Address>();
 
-        shippingAddresses.addAll(billingAddresses);
+        shippingAddresses.add(billingAddress);
 
         return shippingAddresses;
     }
@@ -127,7 +127,7 @@ public class CheckoutHandler
             orderItem.setProduct(cartLine.getProduct());
             orderItem.setProductCount(cartLine.getProductCount());
             orderItem.setBuyingPrice(cartLine.getBuyingPrice());
-            // Add orderItem to orderDetail
+            // Push orderItem to orderItems
             orderItems.add(orderItem);
 
             // Update two entities for orderDetail
@@ -151,10 +151,10 @@ public class CheckoutHandler
         orderDetail.setOrderTotal(orderTotal);
         orderDetail.setOrderCount(orderCount);
         orderDetail.setShipping(checkoutModel.getShippingAddress());
-        orderDetail.setBilling((Address) userDAO.listBillingAddresses(checkoutModel.getUser().getId()));
+        orderDetail.setBilling(userDAO.getBillingAddress(checkoutModel.getUser().getId()));
         orderDetail.setOrderDate(date);
 
-        // Add orderDetail in database
+        // Add orderDetail and all orderItems in database
         orderDAO.addOrderDetail(orderDetail);
 
         // Set orderDetail of checkoutModel

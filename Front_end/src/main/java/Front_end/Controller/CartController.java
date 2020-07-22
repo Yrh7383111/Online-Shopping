@@ -54,6 +54,7 @@ public class CartController
             else if (result.equals("unavailable"))
             {
                 modelAndView.addObject("message", "Product quantity is unavailable...");
+                validateCartLine();
             }
             else if (result.equals("modified"))
             {

@@ -41,13 +41,12 @@
                         <address>
                             <strong>Payment Method:</strong><br>
                             Card Payment <br>
-                            ${orderDetail.user.email}
                         </address>
                     </div>
                     <div class="col-xs-6 text-right">
                         <address>
                             <strong>Order Date:</strong><br>
-                            ${orderDetail.orderDate}<br><br>
+                            ${orderDetail.orderDate}<br>
                         </address>
                     </div>
                 </div>
@@ -59,7 +58,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><strong>Order summary</strong></h3>
+                        <h3 class="panel-title"><strong>Order Summary</strong></h3>
                     </div>
 
                     <div class="panel-body">

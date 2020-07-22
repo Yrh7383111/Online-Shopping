@@ -3,6 +3,7 @@ package Back_end.DTO;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class OrderDetail implements Serializable
     @Column(name="order_date")
     private Date orderDate;
 
+    // mappedBy - Specify that Order Detail is the owner of Order Items,
+    // cascade - Automatically add all Order Items when an Order Detail is created
     @OneToMany(mappedBy="orderDetail",
                fetch = FetchType.LAZY,
                cascade = CascadeType.ALL)
@@ -46,7 +49,10 @@ public class OrderDetail implements Serializable
 
 
     // Public
-    public OrderDetail() {}
+    public OrderDetail()
+    {
+        this.orderItems = new ArrayList<OrderItem>();
+    }
 
     public int getId()
     {

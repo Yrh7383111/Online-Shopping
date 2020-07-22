@@ -38,6 +38,9 @@ public interface UserDAO
     // Retrieve a single address based on addressId
     Address getAddress(int addressId);
 
+    //  Retrieve a single address based on userId
+    Address getBillingAddress(int userId);
+
     // Add a new address - Junit test
     boolean addAddressTest(Address address);
 

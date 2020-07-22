@@ -195,6 +195,30 @@ public class UserDAOImpl implements UserDAO
         return null;
     }
 
+    @Override
+    public Address getBillingAddress(int userId)
+    {
+        try
+        {
+            Session session = sessionFactory.getCurrentSession();
+            String selectBillingAddress = "FROM Address WHERE user.id = :userId AND billing = :billing";
+            Query<Address> query = session.createQuery(selectBillingAddress);
+
+            query.setParameter("userId", userId);
+            query.setParameter("billing", true);
+
+            Address address  = query.getSingleResult();
+
+            return address;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
     // Add a new address - Junit test
     @Override
     public boolean addAddressTest(Address address)
