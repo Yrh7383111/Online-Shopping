@@ -62,7 +62,7 @@
                 </div>
 
                 <ul class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#"><span class="badge pull-right"> $ ${checkoutModel.checkoutTotal}</span> Final Payment</a></li>
+                    <li class="active"><a href=""><span class="badge pull-right"> $ ${checkoutModel.checkoutTotal}</span> Final Payment</a></li>
                 </ul>
                 <br/>
                 <a href="${flowExecutionUrl}&_eventId_addOrder" class="btn btn-success btn-lg btn-block" role="button">Pay</a>

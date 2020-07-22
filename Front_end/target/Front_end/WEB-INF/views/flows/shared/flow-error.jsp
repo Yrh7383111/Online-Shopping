@@ -20,20 +20,13 @@
     <meta name="_csrf" content="${_csrf.token}">
     <meta name="_csrf_header" content="${_csrf.headerName}">
 
-    <title>Online Shopping - ${title}</title>
-
-    <script>
-        window.menu = '${title}';
-        window.contextRoot = '${contextRoot}'
-    </script>
+    <title>Online Shopping</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="${css}/bootstrap.min.css" rel="stylesheet">
 
     <!-- User Defined CSS -->
     <link href="${css}/custom.css" rel="stylesheet">
-
-    <title>Online Shopping - Flow Exception</title>
 </head>
 
 

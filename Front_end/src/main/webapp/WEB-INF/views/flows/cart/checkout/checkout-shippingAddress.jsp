@@ -26,7 +26,7 @@
             <div class="col-md-8">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Sign Up - Address</h4>
+                        <h4>Add - Shipping Address</h4>
                     </div>
 
                     <div class="panel-body">

@@ -8,24 +8,25 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="invoice-title">
-                    <h2 class="pull-left">Invoice</h2><h3 class="pull-right">Order # ${orderDetail.id}</h3>
+                    <h2>Invoice</h2>
+                    <h3 class="pull-right">Order # ${orderDetail.id}</h3>
                 </div>
                 <hr>
 
                 <div class="row">
-                    <div class="col-xs-6 text-left">
+                    <div class="col-xs-6">
                         <address>
-                            <strong>Billed To:</strong><br>
+                            <strong>Billed to:</strong><br>
                             ${orderDetail.user.firstName} ${orderDetail.user.lastName}<br>
                             ${orderDetail.billing.addressLineOne}<br>
                             ${orderDetail.billing.addressLineTwo}<br>
-                            ${orderDetail.billing.city} - ${orderDetail.billing.postalCode}<br>
-                            ${orderDetail.billing.state} - ${orderDetail.billing.country}
+                            ${orderDetail.billing.city}, ${orderDetail.billing.state}<br>
+                            ${orderDetail.billing.country}, ${orderDetail.billing.postalCode}
                         </address>
                     </div>
                     <div class="col-xs-6 text-right">
                         <address>
-                            <strong>Shipped To:</strong><br>
+                            <strong>Shipped to:</strong><br>
                             ${orderDetail.user.firstName} ${orderDetail.user.lastName}<br>
                             ${orderDetail.shipping.addressLineOne}<br>
                             ${orderDetail.shipping.addressLineTwo}<br>

@@ -2,6 +2,7 @@ package Front_end.Handler;
 
 
 import Back_end.DAO.CartLineDAO;
+import Back_end.DAO.OrderDAO;
 import Back_end.DAO.ProductDAO;
 import Back_end.DAO.UserDAO;
 import Back_end.DTO.*;
@@ -24,17 +25,21 @@ public class CheckoutHandler
     private final UserDAO userDAO;
     private final ProductDAO productDAO;
     private final CartLineDAO cartLineDAO;
-    private final HttpSession session;
+    private final OrderDAO orderDAO;
+    private final HttpSession httpSession;
 
 
     // Public
     @Autowired
-    public CheckoutHandler(UserDAO userDAO, ProductDAO productDAO, CartLineDAO cartLineDAO, HttpSession session)
+    public CheckoutHandler(UserDAO userDAO, ProductDAO productDAO,
+                           CartLineDAO cartLineDAO, OrderDAO orderDAO,
+                           HttpSession httpSession)
     {
         this.userDAO = userDAO;
         this.productDAO = productDAO;
         this.cartLineDAO = cartLineDAO;
-        this.session = session;
+        this.orderDAO = orderDAO;
+        this.httpSession = httpSession;
     }
 
     public CheckoutModel init(String email)
@@ -150,7 +155,7 @@ public class CheckoutHandler
         orderDetail.setOrderDate(date);
 
         // Add orderDetail in database
-        cartLineDAO.addOrderDetail(orderDetail);
+        orderDAO.addOrderDetail(orderDetail);
 
         // Set orderDetail of checkoutModel
         checkoutModel.setOrderDetail(orderDetail);
@@ -162,8 +167,8 @@ public class CheckoutHandler
         cartLineDAO.updateCart(cart);
 
         // Update cart if it belongs a user
-        UserModel userModel = (UserModel) session.getAttribute("userModel");
-        if (userModel!=null)
+        UserModel userModel = (UserModel) httpSession.getAttribute("userModel");
+        if (userModel != null)
             userModel.setCart(cart);
 
 

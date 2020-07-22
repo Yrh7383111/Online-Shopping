@@ -51,7 +51,7 @@
 
 
     <!-- End state -->
-    <end-state id="receipt" view="flows/cart/checkout/checkout-receipt" >
+    <end-state id="receipt" view="flows/cart/checkout/checkout-receipt">
         <on-entry>
             <evaluate expression="checkoutHandler.getOrderDetail(flowScope.checkoutModel)" result="requestScope.orderDetail" />
         </on-entry>
