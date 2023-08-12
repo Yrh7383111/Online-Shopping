@@ -1,16 +1,16 @@
 # Online-Shopping
-Online Shopping is an Ecommerce website which allows users to shop products with cart module and admins to manage information online.
+Online Shopping is an e-commerce website which allows users to browse and shop for products with virtual carts and payment and admins to manage sales, with unique functionalities including global search, cart and payment.
 
 
 ## Development Stack
 ```
-Front-end: HTML/CSS, Bootstrap 4, jQuery, Javascript
+Front-end: HTML, CSS, Bootstrap 4, jQuery
 
 Database: MySQL, Hibernate
 
-Back-end: Java, Spring, JSP and other Maven packages
+Back-end: Java, Spring and other Maven packages
 
-Features: Authentication, Fuzzy Search, Image Upload, Pagination and Simulative Payment
+Features: Signup, Fuzzy Search, Cart and Payment
 ```
 
 
