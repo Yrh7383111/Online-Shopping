@@ -10,7 +10,7 @@ Database: MySQL, Hibernate
 
 Back-end: Java, Spring and other Maven packages
 
-Features: Signup, Fuzzy Search, Cart and Payment
+Features: Fuzzy Search, Shopping Cart and Payment
 ```
 
 
