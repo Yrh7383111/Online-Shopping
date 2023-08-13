@@ -1,5 +1,5 @@
 # Online-Shopping
-Online Shopping is an e-commerce website which allows users to browse and shop for products with virtual carts and payment and admins to manage sales, with unique functionalities including global search, cart and payment.
+Online Shopping is an e-commerce website allowing customers to browse and shop for products and admins to manage them, with unique functionalities including global search, shopping cart and payment.
 
 
 ## Development Stack
