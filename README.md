@@ -33,7 +33,7 @@ Features: Fuzzy Search, Shopping Cart and Payment
 ![Checkout Page - Address](https://github.com/Yrh7383111/Online-Shopping/blob/master/Visualizations/Checkout%20Address.png)
 #### Checkout Page - Payment
 ![Checkout Page - Payment](https://github.com/Yrh7383111/Online-Shopping/blob/master/Visualizations/Checkout%20Payment.png)
-3. Checkout Page - Invoice
+#### Checkout Page - Invoice
 ![Checkout Page - Invoice](https://github.com/Yrh7383111/Online-Shopping/blob/master/Visualizations/Checkout%20Invoice.png)
 
 ### Manage Products Page
